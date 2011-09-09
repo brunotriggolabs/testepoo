@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_Z6m4Edr6EeCOVo8HeXx7CQ" name="tp1">
+  <elementImport xmi:id="_aBCQMNr6EeCOVo8HeXx7CQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_aBMoQNr6EeCOVo8HeXx7CQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_aBNPUNr6EeCOVo8HeXx7CQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_aBNPUdr6EeCOVo8HeXx7CQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WCDDYNsAEeCOVo8HeXx7CQ" name="Cliente">
+    <ownedAttribute xmi:id="_HS3AMNsCEeCOVo8HeXx7CQ" name="nome" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_eMfDUNsCEeCOVo8HeXx7CQ" name="cpf" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_gLrT4NsCEeCOVo8HeXx7CQ" name="endereco" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_pUTsUNsCEeCOVo8HeXx7CQ" name="telefone" visibility="private" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XyGEsNsAEeCOVo8HeXx7CQ" name="Motorista">
+    <ownedAttribute xmi:id="_ul6v4NsCEeCOVo8HeXx7CQ" name="cnh" visibility="private" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Y2_QMNsAEeCOVo8HeXx7CQ" name="Veiculo">
+    <ownedAttribute xmi:id="_C94ukNsDEeCOVo8HeXx7CQ" name="placa" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_QXBS4NsDEeCOVo8HeXx7CQ" name="marca" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_SKMgsNsDEeCOVo8HeXx7CQ" name="modelo" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_UpspANsDEeCOVo8HeXx7CQ" name="cor" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_WQjSENsDEeCOVo8HeXx7CQ" name="tipo" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_YB7wINsDEeCOVo8HeXx7CQ" name="opcionais" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_ZZO6QNsDEeCOVo8HeXx7CQ" name="observacoes" visibility="private" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bxWvkNsAEeCOVo8HeXx7CQ" memberEnd="_bxXWoNsAEeCOVo8HeXx7CQ _bxX9sdsAEeCOVo8HeXx7CQ">
+    <ownedEnd xmi:id="_bxXWoNsAEeCOVo8HeXx7CQ" name="src" type="_WCDDYNsAEeCOVo8HeXx7CQ" association="_bxWvkNsAEeCOVo8HeXx7CQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bxX9sNsAEeCOVo8HeXx7CQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bxXWodsAEeCOVo8HeXx7CQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_bxX9sdsAEeCOVo8HeXx7CQ" name="dst" type="_XyGEsNsAEeCOVo8HeXx7CQ" association="_bxWvkNsAEeCOVo8HeXx7CQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bxYkwNsAEeCOVo8HeXx7CQ" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bxX9stsAEeCOVo8HeXx7CQ"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_eW1kENsAEeCOVo8HeXx7CQ" memberEnd="_eW2LINsAEeCOVo8HeXx7CQ _eW2yMdsAEeCOVo8HeXx7CQ">
+    <ownedEnd xmi:id="_eW2LINsAEeCOVo8HeXx7CQ" name="src" type="_WCDDYNsAEeCOVo8HeXx7CQ" association="_eW1kENsAEeCOVo8HeXx7CQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eW2yMNsAEeCOVo8HeXx7CQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eW2LIdsAEeCOVo8HeXx7CQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_eW2yMdsAEeCOVo8HeXx7CQ" name="dst" type="_Y2_QMNsAEeCOVo8HeXx7CQ" association="_eW1kENsAEeCOVo8HeXx7CQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eW3ZQNsAEeCOVo8HeXx7CQ" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eW2yMtsAEeCOVo8HeXx7CQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_lm-w4NsAEeCOVo8HeXx7CQ" memberEnd="_lm-w4dsAEeCOVo8HeXx7CQ _lm_X8tsAEeCOVo8HeXx7CQ">
+    <ownedEnd xmi:id="_lm-w4dsAEeCOVo8HeXx7CQ" name="src" type="_Y2_QMNsAEeCOVo8HeXx7CQ" association="_lm-w4NsAEeCOVo8HeXx7CQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lm_X8dsAEeCOVo8HeXx7CQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lm_X8NsAEeCOVo8HeXx7CQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_lm_X8tsAEeCOVo8HeXx7CQ" name="dst" type="_XyGEsNsAEeCOVo8HeXx7CQ" association="_lm-w4NsAEeCOVo8HeXx7CQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lm__AdsAEeCOVo8HeXx7CQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lm__ANsAEeCOVo8HeXx7CQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4-3LkNsAEeCOVo8HeXx7CQ" name="Funcionario">
+    <ownedAttribute xmi:id="_wYH34NsDEeCOVo8HeXx7CQ" name="nome" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_yCyp8NsDEeCOVo8HeXx7CQ" name="cpf" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_zkSR4NsDEeCOVo8HeXx7CQ" name="cargo" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_2p0fcNsDEeCOVo8HeXx7CQ" name="endereco" visibility="private" aggregation="composite"/>
+    <ownedAttribute xmi:id="_4kljANsDEeCOVo8HeXx7CQ" name="telefone" visibility="private" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ESifQNsBEeCOVo8HeXx7CQ" name="Locações">
+    <ownedAttribute xmi:id="_0Lnv8NsJEeCOVo8HeXx7CQ" name="property" visibility="private" aggregation="composite"/>
+    <nestedClassifier xmi:type="uml:Class" xmi:id="_S3BcYNsBEeCOVo8HeXx7CQ" name="Tipo Locações"/>
+    <ownedOperation xmi:id="_d15kwNsBEeCOVo8HeXx7CQ" name="operation"/>
+  </packagedElement>
+</uml:Package>
