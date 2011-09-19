@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:uml2tools.notation="http://www.eclipse.org/mdt/uml2tools/gmf/notation/ext/2008" xmi:id="_aCXF4Nr6EeCOVo8HeXx7CQ" type="UMLClass" name="tp1.umlclass" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:uml2tools.notation="http://www.eclipse.org/mdt/uml2tools/gmf/notation/ext/2008" xmi:id="_aCXF4Nr6EeCOVo8HeXx7CQ" type="UMLClass" name="tp1.umlclass" measurementUnit="Pixel">
   <children xmi:type="notation:Shape" xmi:id="_axutUNr6EeCOVo8HeXx7CQ" type="2014" fontName="Sans">
     <children xmi:type="notation:DecorationNode" xmi:id="_axxwoNr6EeCOVo8HeXx7CQ" type="5020"/>
     <children xmi:type="notation:DecorationNode" xmi:id="_axxwodr6EeCOVo8HeXx7CQ" type="5041"/>
@@ -443,6 +443,28 @@
     <styles xmi:type="notation:CanonicalStyle" xmi:id="_ta7w8d4XEeC4B9cJqOf07w"/>
     <element xmi:type="uml:DataType" href="tp1.uml#_taqrMN4XEeC4B9cJqOf07w"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ta7w8t4XEeC4B9cJqOf07w" x="648" y="-27"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_IMYGUN_dEeCDlbdR8DVsLg" type="Note" fontName="Sans" description="Adicionar classe Arquivo," fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_IMe0AN_dEeCDlbdR8DVsLg" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_IMe0Ad_dEeCDlbdR8DVsLg" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_IMYGUd_dEeCDlbdR8DVsLg"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_IMYGUt_dEeCDlbdR8DVsLg"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IMYGU9_dEeCDlbdR8DVsLg" x="18" y="432"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_7qEm4N_dEeCDlbdR8DVsLg" type="Text" fontName="Sans" description="Funcionário relaciona com Arquivo.">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_7qFN8N_dEeCDlbdR8DVsLg" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_7qFN8d_dEeCDlbdR8DVsLg" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7qEm4d_dEeCDlbdR8DVsLg" x="216" y="450"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_aCXF4dr6EeCOVo8HeXx7CQ"/>
   <styles xmi:type="uml2tools.notation:U2TDiagramCanonicalStyle" xmi:id="_aCXF4tr6EeCOVo8HeXx7CQ"/>
