@@ -9,8 +9,8 @@ public class Locacao {
 	double kmEntrada;
 	TipoLocacao tipo;
 	BigDecimal valor;
-	Calendar dataSaida;
-	Calendar dataDevolucao;
+	Calendario dataSaida;
+	Calendario dataDevolucao;
 	int previsaoDias;
 	
 	/*Locacao(Ciente p){
