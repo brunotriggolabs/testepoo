@@ -52,12 +52,12 @@ public class PersistenciaLocacao {
 			}
 			if (conteudoLinha.indexOf(busca) != -1) {
 				separador = new StringTokenizer(conteudoLinha, ";");
-				loc.valor = new BigDecimal(separador.nextToken());
+/*				loc.valor = new BigDecimal(separador.nextToken());
 				loc.dataSaida = separador.nextToken();
 				loc.dataDevolucao = separador.nextToken();
 				loc.kmEntrada = separador.nextToken();
 				loc.kmSaida = separador.nextToken();
-				
+*/				
 				System.out.println("Encontrado na linha: " + linhaAtual + " String = " + conteudoLinha);
 				return true;
 			} else {
@@ -66,7 +66,7 @@ public class PersistenciaLocacao {
 			}		
 		}
 		return false;
-		StringTokenizer token = new StringTokenizer("");
+//		StringTokenizer token = new StringTokenizer("");
 	}
 
 	public void deletar(String busca) throws IOException {
