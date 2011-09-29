@@ -19,4 +19,11 @@ public abstract class Pessoa {
 		this.telefone = telefone;
 	}
 	
+	public String getNome() {
+		return this.nome;
+	}
+	
+	public String getCpf() {
+		return this.cpf;
+	}
 }
