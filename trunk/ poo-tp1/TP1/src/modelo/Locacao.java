@@ -14,8 +14,7 @@ public class Locacao {
 	protected Calendar dataDevolucao;
 	protected int previsaoDias;
 		
-	Locacao(){
-		
+	public Locacao(){
 	}
 	
 	/*Locacao(Cliente p){
@@ -26,10 +25,36 @@ public class Locacao {
 			System.out.println("Cliente não cadastrado.Por favor faça o cadastro");
 		}
 	}*/
-		
+	
 	public void escolhaCarro(String marcaCarro) throws IOException{
-		//TODO Fazer a busca no arquivo dos carros disponíveis.
-		
-		
+		//TODO Fazer a busca no arquivo dos carros disponíveis.		
+	}
+
+	public int getKmSaida() {
+		return kmSaida;
+	}
+
+	public int getKmEntrada() {
+		return kmEntrada;
+	}
+
+	public TipoLocacao getTipo() {
+		return tipo;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public Calendar getDataSaida() {
+		return dataSaida;
+	}
+
+	public Calendar getDataDevolucao() {
+		return dataDevolucao;
+	}
+
+	public int getPrevisaoDias() {
+		return previsaoDias;
 	}
 }
