@@ -1,36 +1,35 @@
 package modelo;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
 public class Locacao {
 	
-	double kmSaida;
-	double kmEntrada;
-	TipoLocacao tipo;
-	BigDecimal valor;
-	Calendario dataSaida;
-	Calendario dataDevolucao;
-	int previsaoDias;
+	protected int kmSaida = 0;
+	protected int kmEntrada = 0;
+	protected TipoLocacao tipo = new TipoLocacao();
+	protected double valor;
+	protected Calendar dataSaida;
+	protected Calendar dataDevolucao;
+	protected int previsaoDias;
+		
+	Locacao(){
+		
+	}
 	
-	/*Locacao(Ciente p){
-		if (buscaArquivo(Cliente p)) {
+	/*Locacao(Cliente p){
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
+		if (arquivo.pesquisar(p.nome)) {
 			System.out.println("Cliente já cadastrado.");
 		} else {
 			System.out.println("Cliente não cadastrado.Por favor faça o cadastro");
 		}
 	}*/
 		
-	private boolean buscaArquivo() {
-		// TODO Fazer a busca no arquivo,falta aprender como faz.
-		return false;
-	}
-	
-	public void escolhaCarro(){
+	public void escolhaCarro(String marcaCarro) throws IOException{
 		//TODO Fazer a busca no arquivo dos carros disponíveis.
-	}
-	
-	public void escolhaTipo(){
+		
 		
 	}
 }
