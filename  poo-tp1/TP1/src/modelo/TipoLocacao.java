@@ -13,8 +13,5 @@ public class TipoLocacao {
 	}
 	public double getPrecoKm() {
 		return precoKm;
-	}
-	
-	
-	
+	}	
 }
