@@ -1,19 +1,17 @@
 package modelo;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Calendar;
 
 public class Locacao {
 	
-	protected double kmSaida = 0;
-	protected double kmEntrada = 0;
-	protected TipoLocacao tipo = new TipoLocacao();
-	protected double valor;
-	protected Calendar dataSaida;
-	protected Calendar dataDevolucao;
-	protected int previsaoDias;
-		
+	private double kmSaida = 0;
+	private double kmEntrada = 0;
+	private TipoLocacao tipo = new TipoLocacao();
+	private double valor;
+	private Calendar dataSaida;
+	private Calendar dataDevolucao;
+	private int previsaoDias;		
 	
 	public Locacao() {
 		
@@ -24,6 +22,44 @@ public class Locacao {
 		this.kmEntrada = kmEntrada;
 	}
 	
+	
+	
+	public double getKmSaida() {
+		return kmSaida;
+	}
+
+	public double getKmEntrada() {
+		return kmEntrada;
+	}
+
+	public TipoLocacao getTipo() {
+		return tipo;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public Calendar getDataSaida() {
+		return dataSaida;
+	}
+
+	public Calendar getDataDevolucao() {
+		return dataDevolucao;
+	}
+
+	public int getPrevisaoDias() {
+		return previsaoDias;
+	}
+
+	public TipoVeiculo getTipoVeiculo() {
+		return tipoVeiculo;
+	}
+
+	public TipoLocacao getTipoLocacao() {
+		return tipoLocacao;
+	}
+
 	TipoVeiculo tipoVeiculo = new TipoVeiculo();
 	
 	/*Locacao(Ciente p){
@@ -44,9 +80,6 @@ public class Locacao {
 		// TODO Fazer a busca no arquivo,falta aprender como faz.
 		return false;
 	}
-	
-	
-
 //=======
 	public void escolhaCarro(String marcaCarro) throws IOException{
 //>>>>>>> .r28
@@ -67,7 +100,7 @@ public class Locacao {
 		
 //>>>>>>> .r28
 		String opcao = "0";
-		String tipo;
+		String tipo = "";
 		final Console lerTipo = null;
 		while ((opcao != "1") || (opcao!="2")) {
 			System.out.println("Digite 1 para locação por km ou 2 para locação com quilometragem livre ");
@@ -76,14 +109,9 @@ public class Locacao {
 				System.out.println("Opção inválida!");
 			}
 		}
-	}
-	
-	
+	}	
 	
 	public void dataEntrega(){
 		
-	}
-
-	
+	}	
 }
-

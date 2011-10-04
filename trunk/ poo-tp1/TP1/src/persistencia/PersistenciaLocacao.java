@@ -21,7 +21,6 @@ public class PersistenciaLocacao {
 	BufferedWriter out = new BufferedWriter(fw);
 
 	public void salvar(Locacao locacao) throws IOException{
-		//TODO Criar método para salvar em arquivo
 		out.write(String.valueOf(locacao.getValor()));
 		out.write(";");
 		out.write(locacao.getDataSaida().getTime().toString());
@@ -115,4 +114,4 @@ public class PersistenciaLocacao {
 		return c;
 
 	}
-}	
+}

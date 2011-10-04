@@ -1,10 +1,8 @@
 package modelo;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.nio.CharBuffer;
-import java.util.Calendar;
+
+import persistencia.PersistenciaLocacao;
 import persistencia.PersistenciaCliente;
 
 public class Main {
