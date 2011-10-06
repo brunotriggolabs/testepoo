@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class Locacao {
-	
+
 	private double kmSaida = 0;
 	private double kmEntrada = 0;
 	private TipoLocacao tipo = new TipoLocacao();
@@ -12,18 +12,16 @@ public class Locacao {
 	private Calendar dataSaida;
 	private Calendar dataDevolucao;
 	private int previsaoDias;		
-	
+
 	public Locacao() {
-		
+
 	}
-	
+
 	public Locacao(double kmSaida, double kmEntrada) {
 		this.kmSaida = kmSaida;
 		this.kmEntrada = kmEntrada;
-	}
-	
-	
-	
+	}	
+
 	public double getKmSaida() {
 		return kmSaida;
 	}
@@ -61,44 +59,39 @@ public class Locacao {
 	}
 
 	TipoVeiculo tipoVeiculo = new TipoVeiculo();
-	
+
 	/*Locacao(Ciente p){
 		if (buscaArquivo(Cliente p)) {
-=======
+
 	/*Locacao(Cliente p){
 		PersistenciaLocacao arquivo = new PersistenciaLocacao();
 		if (arquivo.pesquisar(p.nome)) {
->>>>>>> .r28
+
 			System.out.println("Cliente já cadastrado.");
 		} else {
 			System.out.println("Cliente não cadastrado.Por favor faça o cadastro");
 		}
 	}*/
-		
+
 
 	private boolean buscaArquivo() {
 		// TODO Fazer a busca no arquivo,falta aprender como faz.
 		return false;
 	}
-//=======
+
 	public void escolhaCarro(String marcaCarro) throws IOException{
-//>>>>>>> .r28
 		String carroAlugado = null;
-		
+
 		System.out.println("Qual veículo você deseja alugar?");
 		final Console lerTipoVeiculo = null;
 		carroAlugado = lerTipoVeiculo.readString();
 		//TODO verificar se o carro está cadastrado
-		
-//<<<<<<< .mine
 	}
-	
-	
+
+
 	TipoLocacao tipoLocacao = new TipoLocacao();
 	public void escolhaTipo(){
-//=======
-		
-//>>>>>>> .r28
+
 		String opcao = "0";
 		String tipo = "";
 		final Console lerTipo = null;
@@ -110,8 +103,8 @@ public class Locacao {
 			}
 		}
 	}	
-	
+
 	public void dataEntrega(){
-		
+
 	}	
 }
