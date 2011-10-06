@@ -16,7 +16,7 @@ public class PersistenciaLocacao {
 			// TODO: handle exception
 		}
 	}
-	File arquivo = new File ("arquivos/teste.txt");
+	File arquivo = new File ("arquivos/Locacao.txt");
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter out = new BufferedWriter(fw);
 
