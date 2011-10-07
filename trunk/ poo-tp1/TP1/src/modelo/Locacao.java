@@ -1,6 +1,5 @@
 package modelo;
 
-import java.io.IOException;
 import java.util.Calendar;
 
 public class Locacao {
@@ -16,11 +15,16 @@ public class Locacao {
 	public Locacao() {
 
 	}
-
-	public Locacao(double kmSaida, double kmEntrada) {
+	
+	public Locacao(double kmSaida, double kmEntrada,TipoLocacao tipo,double valor,Calendar dataSaida,Calendar dataDevolucao,int previsaoDias) {
 		this.kmSaida = kmSaida;
 		this.kmEntrada = kmEntrada;
-	}	
+		this.tipo = tipo;
+		this.valor =  valor;
+		this.dataSaida = dataSaida;
+		this.dataDevolucao = dataDevolucao;
+		this.previsaoDias = previsaoDias;
+	}
 
 	public double getKmSaida() {
 		return kmSaida;
@@ -55,7 +59,7 @@ public class Locacao {
 	}
 
 	public TipoLocacao getTipoLocacao() {
-		return tipoLocacao;
+		return tipo;
 	}
 
 	TipoVeiculo tipoVeiculo = new TipoVeiculo();
@@ -71,7 +75,7 @@ public class Locacao {
 		} else {
 			System.out.println("Cliente não cadastrado.Por favor faça o cadastro");
 		}
-	}*/
+	}
 
 
 	private boolean buscaArquivo() {
@@ -106,5 +110,5 @@ public class Locacao {
 
 	public void dataEntrega(){
 
-	}	
+	}*/	
 }
