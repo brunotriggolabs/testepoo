@@ -3,19 +3,14 @@ package persistencia;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.StringTokenizer;
-
 import modelo.Locacao;
 
-public class PersistenciaLocacao {
+public class PersistenciaLocacao { 
 
-	public PersistenciaLocacao() throws IOException  {
-		try {
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+	public PersistenciaLocacao() throws IOException{
+		
 	}
+	
 	File arquivo = new File ("arquivos/Locacao.txt");
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter out = new BufferedWriter(fw);
@@ -46,7 +41,7 @@ public class PersistenciaLocacao {
 	FileReader fr = new FileReader(arquivo);
 	BufferedReader br = new BufferedReader(fr);
 
-	public boolean pesquisar(Locacao locacao) throws IOException{
+/*	public boolean pesquisar(Locacao locacao) throws IOException{
 		//TODO Criar método para pesquisa em arquivo
 		String conteudoLinha = null;
 		int linhaAtual = 0;
@@ -96,7 +91,7 @@ public class PersistenciaLocacao {
 
 	public void obterLista(){
 		//TODO Obtem lista de alguma coisa
-	}
+	}*/
 
 	protected Calendar stringParaCalendar(String data){
 		//de STRING para CALENDAR
