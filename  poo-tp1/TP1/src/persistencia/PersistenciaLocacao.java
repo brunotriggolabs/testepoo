@@ -8,6 +8,7 @@ import modelo.Locacao;
 public class PersistenciaLocacao { 
 
 	public PersistenciaLocacao() throws IOException{
+	
 		
 	}
 	
@@ -104,7 +105,9 @@ public class PersistenciaLocacao {
 
 			c.setTime(formatoData.parse(data));
 
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			System.out.println("Erro na conversão de String para Calendar!");
+		}
 
 		return c;
 

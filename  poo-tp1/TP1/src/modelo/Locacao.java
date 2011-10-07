@@ -10,7 +10,7 @@ public class Locacao {
 	private double valor;
 	private Calendar dataSaida;
 	private Calendar dataDevolucao;
-	private int previsaoDias;		
+	private int previsaoDias = 255;		
 
 	public Locacao() {
 
