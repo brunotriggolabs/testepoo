@@ -30,7 +30,7 @@ public class PersistenciaVeiculo {
 	public void salvaVeiculo(Veiculo veiculo) throws IOException {
 		bw.append(veiculo.getPlaca() + ";" 	+ veiculo.getMarca() + ";" +  veiculo.getModelo() +
 				";" + veiculo.getCor() + ";" + veiculo.getTipo() + ";" + veiculo.getObservacoes() 
-				 + ";" + veiculo.getOpicionais() + ";" +"\n");					//Carrega o buff
+				 + ";" + veiculo.getOpcionais() + ";" +"\n");					//Carrega o buff
 		bw.flush();																//escrever o buff no arquivo
 		bw.close();																//fecha o arquivo
 	}

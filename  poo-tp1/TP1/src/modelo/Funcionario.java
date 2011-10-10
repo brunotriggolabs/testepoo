@@ -8,6 +8,11 @@ public class Funcionario extends Pessoa {
 		super(nome, cpf);
 		this.cargo = cargo;
 	}
+
+	public String getCargo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	//TODO adicionar métodos do Funcionário
 	
