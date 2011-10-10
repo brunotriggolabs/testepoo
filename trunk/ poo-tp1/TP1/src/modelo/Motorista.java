@@ -7,6 +7,11 @@ public class Motorista extends Pessoa {
 		super(nome, cpf);
 		Locacao locacao = new Locacao();
 	}
+
+	public String getCnh() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	//TODO adicionar métodos do motorista
 }
