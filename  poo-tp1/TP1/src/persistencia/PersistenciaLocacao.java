@@ -4,6 +4,8 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import modelo.Data;
 import modelo.Locacao;
 import modelo.TipoLocacao;
 
@@ -21,9 +23,17 @@ public class PersistenciaLocacao {
 	public void salvar(Locacao locacao) throws IOException{
 		out.write(String.valueOf(locacao.getValor()));
 		out.write(";");
-		out.write(locacao.getDataSaida().toString());
+		out.write(locacao.getDataSaida().getDia());
 		out.write(";");
-		out.write(locacao.getDataDevolucao().toString());
+		out.write(locacao.getDataSaida().getMes());
+		out.write(";");
+		out.write(locacao.getDataSaida().getAno());
+		out.write(";");
+		out.write(locacao.getDataDevolucao().getDia());
+		out.write(";");
+		out.write(locacao.getDataDevolucao().getMes());
+		out.write(";");
+		out.write(locacao.getDataDevolucao().getAno());
 		out.write(";");
 		out.write(String.valueOf(locacao.getKmSaida()));
 		out.write(";");
@@ -36,6 +46,8 @@ public class PersistenciaLocacao {
 		out.write(locacao.getTipo().getTipo());
 		out.write(";");
 		out.write(String.valueOf(locacao.getTipo().getTaxaBase()));
+		out.write(";");
+		out.write(String.valueOf(locacao.getPreco()));
 		out.write("\n");
 		out.flush();
 		out.close();
@@ -75,28 +87,25 @@ public class PersistenciaLocacao {
 	}
 	
 	private Locacao converteOriginal (String s[],Locacao loc) {
-		SimpleDateFormat formatador = new SimpleDateFormat("dd/mm/yyyy");
-		TipoLocacao tipo = loc.getTipoLocacao();
+		TipoLocacao tipo = loc.getTipoLocacao();		
 		loc.setValor(Double.parseDouble(s[0]));
-		try {
-			loc.setDataSaida(formatador.parse(s[1]));
-		} catch (ParseException e) {
-			System.out.println("Erro na conversão de String para Date!");
-			e.printStackTrace();
-		}
-		try {
-			loc.setDataDevolucao(formatador.parse(s[2]));
-		} catch (ParseException e) {
-			System.out.println("Erro na conversão de String para Date!");
-			e.printStackTrace();
-		}
-		loc.setKmSaida(Double.parseDouble(s[3]));
-		loc.setKmEntrada(Double.parseDouble(s[4]));
-		loc.setPrevisaoDias(Integer.parseInt(s[5]));
-		tipo.setPrecoKm(Double.parseDouble(s[6]));
-		tipo.setTipo(s[7]);
-		tipo.setTaxaBase(Double.parseDouble(s[8]));
+		Data data = new Data();
+		data.setDia(Integer.valueOf(s[1]));
+		data.setMes(Integer.valueOf(s[2]));
+		data.setAno(Integer.valueOf(s[3]));
+		loc.setDataSaida(data);  //setDataSaida.(formatador.parse(s[1]));//Dia
+		data.setDia(Integer.valueOf(s[4]));
+		data.setMes(Integer.valueOf(s[5]));
+		data.setAno(Integer.valueOf(s[6]));
+		loc.setDataDevolucao(data);//Mes
+		loc.setKmSaida(Double.parseDouble(s[7]));
+		loc.setKmEntrada(Double.parseDouble(s[8]));
+		loc.setPrevisaoDias(Integer.parseInt(s[9]));
+		tipo.setPrecoKm(Double.parseDouble(s[10]));
+		tipo.setTipo(s[11]);
+		tipo.setTaxaBase(Double.parseDouble(s[12]));
 		loc.setTipo(tipo);
+		loc.setPreco(Double.parseDouble(s[13]));
 		
 		return loc;
 	}
