@@ -3,6 +3,18 @@ package modelo;
 public class TipoVeiculo {
 	
 	protected double precokm;
+	public void setPrecokm(double precokm) {
+		this.precokm = precokm;
+	}
+
+	public void setTaxaBase(double taxaBase) {
+		this.taxaBase = taxaBase;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	protected double taxaBase;
 	protected String tipo;
 	

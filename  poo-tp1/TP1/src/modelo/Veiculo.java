@@ -12,6 +12,7 @@ public class Veiculo {
 	private String tipo;
 	private String opicionais;
 	private String observacoes;
+	private boolean disponivel;
 	
 	
 	public Veiculo(String placa, String marca, String modelo) {
