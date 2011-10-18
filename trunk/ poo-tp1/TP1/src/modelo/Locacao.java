@@ -1,22 +1,39 @@
 package modelo;
 
-import java.util.Date;
-import java.util.Date;
 
 public class Locacao {
-
+	
+	private double kmSaida = 0;
 	private double kmEntrada = 0;
 	private TipoLocacao tipo = new TipoLocacao();
 	private double valor;
-	private Date dataSaida;
-	private Date dataDevolucao;
+	private Data dataSaida;
+	private Data dataDevolucao;
 	private int previsaoDias = 0;
+	private boolean alugado = false;
+	private double preco = 0.0;
+		
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public boolean isAlugado() {
+		return alugado;
+	}
+
+	public void setAlugado(boolean alugado) {
+		this.alugado = alugado;
+	}
 
 	public Locacao() {
 
 	}
 	
-	public Locacao(double kmSaida, double kmEntrada,TipoLocacao tipo,double valor,Date dataSaida,Date dataDevolucao,int previsaoDias) {
+	public Locacao(double kmSaida, double kmEntrada,TipoLocacao tipo,double valor,Data dataSaida,Data dataDevolucao,int previsaoDias) {
 		this.kmSaida = kmSaida;
 		this.kmEntrada = kmEntrada;
 		this.tipo = tipo;
@@ -24,9 +41,8 @@ public class Locacao {
 		this.dataSaida = dataSaida;
 		this.dataDevolucao = dataDevolucao;
 		this.previsaoDias = previsaoDias;
-	}
+	}	
 	
-	private double kmSaida = 0;
 	public void setKmSaida(double kmSaida) {
 		this.kmSaida = kmSaida;
 	}
@@ -43,11 +59,11 @@ public class Locacao {
 		this.valor = valor;
 	}
 
-	public void setDataSaida(Date dataSaida) {
+	public void setDataSaida(Data dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
-	public void setDataDevolucao(Date dataDevolucao) {
+	public void setDataDevolucao(Data dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 
@@ -75,11 +91,11 @@ public class Locacao {
 		return valor;
 	}
 
-	public Date getDataSaida() {
+	public Data getDataSaida() {
 		return dataSaida;
 	}
 
-	public Date getDataDevolucao() {
+	public Data getDataDevolucao() {
 		return dataDevolucao;
 	}
 

@@ -1,25 +1,37 @@
 package modelo;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.nio.CharBuffer;
-import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import persistencia.PersistenciaLocacao;
 public class Main {
 
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws IOException {
-		//PersistenciaLocacao arquivo = new PersistenciaLocacao();
-		//Locacao locacao = new Locacao();
-
-		//System.out.println("Teste");
+	public static void main(String[] args) throws IOException, ParseException {
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
+		Locacao locacao = new Locacao();
+		TipoLocacao tipo = new TipoLocacao();
+		TipoVeiculo tipoVeiculo = new TipoVeiculo();
 		
-//<<<<<<< .mine
-		//out.write("Tchau");
-		//arquivo.pesquisar("FUNC");
+		
+				
+		locacao.setDataDevolucao(data);
+		locacao.setDataSaida(data);
+		locacao.setKmEntrada(2.0);
+		locacao.setKmSaida(1.0);
+		locacao.setPrevisaoDias(2);
+		locacao.setTipo(tipo);
+		locacao.setTipoVeiculo(tipoVeiculo);
+		locacao.setValor(2.2);
+
+		arquivo.salvar(locacao);
+		arquivo.pesquisar(locacao);
 //=======
 	//	arquivo.salvar(locacao);
 		
