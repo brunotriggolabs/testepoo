@@ -5,6 +5,16 @@ public class TipoLocacao {
 	private double taxaBase;
 	private double precoKm;
 	
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public void setTaxaBase(double taxaBase) {
+		this.taxaBase = taxaBase;
+	}
+	public void setPrecoKm(double precoKm) {
+		this.precoKm = precoKm;
+	}
+	
 	public String getTipo() {
 		return tipo;
 	}
@@ -13,8 +23,5 @@ public class TipoLocacao {
 	}
 	public double getPrecoKm() {
 		return precoKm;
-	}
-	
-	
-	
+	}	
 }

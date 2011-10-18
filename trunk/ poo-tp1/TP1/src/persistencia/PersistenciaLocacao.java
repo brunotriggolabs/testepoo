@@ -1,9 +1,11 @@
 package persistencia;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import modelo.Locacao;
+import modelo.TipoLocacao;
 
 public class PersistenciaLocacao { 
 
@@ -19,9 +21,9 @@ public class PersistenciaLocacao {
 	public void salvar(Locacao locacao) throws IOException{
 		out.write(String.valueOf(locacao.getValor()));
 		out.write(";");
-		out.write(locacao.getDataSaida().getTime().toString());
+		out.write(locacao.getDataSaida().toString());
 		out.write(";");
-		out.write(locacao.getDataDevolucao().getTime().toString());
+		out.write(locacao.getDataDevolucao().toString());
 		out.write(";");
 		out.write(String.valueOf(locacao.getKmSaida()));
 		out.write(";");
@@ -42,33 +44,64 @@ public class PersistenciaLocacao {
 	FileReader fr = new FileReader(arquivo);
 	BufferedReader br = new BufferedReader(fr);
 
-/*	public boolean pesquisar(Locacao locacao) throws IOException{
+	public boolean pesquisar(Locacao locacao) throws IOException{
 		//TODO Criar método para pesquisa em arquivo
 		String conteudoLinha = null;
 		int linhaAtual = 0;
-		StringTokenizer separador;
+		String s[];
 		Locacao loc = new Locacao();
 		while(true){
 			linhaAtual++;
 			try {
 				conteudoLinha = br.readLine();
 			} catch (IOException e) {
+				System.out.println("Erro em IOException");
 				break;
 			}
 			if (conteudoLinha == null) {
+				System.out.println("Linha vazia!");
 				break;
 			}
-			separador = new StringTokenizer(conteudoLinha,";");
-			if (String.valueOf(locacao.getValor()).equals(separador.nextToken())){
-				System.out.println("Deu certo!");
+			s = conteudoLinha.split("\\;");
+			if (converteOriginal(s, loc).equals(locacao)){
+				System.out.println("Encontrado!");
 				return true;
+			}else {
+				System.out.println("Não encontrado!");
+				return false;
 			}
 		}
-		System.out.println("ERRO!");
 		return false;
 	}
+	
+	private Locacao converteOriginal (String s[],Locacao loc) {
+		SimpleDateFormat formatador = new SimpleDateFormat("dd/mm/yyyy");
+		TipoLocacao tipo = loc.getTipoLocacao();
+		loc.setValor(Double.parseDouble(s[0]));
+		try {
+			loc.setDataSaida(formatador.parse(s[1]));
+		} catch (ParseException e) {
+			System.out.println("Erro na conversão de String para Date!");
+			e.printStackTrace();
+		}
+		try {
+			loc.setDataDevolucao(formatador.parse(s[2]));
+		} catch (ParseException e) {
+			System.out.println("Erro na conversão de String para Date!");
+			e.printStackTrace();
+		}
+		loc.setKmSaida(Double.parseDouble(s[3]));
+		loc.setKmEntrada(Double.parseDouble(s[4]));
+		loc.setPrevisaoDias(Integer.parseInt(s[5]));
+		tipo.setPrecoKm(Double.parseDouble(s[6]));
+		tipo.setTipo(s[7]);
+		tipo.setTaxaBase(Double.parseDouble(s[8]));
+		loc.setTipo(tipo);
+		
+		return loc;
+	}
 
-	public void deletar(Locacao locacao) throws IOException {
+/*	public void deletar(Locacao locacao) throws IOException {
 		String conteudoLinha = null;
 		int linhaAtual = 0;
 		while(true){

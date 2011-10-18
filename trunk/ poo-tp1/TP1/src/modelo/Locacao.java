@@ -1,22 +1,22 @@
 package modelo;
 
-import java.util.Calendar;
+import java.util.Date;
+import java.util.Date;
 
 public class Locacao {
 
-	private double kmSaida = 0;
 	private double kmEntrada = 0;
 	private TipoLocacao tipo = new TipoLocacao();
 	private double valor;
-	private Calendar dataSaida;
-	private Calendar dataDevolucao;
-	private int previsaoDias = 255;		
+	private Date dataSaida;
+	private Date dataDevolucao;
+	private int previsaoDias = 0;
 
 	public Locacao() {
 
 	}
 	
-	public Locacao(double kmSaida, double kmEntrada,TipoLocacao tipo,double valor,Calendar dataSaida,Calendar dataDevolucao,int previsaoDias) {
+	public Locacao(double kmSaida, double kmEntrada,TipoLocacao tipo,double valor,Date dataSaida,Date dataDevolucao,int previsaoDias) {
 		this.kmSaida = kmSaida;
 		this.kmEntrada = kmEntrada;
 		this.tipo = tipo;
@@ -24,6 +24,39 @@ public class Locacao {
 		this.dataSaida = dataSaida;
 		this.dataDevolucao = dataDevolucao;
 		this.previsaoDias = previsaoDias;
+	}
+	
+	private double kmSaida = 0;
+	public void setKmSaida(double kmSaida) {
+		this.kmSaida = kmSaida;
+	}
+
+	public void setKmEntrada(double kmEntrada) {
+		this.kmEntrada = kmEntrada;
+	}
+
+	public void setTipo(TipoLocacao tipo) {
+		this.tipo = tipo;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public void setDataSaida(Date dataSaida) {
+		this.dataSaida = dataSaida;
+	}
+
+	public void setDataDevolucao(Date dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
+	}
+
+	public void setPrevisaoDias(int previsaoDias) {
+		this.previsaoDias = previsaoDias;
+	}
+
+	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
 	public double getKmSaida() {
@@ -42,11 +75,11 @@ public class Locacao {
 		return valor;
 	}
 
-	public Calendar getDataSaida() {
+	public Date getDataSaida() {
 		return dataSaida;
 	}
 
-	public Calendar getDataDevolucao() {
+	public Date getDataDevolucao() {
 		return dataDevolucao;
 	}
 
