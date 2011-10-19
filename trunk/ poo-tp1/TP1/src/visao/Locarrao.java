@@ -31,6 +31,7 @@ public class Locarrao {
 			System.out.println("4-Cadastro Funcionario");
 			System.out.println("5-Cadastro Locacao");
 			System.out.println("6-Listagens");
+			System.out.println("7-Encerrar Locacao");
 			System.out.println("0-Sair");
 			System.out.println("********************************************************");
 			opcaoMenu = Console.readInteger();
@@ -63,9 +64,9 @@ public class Locarrao {
 				menu = cadastroLocacao.cadastraLocacao();
 				break;
 			case 6:
-				System.out.println("********----------LOCARRÃO RENT-A-CAR----------********");
-				System.out.println("*******************************************************");
-				System.out.println("********----------Opções para cadastro---------*********");
+				System.out.println("********--------------LOCARRÃO RENT-A-CAR---------------********");
+				System.out.println("****************************************************************");
+				System.out.println("********--------------Opções para Listagem-------------*********");
 				System.out.println("1-Locacoes em aberto");
 				System.out.println("2-Locacoes finalizadas");
 				System.out.println("3-Veiculos disponiveis");
@@ -73,6 +74,7 @@ public class Locarrao {
 				System.out.println("5-Veículos mais rentáveis");
 				System.out.println("6-Pesquisar clientes");
 				System.out.println("7-Pesquisar disponibilidade de determinada categoria de veículos");
+				System.out.println("*****************************************************************");
 				int opMenu2 = 0;
 				opMenu2 = Console.readInteger();
 				switch (opMenu2) {
@@ -102,6 +104,9 @@ public class Locarrao {
 					menu = escolhaMenu();
 					break;
 				}
+			case 7:
+				
+				break;
 			default:
 				System.out.println("Deseja Sair?");
 				menu = escolhaMenu();
