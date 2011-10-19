@@ -1,4 +1,7 @@
 package visao;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import modelo.*;
@@ -8,8 +11,8 @@ public class Locarrao {
 
 	protected static String lerCpf;
 	protected static String lerMotorista;
-
-	public static int escolhaMenu(){
+	
+	public static final int escolhaMenu(){
 		System.out.println("Deseja voltar ao menu? [1==sim]");
 		if (Console.readInteger() == 1){
 			return 1;
@@ -19,6 +22,11 @@ public class Locarrao {
 
 	public static void main(String[] args) throws IOException {
 		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
+		File arquivo = new File ("arquivos/numLocacoes.txt");
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		Locacao.numLocacoes = Integer.parseInt(br.readLine());
+		System.out.println("Numero de locacoes = " + Locacao.numLocacoes + "\n");
 		int menu = 1;
 		while (menu==1){
 			int opcaoMenu = 0;
@@ -32,6 +40,8 @@ public class Locarrao {
 			System.out.println("5-Cadastro Locacao");
 			System.out.println("6-Listagens");
 			System.out.println("7-Encerrar Locacao");
+			System.out.println("8-Remoção de registros");
+			System.out.println("9-Atualizar registros");
 			System.out.println("0-Sair");
 			System.out.println("********************************************************");
 			opcaoMenu = Console.readInteger();
@@ -97,7 +107,7 @@ public class Locarrao {
 					
 					break;
 				case 7:
-					
+					VisaoLocacao.finalizaLocacao(tipov, tipo)
 					break;
 				default:
 					System.out.println("Deseja Sair?");
