@@ -1,7 +1,7 @@
-	package modelo;
+package modelo;
 
 public class TipoVeiculo {
-	
+
 	protected double precokm;
 	public void setPrecokm(double precokm) {
 		this.precokm = precokm;
@@ -17,7 +17,7 @@ public class TipoVeiculo {
 
 	protected double taxaBase;
 	protected String tipo;
-	
+
 	public TipoVeiculo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -36,5 +36,5 @@ public class TipoVeiculo {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }
