@@ -3,16 +3,11 @@ package persistencia;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-
 import modelo.Locacao;
-import modelo.TipoLocacao;
-
-
 
 public class PersistenciaLocacao  {
 
@@ -64,7 +59,6 @@ public class PersistenciaLocacao  {
 	BufferedReader br = new BufferedReader(fr);
 
 	public Locacao pesquisar(int id) throws IOException{
-		TipoLocacao tipo = new TipoLocacao();
 		String conteudoLinha = null;
 		int linhaAtual = 0;
 		String s[];
@@ -116,7 +110,6 @@ public class PersistenciaLocacao  {
 	}
 
 	public double pesquisaPrecoFinalizado (){
-		TipoLocacao tipo = new TipoLocacao();
 		String conteudoLinha = null;
 		int linhaAtual = 0;
 		String s[];
@@ -144,7 +137,6 @@ public class PersistenciaLocacao  {
 	}
 
 	public double pesquisaLocacoesEmAberto () {
-		TipoLocacao tipo = new TipoLocacao();
 		String conteudoLinha = null;
 		int linhaAtual = 0;
 		String s[];

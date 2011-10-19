@@ -3,3 +3,4 @@ gkr 2712;Gol;bolinha;null;null;null;1;0;null
 gkr 2712;Gol;bolinha;null;null;null;1;0;null
 gkr 2712;Gol;bolinha;null;null;null;1;0;null
 gkr 2712;Gol;bolinha;null;null;null;1;0;null
+ABC-2345;FIAT;PALIO;null;null;null;1;0;null
