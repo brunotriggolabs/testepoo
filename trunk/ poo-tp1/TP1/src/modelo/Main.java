@@ -15,23 +15,12 @@ public class Main {
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		PersistenciaLocacao arquivo = new PersistenciaLocacao();
-		Locacao locacao = new Locacao();
 		TipoLocacao tipo = new TipoLocacao();
 		TipoVeiculo tipoVeiculo = new TipoVeiculo();
-		
-		
-				
-		locacao.setDataDevolucao(data);
-		locacao.setDataSaida(data);
-		locacao.setKmEntrada(2.0);
-		locacao.setKmSaida(1.0);
-		locacao.setPrevisaoDias(2);
-		locacao.setTipo(tipo);
-		locacao.setTipoVeiculo(tipoVeiculo);
-		locacao.setValor(2.2);
+		Locacao locacao = new Locacao(12, 13, 2);
 
 		arquivo.salvar(locacao);
-		arquivo.pesquisar(locacao);
+		arquivo.pesquisar(2);
 //=======
 	//	arquivo.salvar(locacao);
 		

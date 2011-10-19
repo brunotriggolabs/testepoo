@@ -1,18 +1,102 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class Locacao {
 	
-	private double kmSaida = 0;
-	private double kmEntrada = 0;
-	private TipoLocacao tipo = new TipoLocacao();
+	private int kmSaida;
+	private int kmEntrada;
+	private int tipoLocacao;
+	private int tipoVeiculo;
 	private double valor;
-	private Data dataSaida;
-	private Data dataDevolucao;
-	private int previsaoDias = 0;
-	private boolean alugado = false;
-	private double preco = 0.0;
+	private int diaEntrada;
+	private int diaSaida;
+	private int mesEntrada;
+	private int mesSaida;
+	private int anoEntrada;
+	private int anoSaida;
+	private int previsaoDias;
+	private boolean alugado;
+	private double preco;
+	private int id;
+	public static int numLocacoes = 0;
 		
+	@SuppressWarnings("deprecation")
+	public Locacao(int kmSaida, int tipoLocacao,int previsaoDias) {
+		this.kmSaida = kmSaida;
+		this.kmEntrada = kmSaida;
+		this.tipoLocacao = tipoLocacao;
+		this.valor = 5;
+		this.diaEntrada = new Date().getDate();
+		this.mesEntrada = new Date().getMonth();
+		this.anoEntrada = new Date().getYear();
+		this.previsaoDias = previsaoDias;
+		System.out.println(numLocacoes);
+		this.id = numLocacoes;
+		numLocacoes++;
+	}
+	
+	public Locacao(int kmSaida, int tipoLocacao) {
+		this.kmSaida = kmSaida;
+		this.kmEntrada = kmSaida;
+		this.tipoLocacao = tipoLocacao;
+		this.valor =  4;
+		this.diaEntrada = new Date().getDate();
+		this.mesEntrada = new Date().getMonth();
+		this.anoEntrada = new Date().getYear();
+		this.previsaoDias = 2;
+	}
+	
+	public int getDiaEntrada() {
+		return diaEntrada;
+	}
+
+	public void setDiaEntrada(int diaEntrada) {
+		this.diaEntrada = diaEntrada;
+	}
+
+	public int getDiaSaida() {
+		return diaSaida;
+	}
+
+	public void setDiaSaida(int diaSaida) {
+		this.diaSaida = diaSaida;
+	}
+
+	public int getMesEntrada() {
+		return mesEntrada;
+	}
+
+	public void setMesEntrada(int mesEntrada) {
+		this.mesEntrada = mesEntrada;
+	}
+
+	public int getMesSaida() {
+		return mesSaida;
+	}
+
+	public void setMesSaida(int mesSaida) {
+		this.mesSaida = mesSaida;
+	}
+
+	public int getAnoEntrada() {
+		return anoEntrada;
+	}
+
+	public void setAnoEntrada(int anoEntrada) {
+		this.anoEntrada = anoEntrada;
+	}
+
+	public int getAnoSaida() {
+		return anoSaida;
+	}
+
+	public void setAnoSaida(int anoSaida) {
+		this.anoSaida = anoSaida;
+	}
+
 	public double getPreco() {
 		return preco;
 	}
@@ -27,137 +111,62 @@ public class Locacao {
 
 	public void setAlugado(boolean alugado) {
 		this.alugado = alugado;
-	}
-
-	public Locacao() {
-
-	}
-	
-	public Locacao(double kmSaida, double kmEntrada,TipoLocacao tipo,double valor,Data dataSaida,Data dataDevolucao,int previsaoDias) {
-		this.kmSaida = kmSaida;
-		this.kmEntrada = kmEntrada;
-		this.tipo = tipo;
-		this.valor =  valor;
-		this.dataSaida = dataSaida;
-		this.dataDevolucao = dataDevolucao;
-		this.previsaoDias = previsaoDias;
 	}	
 	
-	public void setKmSaida(double kmSaida) {
+	public void setKmSaida(int kmSaida) {
 		this.kmSaida = kmSaida;
 	}
 
-	public void setKmEntrada(double kmEntrada) {
+	public void setKmEntrada(int kmEntrada) {
 		this.kmEntrada = kmEntrada;
 	}
 
-	public void setTipo(TipoLocacao tipo) {
-		this.tipo = tipo;
+	public void setTipoLocacao(int tipoLocacao) {
+		this.tipoLocacao = tipoLocacao;
 	}
 
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
-	public void setDataSaida(Data dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-
-	public void setDataDevolucao(Data dataDevolucao) {
-		this.dataDevolucao = dataDevolucao;
-	}
-
 	public void setPrevisaoDias(int previsaoDias) {
 		this.previsaoDias = previsaoDias;
 	}
 
-	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
-		this.tipoVeiculo = tipoVeiculo;
-	}
-
-	public double getKmSaida() {
+	public int getKmSaida() {
 		return kmSaida;
 	}
 
-	public double getKmEntrada() {
+	public int getKmEntrada() {
 		return kmEntrada;
-	}
-
-	public TipoLocacao getTipo() {
-		return tipo;
 	}
 
 	public double getValor() {
 		return valor;
 	}
 
-	public Data getDataSaida() {
-		return dataSaida;
-	}
-
-	public Data getDataDevolucao() {
-		return dataDevolucao;
-	}
-
 	public int getPrevisaoDias() {
 		return previsaoDias;
 	}
 
-	public TipoVeiculo getTipoVeiculo() {
+	public int getTipoVeiculo() {
 		return tipoVeiculo;
 	}
-
-	public TipoLocacao getTipoLocacao() {
-		return tipo;
+	
+	public void setTipoVeiculo(int tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
-	TipoVeiculo tipoVeiculo = new TipoVeiculo();
-
-	/*Locacao(Ciente p){
-		if (buscaArquivo(Cliente p)) {
-
-	/*Locacao(Cliente p){
-		PersistenciaLocacao arquivo = new PersistenciaLocacao();
-		if (arquivo.pesquisar(p.nome)) {
-
-			System.out.println("Cliente já cadastrado.");
-		} else {
-			System.out.println("Cliente não cadastrado.Por favor faça o cadastro");
-		}
+	public int getTipoLocacao() {
+		return tipoLocacao;
 	}
 
-
-	private boolean buscaArquivo() {
-		// TODO Fazer a busca no arquivo,falta aprender como faz.
-		return false;
+	public int getId() {
+		return id;
 	}
-
-	public void escolhaCarro(String marcaCarro) throws IOException{
-		String carroAlugado = null;
-
-		System.out.println("Qual veículo você deseja alugar?");
-		final Console lerTipoVeiculo = null;
-		carroAlugado = lerTipoVeiculo.readString();
-		//TODO verificar se o carro está cadastrado
+	
+	public void setId(int id) {
+		this.id = id;
 	}
-
-
-	TipoLocacao tipoLocacao = new TipoLocacao();
-	public void escolhaTipo(){
-
-		String opcao = "0";
-		String tipo = "";
-		final Console lerTipo = null;
-		while ((opcao != "1") || (opcao!="2")) {
-			System.out.println("Digite 1 para locação por km ou 2 para locação com quilometragem livre ");
-			tipo = lerTipo.readString();
-			if ((opcao != "1") || (opcao!="2")) {
-				System.out.println("Opção inválida!");
-			}
-		}
-	}	
-
-	public void dataEntrega(){
-
-	}*/	
+	
 }
