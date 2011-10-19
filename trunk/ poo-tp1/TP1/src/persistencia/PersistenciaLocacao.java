@@ -18,11 +18,6 @@ public class PersistenciaLocacao  {
 
 
 	public PersistenciaLocacao() throws IOException {
-		try {
-		
-		} catch (IOException e) {
-			// TODO: handle exception
-		}
 	}	
 
 	public File arquivo = new File ("arquivos/Locacao.txt");
@@ -56,7 +51,7 @@ public class PersistenciaLocacao  {
 		out.write(";");
 		out.write(String.valueOf(locacao.getPreco()));
 		out.write(";");
-		out.write(String.valueOf(locacao.isAlugado()));
+		out.write(new Boolean(locacao.isAlugado()).toString());
 		out.write(";");
 		out.write(String.valueOf(locacao.isFinalizado()));
 		out.write("\n");

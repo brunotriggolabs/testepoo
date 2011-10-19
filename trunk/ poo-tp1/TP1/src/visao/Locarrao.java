@@ -23,10 +23,8 @@ public class Locarrao {
 			//TODO realizar cadastro do cliente-motorista
 		} else {
 			//TODO Realiza cadastro motorista
-		}	
+		}
 	}
-	
-	static  PersistenciaLocacao arquivo = new PersistenciaLocacao();
 	
 	private static boolean verificaCpf (String cpf){
 		//Verifica CPF no arquivo
@@ -78,24 +76,29 @@ public class Locarrao {
 		}
 	}
 
-	private static double locacoesEmAberto(Data dia,Locacao locacao) {
+	private static double locacoesEmAberto(Data dia,Locacao locacao) throws IOException {
 		//TODO pegar período desejado
 		double precoTotal = 0.0;
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
 		precoTotal = precoTotal + arquivo.pesquisaLocacoesEmAberto();
 		
 	return precoTotal;
 }
 	
-	private static double locacoesFinalizadas(){
+	private static double locacoesFinalizadas() throws IOException{
 		double resultado = 0;
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
 		resultado = resultado + arquivo.pesquisaPrecoFinalizado();
 		return resultado;
 	}
 
 	
 	public static void main(String[] args) throws IOException {
-		
-
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
+		Locacao loc = new Locacao(2, 1, 3);
+		TipoVeiculo tipov =  new TipoVeiculo();
+		TipoLocacao tipo = new TipoLocacao();
+		Data dia = new Data();
 		System.out.println("********----------LOCARRÃO RENT-A-CAR----------********");
 		System.out.println("Verificando se já está cadastrado:");
 		System.out.println("Digite seu CPF");
@@ -104,7 +107,15 @@ public class Locarrao {
 		/*if (verificaCpf == false){
 			//TODO realiza cadastro
 		}*/
+		arquivo.salvar(loc);
 		System.out.println("Devolução:");
-		
+		lerValores();
+		calculaDias(loc);
+		dia.setDia(con.readInteger());
+		dia.setMes(con.readInteger());
+		dia.setAno(con.readInteger());
+		System.out.println(locacoesEmAberto(dia, loc));
+		System.out.println(locacoesFinalizadas());
+		System.out.println(calculoPreco(tipov, loc, tipo));
 	}
 }
