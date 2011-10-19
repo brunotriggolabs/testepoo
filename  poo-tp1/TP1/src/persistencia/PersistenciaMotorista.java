@@ -7,9 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import modelo.Funcionario;
 import modelo.Motorista;
-import modelo.Veiculo;
 
 public class PersistenciaMotorista {
 	
@@ -20,10 +18,6 @@ public class PersistenciaMotorista {
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter bw = new BufferedWriter(fw);
 
-	//Lê no arquivo
-	FileReader fr = new FileReader(arquivo);
-	BufferedReader br = new BufferedReader(fr);
-	
 	//Construtor Default
 	public PersistenciaMotorista() throws IOException {
 	}
@@ -36,11 +30,13 @@ public class PersistenciaMotorista {
 		bw.close();																			//fecha o arquivo
 	}
 	
-	public Motorista pesquisarMotorista(String cpf) {
+	public Motorista pesquisarMotorista(String cpf) throws IOException {
 		String conateudoLinha = null;
 		int linhaAtual = 0;
-	 	String s[];
-		Motorista mot = new Motorista("x", "y", "z");
+	 	String s[];	 	
+	 	FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+	 	Motorista mot = new Motorista("x", "y", "z");
 		while(true) {
 			linhaAtual++;
 			try {
@@ -50,17 +46,16 @@ public class PersistenciaMotorista {
 				break;
 			}
 			if (conateudoLinha == null) {
-				System.out.println("Linha vazia!");
-				break;
+				System.out.println("Motorista não encontrado.");
+				br.close();
+				return null;
 			}
 			s = conateudoLinha.split("\\;");
 			mot = converteOriginal(s);
 			if (mot.getCpf().equals(cpf)){
 				System.out.println("Encontrado!");
+				br.close();
 				return mot;
-			}else {
-				System.out.println("N�o encontrado!");
-				return null;
 			}
 		}
 		return null;
@@ -71,7 +66,7 @@ public class PersistenciaMotorista {
 		String s0 = s[0]; // NOME
 		String s1 = s[1]; // CPF
 		String s2 = s[2]; // CNH
-		String s3 = s[3]; // ENDERE�O
+		String s3 = s[3]; // ENDERE�O
 		String s4 = s[4]; // TELEFONE
 		Motorista mot = new Motorista(s0, s1, s2);
 		mot.setEndereco(s3);
@@ -80,8 +75,39 @@ public class PersistenciaMotorista {
 	}
 	
 	
-	public boolean deletaMotorista(Motorista motorista) {
-		//TODO implementar a deleção do motorista
-		return false;
+	public void deletaMotorista(String cpf) throws IOException {
+		String conateudoLinha = null;
+		int linhaAtual = 0;
+	 	String s[];
+		Motorista mot = new Motorista("a", "b", "c");
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		File novo = new File("arquivos/motoristaTemp.txt");
+		FileWriter fwTemp = new FileWriter(novo,true);
+		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
+		while(true) {
+			linhaAtual++;
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				break;
+			}
+			s = conateudoLinha.split("\\;");
+			mot = converteOriginal(s);
+			if (mot.getCpf().equals(cpf)){
+				System.out.println("Motorista deletado do registro");
+			} else {
+				bwTemp.append(mot.getNome() + ";" + mot.getCpf() + ";" +  mot.getCnh() + ";" 
+						+ mot.getEndereco() + ";" + mot.getTelefone()+ "\n");			
+			}
+		}
+		bwTemp.flush();														//escrever o buff no arquivo
+		bwTemp.close();														//fecha o arquivo
+		arquivo.delete();
+		novo.renameTo(new File("arquivos/motorista.txt"));  
 	}
 }
