@@ -18,10 +18,9 @@ public class TesteLocacao {
 	@Test
 	public void test() throws IOException {
 		PersistenciaLocacao pers = new PersistenciaLocacao();
-		Locacao loc = new Locacao(20, 1, 2);
-		assertEquals(20, pers.pesquisar(1).getKmSaida());
-		
-		
+		Locacao loc = new Locacao(20, 1);
+		loc.setId(50);
+		//pers.salvar(loc);
+		pers.deletaLocacao(2);
 	}
-
 }
