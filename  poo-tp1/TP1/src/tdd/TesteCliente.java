@@ -1,25 +1,38 @@
 package tdd;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
 import modelo.Cliente;
-import modelo.Veiculo;
 
 import org.junit.Test;
 
 import persistencia.PersistenciaCliente;
-import persistencia.PersistenciaVeiculo;
 
 public class TesteCliente {
 
 	@Test
-	public void test() throws IOException {
+	public void test1() throws IOException {
 		PersistenciaCliente pers = new PersistenciaCliente();
-		Cliente cli = new Cliente("bruno", "1231543");
-		pers.salvaCliente(cli);
-		assertEquals("bruno", pers.pesquisarCliente("1231543").getNome());
+		Cliente cli = new Cliente("fernando", "456");
+		cli.addLocacao(1);
+		cli.addLocacao(2);
+		//pers.salvaCliente(cli);
+		cli = pers.pesquisarCliente("456");
+		System.out.println(cli.getNome());
+		cli = pers.pesquisarCliente("123");
+		System.out.println(cli.getNome());
+		cli = pers.pesquisarCliente("321");
+		System.out.println(cli.getNome());
+		assertEquals("fernando", pers.pesquisarCliente("456").getNome());
+		assertEquals("bruno", pers.pesquisarCliente("123").getNome());
+		assertEquals("iago", pers.pesquisarCliente("321").getNome());
 	}
-
+	
+//	@Test
+//	public void test2() throws IOException {
+//		PersistenciaCliente pers = new PersistenciaCliente();
+//		pers.deletaCliente("456");
+//	}
 }
