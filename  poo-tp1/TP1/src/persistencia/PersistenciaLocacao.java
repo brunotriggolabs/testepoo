@@ -53,18 +53,15 @@ public class PersistenciaLocacao  {
 		out.write("\n");
 		out.flush();
 		out.close();
-
 	}
-
+	
 	public Locacao pesquisar(int id) throws IOException{
 		String conteudoLinha = null;
-		int linhaAtual = 0;
 		String s[];
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
 		while(true){
-			linhaAtual++;
 			try {
 				conteudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -87,8 +84,7 @@ public class PersistenciaLocacao  {
 
 	public void deletaLocacao(int id) throws IOException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
-	 	String s[];
+		String s[];
 		Locacao loc = new Locacao(5, 2, 3);
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
@@ -96,7 +92,6 @@ public class PersistenciaLocacao  {
 		FileWriter fwTemp = new FileWriter(novo,true);
 		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
 		while(true) {
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -111,7 +106,7 @@ public class PersistenciaLocacao  {
 			if (String.valueOf(loc.getId()).equals(String.valueOf(id))) {
 				System.out.println("Funcionário deletado do registro");
 			} else {
-				bwTemp.write(String.valueOf(Locacao.numLocacoes));
+				bwTemp.write(String.valueOf(loc.getId()));
 				bwTemp.write(";");
 				bwTemp.write(String.valueOf(loc.getValor()));
 				bwTemp.write(";");
@@ -171,14 +166,12 @@ public class PersistenciaLocacao  {
 
 	public double pesquisaPrecoFinalizado () throws FileNotFoundException{
 		String conteudoLinha = null;
-		int linhaAtual = 0;
 		String s[];
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
 		double resultado = 0;
 		while(true){
-			linhaAtual++;
 			try {
 				conteudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -200,14 +193,12 @@ public class PersistenciaLocacao  {
 
 	public double pesquisaLocacoesEmAberto () throws FileNotFoundException {
 		String conteudoLinha = null;
-		int linhaAtual = 0;
 		String s[];
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
 		double resultado = 0;
 		while(true){
-			linhaAtual++;
 			try {
 				conteudoLinha = br.readLine();
 			} catch (IOException e) {
