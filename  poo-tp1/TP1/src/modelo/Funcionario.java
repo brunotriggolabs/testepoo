@@ -10,8 +10,7 @@ public class Funcionario extends Pessoa {
 	}
 
 	public String getCargo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.cargo;
 	}
 	
 	//TODO adicionar métodos do Funcionário

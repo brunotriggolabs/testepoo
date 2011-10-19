@@ -1,17 +1,26 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Motorista extends Pessoa {
 	private String cnh;
+	private int locacao;
 	
 	public Motorista(String nome, String cpf, String cnh) {
 		super(nome, cpf);
-		Locacao locacao = new Locacao();
+		this.cnh = cnh;
 	}
 
 	public String getCnh() {
-		// TODO Auto-generated method stub
-		return null;
+		return cnh;
 	}
 	
-	//TODO adicionar métodos do motorista
+	public int getLocacao() {
+		return locacao;
+	}
+	
+	public void setLocacao(int locacao) {
+		this.locacao = locacao;
+	}
+	
 }

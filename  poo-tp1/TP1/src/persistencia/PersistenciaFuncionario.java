@@ -29,18 +29,18 @@ public class PersistenciaFuncionario {
 	
 	
 	public void salvaFuncionario(Funcionario funcionario) throws IOException {
-		bw.append(funcionario.getNome() + ";" 
-				+ funcionario.getCpf() + ";" +  funcionario.getCargo() + "\n");	//Carrega o buff
-		bw.flush();																//escrever o buff no arquivo
-		bw.close();																//fecha o arquivo
+		bw.append(funcionario.getNome() + ";" + funcionario.getCpf() + ";" +  funcionario.getCargo() + ";" + 
+				funcionario.getEndereco() + ";" + funcionario.getTelefone()+ "\n");	//Carrega o buff
+		bw.flush();																	//escrever o buff no arquivo
+		bw.close();																	//fecha o arquivo
 	}
 	
-	public Funcionario pesquisarFuncionario(Funcionario funcionario) {
+	public Funcionario pesquisarFuncionario(String cpf) {
 		String conateudoLinha = null;
 		int linhaAtual = 0;
 	 	String s[];
 		Funcionario fun = new Funcionario("x", "y", "z");
-		while(true){
+		while(true) {
 			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
@@ -54,11 +54,11 @@ public class PersistenciaFuncionario {
 			}
 			s = conateudoLinha.split("\\;");
 			fun = converteOriginal(s);
-			if (fun.equals(funcionario)){
+			if (fun.getCpf().equals(cpf)){
 				System.out.println("Encontrado!");
 				return fun;
 			}else {
-				System.out.println("NÃ£o encontrado!");
+				System.out.println("Não encontrado!");
 				return null;
 			}
 		}
@@ -66,7 +66,14 @@ public class PersistenciaFuncionario {
 	}
 	
 	private Funcionario converteOriginal (String s[]) {		
-		Funcionario fun = new Funcionario(s[0], s[1], s[2]);
+		String s1 = s[0];
+		String s2 = s[1];
+		String s3 = s[2];
+		String s4 = s[3];
+		String s5 = s[4];
+		Funcionario fun = new Funcionario(s1, s2, s3);
+		fun.setEndereco(s4);
+		fun.setTelefone(s5);
 		return fun;
 	}
 	

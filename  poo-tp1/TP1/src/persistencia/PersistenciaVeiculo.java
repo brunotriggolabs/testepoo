@@ -33,13 +33,13 @@ public class PersistenciaVeiculo {
 	
 	public void salvaVeiculo(Veiculo veiculo) throws IOException {
 		bw.append(veiculo.getPlaca() + ";" 	+ veiculo.getMarca() + ";" +  veiculo.getModelo() +
-				";" + veiculo.getCor() + ";" + veiculo.getTipo() + ";" + veiculo.getObservacoes() 
-				 + ";" + veiculo.getOpcionais() + ";" + veiculo.getDisponivel() +"\n");					//Carrega o buff
-		bw.flush();																//escrever o buff no arquivo
-		bw.close();																//fecha o arquivo
+				";" + veiculo.getCor() + ";" + veiculo.getTipo() + ";" + veiculo.getOpicionais() + ";" + veiculo.getDisponivel() +
+				";" + String.valueOf(veiculo.getLocacao()) + ";" + veiculo.getObservacoes() + "\n");	//Carrega o buff
+		bw.flush();																									//escrever o buff no arquivo
+		bw.close();																									//fecha o arquivo
 	}
 	
-	public Veiculo pesquisarVeiculo(Veiculo veiculo) {
+	public Veiculo pesquisarVeiculo(String placa) {
 		String conateudoLinha = null;
 		int linhaAtual = 0;
 		String s[];
@@ -58,11 +58,11 @@ public class PersistenciaVeiculo {
 			}
 			s = conateudoLinha.split("\\;");
 			vec = converteOriginal(s);
-			if (vec.equals(veiculo)){
+			if (vec.getPlaca().equals(placa)) {
 				System.out.println("Encontrado!");
 				return vec;
 			}else {
-				System.out.println("NÃ£o encontrado!");
+				System.out.println("Não encontrado!");
 				return null;
 			}
 		}
@@ -71,13 +71,25 @@ public class PersistenciaVeiculo {
 	
 	
 	private Veiculo converteOriginal (String s[]) {		
-		Veiculo vec = new Veiculo(s[0], s[1], s[2]);
-		vec.setCor(s[3]);
-		vec.setTipo(s[4]);
-		vec.setObservacoes(s[5]);
-		vec.setOpicionais(s[6]);
-		vec.setDisponivel(Integer.valueOf(s[7]));
+		String s0 = s[0]; // PLACA
+		String s1 = s[1]; // MARCA
+		String s2 = s[2]; // MODELO
+		String s3 = s[3]; // COR
+		String s4 = s[4]; // TIPO
+		String s5 = s[5]; // OPCIONAIS
+		if (s[6] != null) {
+			int s6 = Integer.parseInt(s[6]); // DISPONÍVEL
+		} else {
+			int s6 = 0;
+		}
+		int s7 = Integer.parseInt(s[7]); // LOCAÇÃO
+		String s8 = s[8]; // OBSERVAÇÕES
 		
+		Veiculo vec = new Veiculo(s0, s1, s2);
+		vec.setCor(s3);
+		vec.setTipo(s4);
+		vec.setOpicionais(s5);
+		vec.setObservacoes(s8);
 		return vec;
 	}
 	

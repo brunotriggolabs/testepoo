@@ -11,6 +11,13 @@ public class Cliente extends Pessoa {
 		this.locacao = new ArrayList<Integer>();
 	}
 	
+	public Object[] tamanhoVetor() {
+		return locacao.toArray();
+	}
+	
+	public void addLocacao(int locacao) {
+		this.locacao.add(locacao);
+	}
 	//TODO adicionar métodos do cliente
 	
 }
