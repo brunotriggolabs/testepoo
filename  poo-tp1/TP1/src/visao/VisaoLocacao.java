@@ -74,10 +74,14 @@ public class VisaoLocacao {
 		return dias;
 	}
 
-
-
-	public static double calculoPreco (TipoVeiculo tipov,Locacao loc,TipoLocacao tipo) {
+	public static double finalizaLocacao (TipoVeiculo tipov,TipoLocacao tipo) throws IOException {
 		final double p;
+		int id;
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
+		System.out.println("Digite a ID da sua locacao:");
+		id = Console.readInteger();
+		System.out.println("Buscando a sua locacao:");
+		Locacao loc = arquivo.pesquisar(id);
 		loc.setAlugado(false);
 		loc.setFinalizado(true);
 		if (tipo.getTipo().equals("porKm")){
@@ -113,9 +117,5 @@ public class VisaoLocacao {
 		data.setMes(Console.readInteger());
 		data.setAno(Console.readInteger());
 		return data;
-	}
-	
-	public static boolean finalizaLocacao(Locacao loc){
-		
 	}
 }
