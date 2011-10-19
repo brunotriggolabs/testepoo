@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import modelo.Funcionario;
 import modelo.Motorista;
 import modelo.Veiculo;
 
@@ -29,18 +30,18 @@ public class PersistenciaMotorista {
 	
 	
 	public void salvaMotorista(Motorista motorista) throws IOException {
-		bw.append(motorista.getNome() + ";" + motorista.getCpf() 
-						+ ";" +  motorista.getCnh() + "\n");					//Carrega o buff
-		bw.flush();																//escrever o buff no arquivo
-		bw.close();																//fecha o arquivo
+		bw.append(motorista.getNome() + ";" + motorista.getCpf() + ";" +  motorista.getCnh() + ";" 
+				+ motorista.getEndereco() + ";" + motorista.getTelefone()+ "\n");			//Carrega o buff
+		bw.flush();																			//escrever o buff no arquivo
+		bw.close();																			//fecha o arquivo
 	}
 	
-	public Motorista pesquisarMotorista(Motorista motorista) {
+	public Motorista pesquisarMotorista(String cpf) {
 		String conateudoLinha = null;
 		int linhaAtual = 0;
-		String s[];
+	 	String s[];
 		Motorista mot = new Motorista("x", "y", "z");
-		while(true){
+		while(true) {
 			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
@@ -54,11 +55,11 @@ public class PersistenciaMotorista {
 			}
 			s = conateudoLinha.split("\\;");
 			mot = converteOriginal(s);
-			if (mot.equals(motorista)){
+			if (mot.getCpf().equals(cpf)){
 				System.out.println("Encontrado!");
 				return mot;
 			}else {
-				System.out.println("NÃ£o encontrado!");
+				System.out.println("Não encontrado!");
 				return null;
 			}
 		}
@@ -67,7 +68,14 @@ public class PersistenciaMotorista {
 	
 	
 	private Motorista converteOriginal (String s[]) {		
-		Motorista mot = new Motorista(s[0], s[1], s[3]);
+		String s0 = s[0]; // NOME
+		String s1 = s[1]; // CPF
+		String s2 = s[2]; // CNH
+		String s3 = s[3]; // ENDEREÇO
+		String s4 = s[4]; // TELEFONE
+		Motorista mot = new Motorista(s0, s1, s2);
+		mot.setEndereco(s3);
+		mot.setTelefone(s4);
 		return mot;
 	}
 	

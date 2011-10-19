@@ -13,14 +13,14 @@ public class Veiculo {
 	private String opicionais;
 	private String observacoes;
 	private int disponivel;
-	
+	private int locacao;
 	
 	public Veiculo(String placa, String marca, String modelo) {
 		this.placa = placa;
 		this.modelo = modelo;
 		this.marca = marca;
 		this.disponivel = 1;
-		Locacao locacao = new Locacao();
+		this.locacao = 0;
 	}
 
 	public void setCor(String cor) {
@@ -43,49 +43,44 @@ public class Veiculo {
 		this.disponivel = disponivel;
 	}
 	
-	public int getModelo() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setLocacao(int locacao) {
+		this.locacao = locacao;
 	}
-
-
-	public String getPlaca() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public String getMarca() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
 	public String getCor() {
-		// TODO Auto-generated method stub
-		return null;
+		return cor;
 	}
-
-
+	
 	public String getTipo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public String getObservacoes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public String getOpcionais() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		return tipo;
+	} 
 	
 	public int getDisponivel() {
 		return disponivel;
+	}
+	
+	public int getLocacao() {
+		return locacao;
+	}
+	
+	public String getMarca() {
+		return marca;
+	}
+	
+	public String getModelo() {
+		return modelo;
+	}
+	
+	public String getObservacoes() {
+		return observacoes;
+	}
+	
+	public String getOpicionais() {
+		return opicionais;
+	}
+	
+	public String getPlaca() {
+		return placa;
 	}
 	
 	//TODO implementar os métodos do veículo
