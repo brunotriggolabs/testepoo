@@ -9,31 +9,33 @@ import modelo.Data;
 import modelo.Locacao;
 import modelo.TipoLocacao;
 
+
 public class PersistenciaLocacao { 
 
 	public PersistenciaLocacao() throws IOException{
-	
-		
+			
 	}
 	
 	File arquivo = new File ("arquivos/Locacao.txt");
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter out = new BufferedWriter(fw);
-
-	public void salvar(Locacao locacao) throws IOException{
+	
+	public void salvar(Locacao locacao) throws IOException {
+		out.write(String.valueOf(locacao.numLocacoes));
+		out.write(";");
 		out.write(String.valueOf(locacao.getValor()));
 		out.write(";");
-		out.write(locacao.getDataSaida().getDia());
+		out.write(String.valueOf(locacao.getDiaEntrada()));
 		out.write(";");
-		out.write(locacao.getDataSaida().getMes());
+		out.write(String.valueOf(locacao.getMesEntrada()));
 		out.write(";");
-		out.write(locacao.getDataSaida().getAno());
+		out.write(String.valueOf(locacao.getAnoEntrada()));
 		out.write(";");
-		out.write(locacao.getDataDevolucao().getDia());
+		out.write(String.valueOf(locacao.getDiaSaida()));
 		out.write(";");
-		out.write(locacao.getDataDevolucao().getMes());
+		out.write(String.valueOf(locacao.getMesSaida()));
 		out.write(";");
-		out.write(locacao.getDataDevolucao().getAno());
+		out.write(String.valueOf(locacao.getAnoSaida()));
 		out.write(";");
 		out.write(String.valueOf(locacao.getKmSaida()));
 		out.write(";");
@@ -41,11 +43,7 @@ public class PersistenciaLocacao {
 		out.write(";");
 		out.write(String.valueOf(locacao.getPrevisaoDias()));
 		out.write(";");
-		out.write(String.valueOf(locacao.getTipo().getPrecoKm()));
-		out.write(";");
-		out.write(locacao.getTipo().getTipo());
-		out.write(";");
-		out.write(String.valueOf(locacao.getTipo().getTaxaBase()));
+		out.write(String.valueOf(locacao.getTipoLocacao()));
 		out.write(";");
 		out.write(String.valueOf(locacao.getPreco()));
 		out.write("\n");
@@ -56,12 +54,12 @@ public class PersistenciaLocacao {
 	FileReader fr = new FileReader(arquivo);
 	BufferedReader br = new BufferedReader(fr);
 
-	public boolean pesquisar(Locacao locacao) throws IOException{
-		//TODO Criar método para pesquisa em arquivo
+	public Locacao pesquisar(int id) throws IOException{
+		TipoLocacao tipo = new TipoLocacao();
 		String conteudoLinha = null;
 		int linhaAtual = 0;
 		String s[];
-		Locacao loc = new Locacao();
+		Locacao loc = new Locacao(1, 1);
 		while(true){
 			linhaAtual++;
 			try {
@@ -75,38 +73,34 @@ public class PersistenciaLocacao {
 				break;
 			}
 			s = conteudoLinha.split("\\;");
-			if (converteOriginal(s, loc).equals(locacao)){
+			loc = converteOriginal(s);
+			if (loc.getId() == id) {
 				System.out.println("Encontrado!");
-				return true;
+				return loc;
 			}else {
 				System.out.println("Não encontrado!");
-				return false;
+				return null;
 			}
 		}
-		return false;
+		return null;
 	}
 	
-	private Locacao converteOriginal (String s[],Locacao loc) {
-		TipoLocacao tipo = loc.getTipoLocacao();		
-		loc.setValor(Double.parseDouble(s[0]));
-		Data data = new Data();
-		data.setDia(Integer.valueOf(s[1]));
-		data.setMes(Integer.valueOf(s[2]));
-		data.setAno(Integer.valueOf(s[3]));
-		loc.setDataSaida(data);  //setDataSaida.(formatador.parse(s[1]));//Dia
-		data.setDia(Integer.valueOf(s[4]));
-		data.setMes(Integer.valueOf(s[5]));
-		data.setAno(Integer.valueOf(s[6]));
-		loc.setDataDevolucao(data);//Mes
-		loc.setKmSaida(Double.parseDouble(s[7]));
-		loc.setKmEntrada(Double.parseDouble(s[8]));
-		loc.setPrevisaoDias(Integer.parseInt(s[9]));
-		tipo.setPrecoKm(Double.parseDouble(s[10]));
-		tipo.setTipo(s[11]);
-		tipo.setTaxaBase(Double.parseDouble(s[12]));
-		loc.setTipo(tipo);
-		loc.setPreco(Double.parseDouble(s[13]));
+	private Locacao converteOriginal (String s[]) {
 		
+		int dias = Integer.parseInt(s[10]);
+		int kmSaida = Integer.parseInt(s[8]);
+		int km = (int)kmSaida;
+		double tipo = Integer.parseInt(s[11]);
+		int tp = (int)tipo;
+		Locacao loc = new Locacao(km, tp);
+		loc.setPrevisaoDias(dias);
+		loc.setId(Integer.valueOf(s[0]));
+		loc.setDiaEntrada(Integer.valueOf(s[2]));
+		loc.setMesEntrada(Integer.valueOf(s[3]));
+		loc.setAnoEntrada(Integer.valueOf(s[4]));
+		loc.setDiaSaida(Integer.valueOf(s[5]));
+		loc.setMesSaida(Integer.valueOf(s[6]));
+		loc.setAnoSaida(Integer.valueOf(s[7]));
 		return loc;
 	}
 
