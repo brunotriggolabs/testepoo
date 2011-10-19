@@ -58,7 +58,7 @@ public class PersistenciaFuncionario {
 				System.out.println("Encontrado!");
 				return fun;
 			}else {
-				System.out.println("N�o encontrado!");
+				System.out.println("N�o encontrado!");
 				return null;
 			}
 		}
@@ -78,8 +78,37 @@ public class PersistenciaFuncionario {
 	}
 	
 	
-	public boolean deletaFuncionario(Funcionario funcionario) {
-		//TODO implementar a deleção do Funcionario
-		return false;
+	public void deletaFuncionario(String cpf) throws IOException {
+		String conateudoLinha = null;
+		int linhaAtual = 0;
+	 	String s[];
+		Funcionario fun = new Funcionario("x", "y", "z");
+		File novo = new File("arquivos/funcionarioTemp.txt");
+		FileWriter fwTemp = new FileWriter(novo,true);
+		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
+		while(true) {
+			linhaAtual++;
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				break;
+			}
+			s = conateudoLinha.split("\\;");
+			fun = converteOriginal(s);
+			if (fun.getCpf().equals(cpf)){
+				System.out.println("Funcionário deletado do registro");
+			} else {
+				bwTemp.write(fun.getNome() + ";" + fun.getCpf() + ";" +  fun.getCargo() + ";" + 
+						fun.getEndereco() + ";" + fun.getTelefone()+ "\n");			//Carrega o buff
+			}
+		}
+		bwTemp.flush();														//escrever o buff no arquivo
+		bwTemp.close();														//fecha o arquivo
+		arquivo.delete();
+		novo.renameTo(new File("arquivos/funcionario.txt"));  
 	}
 }
