@@ -18,8 +18,6 @@ public class PersistenciaFuncionario {
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter bw = new BufferedWriter(fw);
 
-	
-	
 	//Construtor Default
 	public PersistenciaFuncionario() throws IOException {
 	}
