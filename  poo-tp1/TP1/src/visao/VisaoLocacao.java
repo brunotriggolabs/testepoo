@@ -12,6 +12,12 @@ import persistencia.PersistenciaLocacao;
 
 public class VisaoLocacao {
 	
+	private boolean verificacaoMotorista () {
+		
+		
+		return false;
+	}
+	
 	private static boolean checaCpf(String cpf)throws IOException {
 		String lerCpf;
 		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
