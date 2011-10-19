@@ -1,8 +1,6 @@
 package modelo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 public class Locacao {
 	
@@ -19,6 +17,7 @@ public class Locacao {
 	private int anoSaida;
 	private int previsaoDias;
 	private boolean alugado;
+	private boolean finalizado;
 	private double preco;
 	private int id;
 	public static int numLocacoes = 0;
@@ -47,6 +46,22 @@ public class Locacao {
 		this.mesEntrada = new Date().getMonth();
 		this.anoEntrada = new Date().getYear();
 		this.previsaoDias = 2;
+	}
+	
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
+	}
+
+	public static int getNumLocacoes() {
+		return numLocacoes;
+	}
+
+	public static void setNumLocacoes(int numLocacoes) {
+		Locacao.numLocacoes = numLocacoes;
 	}
 	
 	public int getDiaEntrada() {
