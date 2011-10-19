@@ -3,9 +3,12 @@ package modelo;
 import java.util.ArrayList;
 
 public class Cliente extends Pessoa {
+	
+	private ArrayList<Integer> locacao;
+	
 	public Cliente(String nome, String cpf) {
 		super(nome, cpf);
-		ArrayList<Locacao> locacao = new ArrayList<Locacao>();
+		this.locacao = new ArrayList<Integer>();
 	}
 	
 	//TODO adicionar métodos do cliente

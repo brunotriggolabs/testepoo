@@ -12,17 +12,37 @@ public class Veiculo {
 	private String tipo;
 	private String opicionais;
 	private String observacoes;
-	private boolean disponivel;
+	private int disponivel;
 	
 	
 	public Veiculo(String placa, String marca, String modelo) {
 		this.placa = placa;
 		this.modelo = modelo;
 		this.marca = marca;
+		this.disponivel = 1;
 		Locacao locacao = new Locacao();
 	}
 
-
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+	
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	public void setOpicionais(String opicionais) {
+		this.opicionais = opicionais;
+	}
+	
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+	
+	public void setDisponivel(int disponivel) {
+		this.disponivel = disponivel;
+	}
+	
 	public int getModelo() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -62,6 +82,10 @@ public class Veiculo {
 	public String getOpcionais() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public int getDisponivel() {
+		return disponivel;
 	}
 	
 	//TODO implementar os métodos do veículo

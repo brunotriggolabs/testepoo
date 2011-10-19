@@ -1,21 +1,21 @@
 package modelo;
 
 public abstract class Pessoa {
-	protected String nome;
-	protected String cpf;
-	protected String endereco;
-	protected String telefone;
+	private String nome;
+	private String cpf;
+	private String endereco;
+	private String telefone;
 	
 	public Pessoa(String nome, String cpf) {
 		this.cpf = cpf;
 		this.nome = nome;
 	}
 
-	protected void setEndereco(String endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 
-	protected void setTelefone(String telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	
@@ -26,4 +26,13 @@ public abstract class Pessoa {
 	public String getCpf() {
 		return this.cpf;
 	}
+	
+	public String getEndereco() {
+		return endereco;
+	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
+	
 }
