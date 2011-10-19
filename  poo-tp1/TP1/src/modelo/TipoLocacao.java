@@ -1,9 +1,15 @@
 package modelo;
 
 public class TipoLocacao {
-	private String tipo = ""; //porKm ou Km livre
+	private String tipo; //porKm ou Km livre
 	private double taxaBase;
 	private double precoKm;
+	
+	public TipoLocacao(String tipo, Double taxa, Double precoKm) {
+		this.tipo = tipo;
+		this.taxaBase = taxa;
+		this.precoKm = this.precoKm;
+	}
 	
 	public void setTipo(String tipo) {
 		this.tipo = tipo;

@@ -21,7 +21,17 @@ public class PersistenciaLocacao  {
 	public BufferedWriter out = new BufferedWriter(fw);
 
 	public void salvar(Locacao locacao)throws IOException {
-		out.write(String.valueOf(Locacao.numLocacoes));
+		Locacao.numLocacoes++;
+		// Lê o numero de locações e atualiza o arquivo
+		File numLocacoes = new File("arquivos/numLocacoes.txt");
+		FileWriter fw = new FileWriter(numLocacoes);
+		BufferedWriter escreve = new BufferedWriter(fw);
+		String x = String.valueOf(Locacao.numLocacoes);
+		escreve.write(x);
+		escreve.flush();
+		escreve.close();
+		
+		out.write(x);
 		out.write(";");
 		out.write(String.valueOf(locacao.getValor()));
 		out.write(";");
@@ -104,7 +114,7 @@ public class PersistenciaLocacao  {
 			s = conateudoLinha.split("\\;");
 			loc = converteOriginal(s);
 			if (String.valueOf(loc.getId()).equals(String.valueOf(id))) {
-				System.out.println("Funcionário deletado do registro");
+				System.out.println("Locacao deletada do registro");
 			} else {
 				bwTemp.write(String.valueOf(loc.getId()));
 				bwTemp.write(";");

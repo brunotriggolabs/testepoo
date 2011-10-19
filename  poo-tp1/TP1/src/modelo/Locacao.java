@@ -1,9 +1,6 @@
 package modelo;
 
-import java.io.IOException;
 import java.util.Date;
-
-import persistencia.PersistenciaLocacao;
 
 public class Locacao {
 	
@@ -35,11 +32,11 @@ public class Locacao {
 		this.mesEntrada = new Date().getMonth();
 		this.anoEntrada = new Date().getYear();
 		this.previsaoDias = previsaoDias;
-		System.out.println(numLocacoes);
 		this.id = numLocacoes;
 		numLocacoes++;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Locacao(int kmSaida, int tipoLocacao) {
 		this.kmSaida = kmSaida;
 		this.kmEntrada = kmSaida;
