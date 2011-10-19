@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import modelo.Funcionario;
-import modelo.Veiculo;
 
 public class PersistenciaFuncionario {
 	
@@ -19,9 +18,7 @@ public class PersistenciaFuncionario {
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter bw = new BufferedWriter(fw);
 
-	//Lê no arquivo
-	FileReader fr = new FileReader(arquivo);
-	BufferedReader br = new BufferedReader(fr);
+	
 	
 	//Construtor Default
 	public PersistenciaFuncionario() throws IOException {
@@ -35,11 +32,14 @@ public class PersistenciaFuncionario {
 		bw.close();																	//fecha o arquivo
 	}
 	
-	public Funcionario pesquisarFuncionario(String cpf) {
+	public Funcionario pesquisarFuncionario(String cpf) throws IOException {
 		String conateudoLinha = null;
 		int linhaAtual = 0;
 	 	String s[];
-		Funcionario fun = new Funcionario("x", "y", "z");
+	 	
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+	 	Funcionario fun = new Funcionario("x", "y", "z");
 		while(true) {
 			linhaAtual++;
 			try {
@@ -49,17 +49,16 @@ public class PersistenciaFuncionario {
 				break;
 			}
 			if (conateudoLinha == null) {
-				System.out.println("Linha vazia!");
-				break;
+				System.out.println("Registro não encontrado.");
+				br.close();
+				return null;
 			}
 			s = conateudoLinha.split("\\;");
 			fun = converteOriginal(s);
 			if (fun.getCpf().equals(cpf)){
 				System.out.println("Encontrado!");
+				br.close();
 				return fun;
-			}else {
-				System.out.println("N�o encontrado!");
-				return null;
 			}
 		}
 		return null;
@@ -83,6 +82,8 @@ public class PersistenciaFuncionario {
 		int linhaAtual = 0;
 	 	String s[];
 		Funcionario fun = new Funcionario("x", "y", "z");
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
 		File novo = new File("arquivos/funcionarioTemp.txt");
 		FileWriter fwTemp = new FileWriter(novo,true);
 		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
