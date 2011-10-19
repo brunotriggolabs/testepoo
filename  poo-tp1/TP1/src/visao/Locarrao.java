@@ -26,7 +26,7 @@ public class Locarrao {
 		}	
 	}
 	
-	static PersistenciaLocacao arquivo = new PersistenciaLocacao();
+	static  PersistenciaLocacao arquivo = new PersistenciaLocacao();
 	
 	private static boolean verificaCpf (String cpf){
 		//Verifica CPF no arquivo
@@ -88,12 +88,7 @@ public class Locarrao {
 	
 	private static double locacoesFinalizadas(){
 		double resultado = 0;
-		try {
-			resultado += arquivo.pesquisaPrecoFinalizado();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		resultado = resultado + arquivo.pesquisaPrecoFinalizado();
 		return resultado;
 	}
 

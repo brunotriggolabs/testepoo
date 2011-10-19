@@ -14,17 +14,22 @@ import modelo.TipoLocacao;
 
 
 
-public class PersistenciaLocacao {
-	
-	public PersistenciaLocacao() throws IOException{
-			
-	}
-	
-	File arquivo = new File ("arquivos/Locacao.txt");
-	FileWriter fw = new FileWriter(arquivo,true);
-	BufferedWriter out = new BufferedWriter(fw);
+public class PersistenciaLocacao  {
 
-	public void salvar(Locacao locacao) throws IOException {
+
+	public PersistenciaLocacao() throws IOException {
+		try {
+		
+		} catch (IOException e) {
+			// TODO: handle exception
+		}
+	}	
+
+	public File arquivo = new File ("arquivos/Locacao.txt");
+	public FileWriter fw = new FileWriter(arquivo,true);
+	public BufferedWriter out = new BufferedWriter(fw);
+
+	public void salvar(Locacao locacao)throws IOException {
 		out.write(String.valueOf(locacao.numLocacoes));
 		out.write(";");
 		out.write(String.valueOf(locacao.getValor()));
@@ -57,6 +62,7 @@ public class PersistenciaLocacao {
 		out.write("\n");
 		out.flush();
 		out.close();
+
 	}
 
 	FileReader fr = new FileReader(arquivo);
