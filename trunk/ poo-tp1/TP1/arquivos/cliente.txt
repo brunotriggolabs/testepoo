@@ -1,2 +1,12 @@
 bruno;1231543;null;null;1
 bruno;1231543;null;null;1;5;3
+José;123456;null;null;1;5;3
+;08412565606;null;null;1;5;3
+2;null;null;null;1;5;3
+Jose;null;null;null;1;5;3
+Samuel Torga de Morais;null;null;null;1;5;3
+Samuel Torga de Morais;null;null;null;1;5;3
+Samuel;12345;null;null;1;5;3
+Samaaaam;12312321;null;null;1;5;3
+uhduhdwq;12312231;null;null;1;5;3
+Sam;12332;null;null;1;5;3
