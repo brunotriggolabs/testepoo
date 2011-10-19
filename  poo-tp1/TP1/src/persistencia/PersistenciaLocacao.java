@@ -1,17 +1,21 @@
 package persistencia;
 
-import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 
-import modelo.Data;
 import modelo.Locacao;
 import modelo.TipoLocacao;
 
 
-public class PersistenciaLocacao { 
 
+public class PersistenciaLocacao {
+	
 	public PersistenciaLocacao() throws IOException{
 			
 	}
@@ -19,7 +23,7 @@ public class PersistenciaLocacao {
 	File arquivo = new File ("arquivos/Locacao.txt");
 	FileWriter fw = new FileWriter(arquivo,true);
 	BufferedWriter out = new BufferedWriter(fw);
-	
+
 	public void salvar(Locacao locacao) throws IOException {
 		out.write(String.valueOf(locacao.numLocacoes));
 		out.write(";");
@@ -46,6 +50,10 @@ public class PersistenciaLocacao {
 		out.write(String.valueOf(locacao.getTipoLocacao()));
 		out.write(";");
 		out.write(String.valueOf(locacao.getPreco()));
+		out.write(";");
+		out.write(String.valueOf(locacao.isAlugado()));
+		out.write(";");
+		out.write(String.valueOf(locacao.isFinalizado()));
 		out.write("\n");
 		out.flush();
 		out.close();
@@ -84,9 +92,9 @@ public class PersistenciaLocacao {
 		}
 		return null;
 	}
-	
+
 	private Locacao converteOriginal (String s[]) {
-		
+
 		int dias = Integer.parseInt(s[10]);
 		int kmSaida = Integer.parseInt(s[8]);
 		int km = (int)kmSaida;
@@ -101,51 +109,83 @@ public class PersistenciaLocacao {
 		loc.setDiaSaida(Integer.valueOf(s[5]));
 		loc.setMesSaida(Integer.valueOf(s[6]));
 		loc.setAnoSaida(Integer.valueOf(s[7]));
+		loc.setAlugado(Boolean.parseBoolean(s[13]));
+		loc.setFinalizado(Boolean.parseBoolean(s[14]));
 		return loc;
 	}
 
-/*	public void deletar(Locacao locacao) throws IOException {
+	public double pesquisaPrecoFinalizado (){
+		TipoLocacao tipo = new TipoLocacao();
 		String conteudoLinha = null;
 		int linhaAtual = 0;
+		String s[];
+		Locacao loc = new Locacao(1, 1);
+		double resultado = 0;
 		while(true){
 			linhaAtual++;
 			try {
 				conteudoLinha = br.readLine();
 			} catch (IOException e) {
+				System.out.println("Erro em IOException");
 				break;
 			}
 			if (conteudoLinha == null) {
+				System.out.println("Linha vazia!");
 				break;
 			}
-			if (conteudoLinha.equals(locacao)) {
-				System.out.println("Encontrado na linha: " + linhaAtual + " String = " + conteudoLinha);
-			} else {
-				System.out.println("NÃO ENCONTRADO!");
-				break;
+			s = conteudoLinha.split("\\;");
+			if (s[14] == "true"){
+				resultado = resultado + loc.getPreco();
 			}
+			return resultado;
 		}
+		return 0;
 	}
 
-	public void obterLista(){
-		//TODO Obtem lista de alguma coisa
-	}*/
-
-	protected Calendar stringParaCalendar(String data){
-		//de STRING para CALENDAR
-
-		SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-
-		Calendar c = Calendar.getInstance();
-
-		try {
-
-			c.setTime(formatoData.parse(data));
-
-		} catch (Exception e) {
-			System.out.println("Erro na conversão de String para Calendar!");
+	public double pesquisaLocacoesEmAberto () {
+		TipoLocacao tipo = new TipoLocacao();
+		String conteudoLinha = null;
+		int linhaAtual = 0;
+		String s[];
+		Locacao loc = new Locacao(1, 1);
+		double resultado = 0;
+		while(true){
+			linhaAtual++;
+			try {
+				conteudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conteudoLinha == null) {
+				System.out.println("Linha vazia!");
+				break;
+			}
+			s = conteudoLinha.split("\\;");
+			if (s[13] == "true" && verificaDias(loc,s)){
+				resultado = resultado + loc.getPreco();
+			}
+			return resultado;
 		}
+		return 0;
+	}
 
-		return c;
+	@SuppressWarnings("deprecation")
+	private boolean verificaDias(Locacao loc,String s[]) {
+		int diaAtual = new Date().getDate();
+		int mesAtual = new Date().getMonth();
+		int anoAtual = new Date().getYear();
+		loc.setDiaEntrada(Integer.valueOf(s[2]));
+		loc.setMesEntrada(Integer.valueOf(s[3]));
+		loc.setAnoEntrada(Integer.valueOf(s[4]));
 
+		if (anoAtual < loc.getAnoEntrada()) {
+			return false;
+		}else if (loc.getMesEntrada() < mesAtual) {
+			return false;
+		} else if (loc.getDiaEntrada() < diaAtual){
+			return false;
+		}
+		return true;
 	}
 }
