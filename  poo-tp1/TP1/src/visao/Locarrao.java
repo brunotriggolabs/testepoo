@@ -30,6 +30,7 @@ public class Locarrao {
 			System.out.println("3-Cadastro Veiculo");
 			System.out.println("4-Cadastro Funcionario");
 			System.out.println("5-Cadastro Locacao");
+			System.out.println("6-Listagens");
 			System.out.println("0-Sair");
 			System.out.println("********************************************************");
 			opcaoMenu = Console.readInteger();
@@ -61,6 +62,46 @@ public class Locarrao {
 				VisaoLocacao cadastroLocacao = new VisaoLocacao();
 				menu = cadastroLocacao.cadastraLocacao();
 				break;
+			case 6:
+				System.out.println("********----------LOCARRÃO RENT-A-CAR----------********");
+				System.out.println("*******************************************************");
+				System.out.println("********----------Opções para cadastro---------*********");
+				System.out.println("1-Locacoes em aberto");
+				System.out.println("2-Locacoes finalizadas");
+				System.out.println("3-Veiculos disponiveis");
+				System.out.println("4-Veículos mais procurados");
+				System.out.println("5-Veículos mais rentáveis");
+				System.out.println("6-Pesquisar clientes");
+				System.out.println("7-Pesquisar disponibilidade de determinada categoria de veículos");
+				int opMenu2 = 0;
+				opMenu2 = Console.readInteger();
+				switch (opMenu2) {
+				case 1:
+					VisaoLocacao.locacoesEmAberto(VisaoLocacao.leDia());
+					break;
+				case 2:
+					VisaoLocacao.locacoesFinalizadas();
+					break;
+				case 3:
+					
+					break;
+				case 4:
+					
+					break;
+				case 5:
+					
+					break;
+				case 6:
+					
+					break;
+				case 7:
+					
+					break;
+				default:
+					System.out.println("Deseja Sair?");
+					menu = escolhaMenu();
+					break;
+				}
 			default:
 				System.out.println("Deseja Sair?");
 				menu = escolhaMenu();

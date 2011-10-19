@@ -72,7 +72,7 @@ public class PersistenciaLocacao  {
 				break;
 			}
 			if (conteudoLinha == null) {
-				System.out.println("Linha vazia!");
+				System.out.println("Arquivo Vazio!");
 				break;
 			}
 			s = conteudoLinha.split("\\;");
