@@ -79,6 +79,7 @@ public class VisaoLocacao {
 	public static double calculoPreco (TipoVeiculo tipov,Locacao loc,TipoLocacao tipo) {
 		final double p;
 		loc.setAlugado(false);
+		loc.setFinalizado(true);
 		if (tipo.getTipo().equals("porKm")){
 			p = (loc.getKmSaida() - loc.getKmEntrada()) + ( tipov.getTaxaBase() * calculaDias(loc) ) ;
 			loc.setPreco(p);
@@ -112,5 +113,9 @@ public class VisaoLocacao {
 		data.setMes(Console.readInteger());
 		data.setAno(Console.readInteger());
 		return data;
+	}
+	
+	public static boolean finalizaLocacao(Locacao loc){
+		
 	}
 }
