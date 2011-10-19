@@ -1,6 +1,9 @@
 package modelo;
 
+import java.io.IOException;
 import java.util.Date;
+
+import persistencia.PersistenciaLocacao;
 
 public class Locacao {
 	
@@ -182,6 +185,66 @@ public class Locacao {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	private static int calculaDias (Locacao loc) {		//MÊS COM 30 DIAS
+		int dias = 0;
+		if (loc.getAnoSaida() == loc.getAnoEntrada()) {
+			if (loc.getMesEntrada() == loc.getMesSaida()) {
+				dias = (loc.getDiaEntrada() - loc.getDiaSaida());
+			}
+			else if (loc.getMesEntrada() > loc.getMesSaida()) {
+				if (loc.getDiaEntrada() >= loc.getDiaSaida()) {
+					dias = ((loc.getMesEntrada() - loc.getMesSaida())*30) + (loc.getDiaEntrada() - loc.getDiaSaida());  
+				}
+				else dias = ((loc.getMesEntrada() - loc.getMesSaida())*30) - (loc.getDiaEntrada() - loc.getDiaSaida());
+			}
+		}
+		else if (loc.getAnoSaida() < loc.getAnoEntrada()) {
+			if (loc.getMesEntrada() >= loc.getMesSaida()) {
+				if (loc.getDiaEntrada() >= loc.getDiaSaida()) {
+					dias = ((loc.getDiaEntrada() - loc.getAnoSaida())*365) + ((loc.getMesEntrada() - loc.getMesSaida())*30) + (loc.getDiaEntrada() - loc.getDiaSaida());
+				}
+				else dias = ((loc.getDiaEntrada() - loc.getAnoSaida())*365) + ((loc.getMesEntrada() - loc.getMesSaida())*30) - (loc.getDiaEntrada() - loc.getDiaSaida());
+			}
+			else if (loc.getDiaEntrada() >= loc.getDiaSaida()) {
+				dias = ((loc.getDiaEntrada() - loc.getAnoSaida())*365) - ((loc.getMesEntrada() - loc.getMesSaida())*30) + (loc.getDiaEntrada() - loc.getDiaSaida());
+			}	
+			else dias = ((loc.getDiaEntrada() - loc.getAnoSaida())*365) - ((loc.getMesEntrada() - loc.getMesSaida())*30) - (loc.getDiaEntrada() - loc.getDiaSaida());	
+		}
+		else System.out.println("Dados inválidos!");
+		return dias;
+	}
+
+
+
+	private static double calculoPreco (TipoVeiculo tipov,Locacao loc,TipoLocacao tipo) {
+		final double p;
+		loc.setAlugado(false);
+		if (tipo.getTipo().equals("porKm")){
+			p = (loc.getKmSaida() - loc.getKmEntrada()) + ( tipov.getTaxaBase() * calculaDias(loc) ) ;
+			loc.setPreco(p);
+			return loc.getPreco();
+		}else{
+			loc.setPreco(tipov.getTaxaBase() * calculaDias(loc) );
+			return loc.getPreco();
+		}
+	}
+
+	private static double locacoesEmAberto(Data dia,Locacao locacao) throws IOException {
+		//TODO pegar período desejado
+		double precoTotal = 0.0;
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
+		precoTotal = precoTotal + arquivo.pesquisaLocacoesEmAberto();
+
+		return precoTotal;
+	}
+
+	private static double locacoesFinalizadas() throws IOException{
+		double resultado = 0;
+		PersistenciaLocacao arquivo = new PersistenciaLocacao();
+		resultado = resultado + arquivo.pesquisaPrecoFinalizado();
+		return resultado;
 	}
 	
 }
