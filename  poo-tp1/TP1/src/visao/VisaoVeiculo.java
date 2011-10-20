@@ -85,4 +85,17 @@ public class VisaoVeiculo {
 		
 		return Locarrao.escolhaMenu();
 	}
+	
+	public static int pesquisaCategoriaVeiculo () throws IOException {
+		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
+		String categoria = "";
+		categoria = Console.readString();
+		if(arquivoVeiculo.pesquisaDisponivel(categoria)){
+			System.out.println("Veículo da categoria disponível.");
+			return Locarrao.escolhaMenu();
+		} else {
+			System.out.println("Veiculo da cetegoria não disponível.");
+			return Locarrao.escolhaMenu();
+		}
+	}
 }
