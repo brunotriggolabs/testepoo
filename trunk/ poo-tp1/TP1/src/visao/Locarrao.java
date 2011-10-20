@@ -9,9 +9,15 @@ import persistencia.*;
 
 public class Locarrao {
 
+	private static VisaoCliente cadastroCliente = new VisaoCliente();
+	private static VisaoMotorista cadastroMotorista = new VisaoMotorista();
+	private static VisaoVeiculo cadastroVeiculo = new VisaoVeiculo();
+	private static VisaoFuncionario cadastroFuncionario = new VisaoFuncionario();
+	private static VisaoLocacao cadastroLocacao = new VisaoLocacao();
+	private static VisaoTipoVeiculo cadastroTipoVeiculo = new VisaoTipoVeiculo();
 	protected static String lerCpf;
 	protected static String lerMotorista;
-	
+
 	public static final int escolhaMenu(){
 		System.out.println("Deseja voltar ao menu? [1==sim]");
 		if (Console.readInteger() == 1){
@@ -38,10 +44,11 @@ public class Locarrao {
 			System.out.println("3-Cadastro Veiculo");
 			System.out.println("4-Cadastro Funcionario");
 			System.out.println("5-Cadastro Locacao");
-			System.out.println("6-Listagens");
-			System.out.println("7-Encerrar Locacao");
-			System.out.println("8-Remoção de registros");
-			System.out.println("9-Atualizar registros");
+			System.out.println("6-Cadastro de Tipo de Locacao");
+			System.out.println("7-Listagens");
+			System.out.println("8-Encerrar Locacao");
+			System.out.println("9-Remoção de registros");
+			System.out.println("10-Atualizar registros");
 			System.out.println("0-Sair");
 			System.out.println("********************************************************");
 			opcaoMenu = Console.readInteger();
@@ -50,30 +57,29 @@ public class Locarrao {
 			switch (opcaoMenu) {
 			case 1:
 				//Cadastra cliente
-				VisaoCliente cadastroCliente = new VisaoCliente();
 				menu = cadastroCliente.cadastraCliente();
 				break;
 			case 2:
 				//Cadastra Motorista
-				VisaoMotorista cadastroMotorista = new VisaoMotorista();
 				menu = cadastroMotorista.cadastraMotorista();
 				break;
 			case 3:
 				//Cadastra veículo
-				VisaoVeiculo cadastroVeiculo = new VisaoVeiculo();
 				menu = cadastroVeiculo.cadastraVeiculo();
 				break;
 			case 4:
 				//Cadastra Funcionario
-				VisaoFuncionario cadastroFuncionario = new VisaoFuncionario();
 				menu = cadastroFuncionario.cadastraFuncionario();
 				break;
 			case 5:
 				//Cadastra Locacao
-				VisaoLocacao cadastroLocacao = new VisaoLocacao();
 				menu = cadastroLocacao.cadastraLocacao();
 				break;
 			case 6:
+				// Cadastra tipo de locação
+				menu = cadastroTipoVeiculo.cadastraTipoVeiculo();
+				break;
+			case 7:
 				System.out.println("********--------------LOCARRÃO RENT-A-CAR---------------********");
 				System.out.println("****************************************************************");
 				System.out.println("********--------------Opções para Listagem-------------*********");
@@ -95,27 +101,86 @@ public class Locarrao {
 					VisaoLocacao.locacoesFinalizadas();
 					break;
 				case 3:
-					
+
 					break;
 				case 4:
-					
+
 					break;
 				case 5:
-					
+
 					break;
 				case 6:
-					
+
 					break;
 				case 7:
-					VisaoLocacao.finalizaLocacao(tipov, tipo)
 					break;
 				default:
-					System.out.println("Deseja Sair?");
-					menu = escolhaMenu();
+					System.out.println("Opção inválida");
 					break;
 				}
-			case 7:
-				
+			case 8:
+				PersistenciaTipoVeiculo arquivoTipo = new PersistenciaTipoVeiculo();
+				int tipo;
+				System.out.println("Digite o tipo da locação: \n    1 - PorKm \n    2 - KmLivre");
+				tipo = Console.readInteger();
+				VisaoLocacao.finalizaLocacao(tipov,arquivoTipo.pesquisarTipoLocacao(tipo)); //FALTA CRIAR MÉTODO PRA 
+				//PESQUISAR O TIPO VEÍCULO
+				break;
+			case 9:
+				System.out.println("********--------------LOCARRÃO RENT-A-CAR---------------********");
+				System.out.println("****************************************************************");
+				System.out.println("1-Remover cliente da base de dados");
+				System.out.println("2-Remover veículo da base de dados");
+				System.out.println("3-Remover motorista da base de dados");
+				System.out.println("4-Remover funcionário da base de dados");
+				System.out.println("*****************************************************************");
+				int opMenu3 = 0;
+				opMenu3 = Console.readInteger();
+				switch (opMenu3) {
+				case 1:
+					cadastroCliente.removeCliente();
+					break;
+				case 2:
+					cadastroVeiculo.removeVeiculo();
+					break;
+				case 3:
+					cadastroMotorista.removeMotorista();
+					break;
+				case 4:
+					cadastroFuncionario.removeFuncionario();
+					break;
+				default:
+					System.out.println("Opção inválida.");
+					break;
+				}
+				break;
+			case 10:
+				System.out.println("********--------------LOCARRÃO RENT-A-CAR---------------********");
+				System.out.println("****************************************************************");
+				System.out.println("1-Atualizar cliente da base de dados");
+				System.out.println("2-Atualizar veículo da base de dados");
+				System.out.println("3-Atualizar motorista da base de dados");
+				System.out.println("4-Atualizar funcionário da base de dados");
+				System.out.println("*****************************************************************");
+				int opMenu4 = 0;
+				opMenu4 = Console.readInteger();
+				switch (opMenu4) {
+				case 1:
+					cadastroCliente.atualizaCliente();
+					break;
+				case 2:
+					cadastroVeiculo.atualizaVeiculo();
+					break;
+				case 3:
+					cadastroMotorista.atualizaMotorista();
+					break;
+				case 4:
+					cadastroFuncionario.atualizaFuncionario();
+					break;
+				default:
+					System.out.println("Opção inválida.");
+					break;
+				}
 				break;
 			default:
 				System.out.println("Deseja Sair?");
