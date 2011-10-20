@@ -83,6 +83,15 @@ public class Veiculo {
 		return placa;
 	}
 	
-	//TODO implementar os métodos do veículo
+	public Veiculo[] ordenaPorLocacoes(int tamanho, Veiculo[] veiculos) {
+		Veiculo vec;
+		int maior;
+		int aux
+		for (int i = 0; i < tamanho; tamanho++) {
+			if veiculo
+			
+		}
+		return veiculos;
+	}
 	
 }

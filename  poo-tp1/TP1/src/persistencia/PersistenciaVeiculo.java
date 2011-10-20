@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import modelo.Veiculo;
 
@@ -89,7 +91,6 @@ public class PersistenciaVeiculo {
 	
 	public void deletaVeiculo(String placa) throws IOException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
 	 	String s[];
 		Veiculo vec = new Veiculo("a", "b", "c");
 		FileReader fr = new FileReader(arquivo);
@@ -98,7 +99,6 @@ public class PersistenciaVeiculo {
 		FileWriter fwTemp = new FileWriter(novo,true);
 		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
 		while(true) {
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -124,14 +124,61 @@ public class PersistenciaVeiculo {
 		novo.renameTo(new File("arquivos/veiculo.txt"));  
 	}
 	
-	public Veiculo pesquisarDisponivel() throws FileNotFoundException {
+	public void pesquisarDisponivel() throws FileNotFoundException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
 		String s[];
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Veiculo vec = new Veiculo("x", "y", "z");
+		System.out.print("Veículos disponíveis:");
 		while(true){
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				break;
+			}
+			s = conateudoLinha.split("\\;");
+			vec = converteOriginal(s);
+			if (vec.getDisponivel() == 1) {
+				System.out.print(" " + vec.getPlaca());
+			}
+		}
+		System.out.println();
+	}
+	
+	public int contaVeiculos() throws FileNotFoundException {
+		String conateudoLinha = null;
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		int contador = 0;
+		while(true) {
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				break;
+			}
+			contador++;
+		}
+		return contador;
+	}
+	
+	public Veiculo[] montaVetorVeiculos(int quantidade) throws FileNotFoundException {
+		String conateudoLinha = null;
+		Veiculo vetor[] = new Veiculo[quantidade];
+		Veiculo vec;
+	 	String s[];
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		int linhaAtual = -1;
+		while(true) {
 			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
@@ -140,15 +187,32 @@ public class PersistenciaVeiculo {
 				break;
 			}
 			if (conateudoLinha == null) {
-				System.out.println("Veículo não encontrado!");
-				return null;
+				break;
 			}
 			s = conateudoLinha.split("\\;");
 			vec = converteOriginal(s);
-			if (vec.getDisponivel() == 1) {
-				return vec;
-			}
+			vetor[linhaAtual] = vec;
 		}
-		return null;
+		return vetor;
+	}
+	
+	public boolean aluga(String placa) throws FileNotFoundException {
+		Veiculo veiculo = pesquisarVeiculo(placa);
+		if (veiculo.getDisponivel() == 1) {
+			veiculo.setDisponivel(0);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean veiculoDisponivel(String placa) throws FileNotFoundException {
+		Veiculo vec = new Veiculo("placa", "placa", "placa");
+		vec = pesquisarVeiculo(placa);
+		int i = vec.getDisponivel();
+		if (i == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

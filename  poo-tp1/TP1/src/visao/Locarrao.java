@@ -27,7 +27,6 @@ public class Locarrao {
 	}
 
 	public static void main(String[] args) throws IOException {
-		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
 		File arquivo = new File ("arquivos/numLocacoes.txt");
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
@@ -93,22 +92,22 @@ public class Locarrao {
 				System.out.println("*****************************************************************");
 				int opMenu2 = 0;
 				opMenu2 = Console.readInteger();
-				while(opMenu2 == 1){
+				while(opMenu2 == 1) {
 					switch (opMenu2) {
 					case 1:
-						System.out.println("Preço total das locações ainda em aberto: " + VisaoLocacao.locacoesEmAberto(VisaoLocacao.leDia()));
+						System.out.println("Preço total das locações ainda em aberto: " + VisaoLocacao.locacoesEmAberto(VisaoLocacao.leDia())); // OK
 						break;
 					case 2:
-						System.out.println("Preço total das locações já finalizadas: " + VisaoLocacao.locacoesFinalizadas());
+						System.out.println("Preço total das locações já finalizadas: " + VisaoLocacao.locacoesFinalizadas()); // OK
 						break;
 					case 3:
-						opMenu2 = VisaoVeiculo.pesquisaDispo();
+						opMenu2 = VisaoVeiculo.pesquisaDispo(); // OK
 						break;
 					case 4:
-						//TODO VEICULOS MAIS PROCURADOS
+						VisaoVeiculo.maisProcurados();
 						break;
 					case 5:
-						//TODO VEICULOS MAIS RENTAVEIS
+						VisaoVeiculo.maisRentaveis();
 						break;
 					case 6:
 						opMenu2 = VisaoCliente.pesquisaCliente();
