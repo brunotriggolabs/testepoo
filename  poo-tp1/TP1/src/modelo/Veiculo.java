@@ -14,7 +14,7 @@ public class Veiculo {
 	private String observacoes;
 	private int disponivel;
 	private int locacao;
-	protected int getNumLocacoes;
+	private int numLocacoes;
 	
 	public Veiculo(String placa, String marca, String modelo) {
 		this.placa = placa;
@@ -22,6 +22,11 @@ public class Veiculo {
 		this.marca = marca;
 		this.disponivel = 1;
 		this.locacao = 0;
+		this.numLocacoes = 0;
+	}
+
+	public void setNumLocacoes(int numLocacoes) {
+		this.numLocacoes = numLocacoes;
 	}
 
 	public void setCor(String cor) {
@@ -96,7 +101,7 @@ public class Veiculo {
 	}
 	
 	public int getNumLocacoes() {
-		return 1;
+		return numLocacoes;
 	}
 	
 }

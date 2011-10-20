@@ -29,6 +29,7 @@ public class PersistenciaLocacao  {
 		File numLocacoes = new File("arquivos/numLocacoes.txt");
 		FileWriter fw = new FileWriter(numLocacoes);
 		BufferedWriter escreve = new BufferedWriter(fw);
+		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
 		String x = String.valueOf(Locacao.numLocacoes);
 		escreve.write(x);
 		escreve.flush();
@@ -63,6 +64,8 @@ public class PersistenciaLocacao  {
 		out.write(new Boolean(locacao.isAlugado()).toString());
 		out.write(";");
 		out.write(String.valueOf(locacao.isFinalizado()));
+		out.write(";");
+		out.write(locacao.getPlaca());
 		out.write("\n");
 		out.flush();
 		out.close();
@@ -148,6 +151,8 @@ public class PersistenciaLocacao  {
 				bwTemp.write(new Boolean(loc.isAlugado()).toString());
 				bwTemp.write(";");
 				bwTemp.write(String.valueOf(loc.isFinalizado()));
+				bwTemp.write(";");
+				bwTemp.write(loc.getPlaca());
 				bwTemp.write("\n");								//Carrega o buff
 			}
 		}
@@ -175,6 +180,7 @@ public class PersistenciaLocacao  {
 		loc.setPreco(Double.parseDouble(s[12]));
 		loc.setAlugado(Boolean.parseBoolean(s[13]));
 		loc.setFinalizado(Boolean.parseBoolean(s[14]));
+		loc.setPlaca(s[15]);
 		return loc;
 	}
 
@@ -339,5 +345,4 @@ public class PersistenciaLocacao  {
 		}
 		return false;
 	}
-
 }

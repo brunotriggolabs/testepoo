@@ -28,7 +28,7 @@ public class PersistenciaVeiculo {
 	public void salvaVeiculo(Veiculo veiculo) throws IOException {
 		bw.append(veiculo.getPlaca() + ";" 	+ veiculo.getMarca() + ";" +  veiculo.getModelo() +
 				";" + veiculo.getCor() + ";" + veiculo.getTipo() + ";" + veiculo.getOpicionais() + ";" + veiculo.getDisponivel() +
-				";" + String.valueOf(veiculo.getLocacao()) + ";" + veiculo.getObservacoes() + "\n");	//Carrega o buff
+				";" + String.valueOf(veiculo.getLocacao()) + ";" + veiculo.getObservacoes() + ";" + veiculo.getNumLocacoes() + "\n");	//Carrega o buff
 		bw.flush();																									//escrever o buff no arquivo
 		bw.close();																									//fecha o arquivo
 	}
@@ -78,6 +78,7 @@ public class PersistenciaVeiculo {
 		}
 		int s7 = Integer.parseInt(s[7]); // LOCA��O
 		String s8 = s[8]; // OBSERVA��ES
+		String s9 = s[9];
 		
 		Veiculo vec = new Veiculo(s0, s1, s2);
 		vec.setCor(s3);
@@ -86,6 +87,7 @@ public class PersistenciaVeiculo {
 		vec.setDisponivel(s6);
 		vec.setLocacao(s7);
 		vec.setObservacoes(s8);
+		vec.setNumLocacoes(Integer.parseInt(s9));
 		return vec;
 	}
 	
@@ -115,7 +117,7 @@ public class PersistenciaVeiculo {
 			} else {
 				bwTemp.append(vec.getPlaca() + ";" 	+ vec.getMarca() + ";" +  vec.getModelo() +
 						";" + vec.getCor() + ";" + vec.getTipo() + ";" + vec.getOpicionais() + ";" + vec.getDisponivel() +
-						";" + String.valueOf(vec.getLocacao()) + ";" + vec.getObservacoes() + "\n");		
+						";" + String.valueOf(vec.getLocacao()) + ";" + vec.getObservacoes() + ";" + vec.getNumLocacoes() + "\n");		
 			}
 		}
 		bwTemp.flush();														//escrever o buff no arquivo

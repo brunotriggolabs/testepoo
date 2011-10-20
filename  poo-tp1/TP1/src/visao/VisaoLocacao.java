@@ -58,6 +58,7 @@ public class VisaoLocacao {
 			// Finalmente, realiza a locação e a registra no arquivo
 			System.out.println("Digite a Km de Saida,Tipo da Locacao[porKm - 1 / Kmlivre - 2] e a previsão de dias da locacao.");
 			Locacao locacao = new Locacao(Console.readInteger(), Console.readInteger(), Console.readInteger());
+			locacao.setPlaca(placa);
 			locacao.setAlugado(true);
 			PersistenciaLocacao arquivoLocacao = new PersistenciaLocacao();
 			arquivoLocacao.salvar(locacao);
@@ -107,7 +108,7 @@ public class VisaoLocacao {
 		loc.setAlugado(false);
 		loc.setFinalizado(true);
 		if (tipo.getTipo().equals("porKm")){
-			p = (loc.getKmSaida() - loc.getKmEntrada()) + ( tipov.getTaxaBase() * calculaDias(loc) ) ;
+			p = (loc.getKmEntrada() - loc.getKmSaida()) + ( tipov.getTaxaBase() * calculaDias(loc) ) ;
 			loc.setPreco(p);
 			return loc.getPreco();
 		} else {
@@ -138,4 +139,10 @@ public class VisaoLocacao {
 		data.setAno(Console.readInteger());
 		return data;
 	}
+	
 }
+
+	
+	//public static boolean finalizaLocacao(Locacao loc){
+		
+	//}
