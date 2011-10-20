@@ -1,7 +1,5 @@
 package modelo;
 
-import java.awt.List;
-import java.util.ArrayList;
 
 public class Veiculo {
 	
@@ -88,18 +86,7 @@ public class Veiculo {
 	public String getPlaca() {
 		return placa;
 	}
-	
-	public Veiculo[] ordenaPorLocacoes(int tamanho, Veiculo[] veiculos) {
-		Veiculo vec;
-		int maior;
-		int aux
-		for (int i = 0; i < tamanho; tamanho++) {
-			if veiculo
-			
-		}
-		return veiculos;
-	}
-	
+		
 	public int getNumLocacoes() {
 		return numLocacoes;
 	}

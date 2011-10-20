@@ -7,10 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import modelo.Veiculo;
+import modelo.Vetor;
 
 public class PersistenciaVeiculo {
 	
@@ -35,13 +34,11 @@ public class PersistenciaVeiculo {
 	
 	public Veiculo pesquisarVeiculo(String placa) throws FileNotFoundException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
 		String s[];
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Veiculo vec = new Veiculo("x", "y", "z");
 		while(true){
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -195,6 +192,22 @@ public class PersistenciaVeiculo {
 			vec = converteOriginal(s);
 			vetor[linhaAtual] = vec;
 		}
+		return vetor = ordena(vetor);
+	}
+	
+	private static Veiculo[] ordena (Veiculo [] vetor){
+		boolean houveTroca = true;
+		while (houveTroca == true) {
+			houveTroca = false;
+			for (int i = 0; i < (vetor.length)-1; i++){
+				if (vetor[i].getNumLocacoes() > vetor[i+1].getNumLocacoes()){
+					Veiculo vec = vetor[i+1];
+					vetor[i+1] = vetor[i];
+					vetor[i] = vec;
+					houveTroca = true;
+				}
+			}
+		}
 		return vetor;
 	}
 	
@@ -242,4 +255,53 @@ public class PersistenciaVeiculo {
 		}
 		return false;
 	}
+	
+	public Vetor[] somaPrecos(int quantidade) throws IOException {
+		PersistenciaLocacao arquivoLocacao = new PersistenciaLocacao();
+		Veiculo vec = new Veiculo("", "", "");
+		String conateudoLinha = null;
+		String s[];
+		Vetor vetor[] = new Vetor[quantidade];
+		//ArrayList<Vetor> vetor = new ArrayList<Vetor>();
+		Vetor vet = new Vetor();
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		int cont = -1;
+		while(true){
+			cont++;
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				break;
+			}
+			s = conateudoLinha.split("\\;");
+			vec = converteOriginal(s);
+			vet.setPreco(arquivoLocacao.retornaPreco(vec.getPlaca()));
+			vet.setPlaca(vec.getPlaca());
+			vetor[cont] = vet;	
+		}
+		
+		return vetor = ordenaPreco(vetor);
+	}
+	
+	private static Vetor[] ordenaPreco (Vetor [] vetor){
+		boolean houveTroca = true;
+		while (houveTroca == true) {
+			houveTroca = false;
+			for (int i = 0; i < (vetor.length)-1; i++){
+				if (vetor[i].getPreco() > vetor[i+1].getPreco()){
+					Vetor vec = vetor[i+1];
+					vetor[i+1] = vetor[i];
+					vetor[i] = vec;
+					houveTroca = true;
+				}
+			}
+		}
+		return vetor;
+	}
+	
 }

@@ -35,13 +35,11 @@ public class PersistenciaCliente {
 	
 	public Cliente pesquisarCliente(String cpf) throws IOException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
 	 	String s[];
 	 	FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 	 	Cliente cli = new Cliente("a", "b");
 		while(true) {
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -83,7 +81,6 @@ public class PersistenciaCliente {
 	
 	public void deletaCliente(String cpf) throws IOException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
 	 	String s[];
 		Cliente cli = new Cliente("a", "1");
 		FileReader fr = new FileReader(arquivo);
@@ -92,7 +89,6 @@ public class PersistenciaCliente {
 		FileWriter fwTemp = new FileWriter(novo,true);
 		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
 		while(true) {
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {

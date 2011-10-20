@@ -8,7 +8,7 @@ public class TipoLocacao {
 	public TipoLocacao(String tipo, Double taxa, Double precoKm) {
 		this.tipo = tipo;
 		this.taxaBase = taxa;
-		this.precoKm = this.precoKm;
+		this.precoKm = precoKm;
 	}
 	
 	public void setTipo(String tipo) {

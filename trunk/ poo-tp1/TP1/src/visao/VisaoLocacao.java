@@ -14,10 +14,6 @@ import persistencia.PersistenciaVeiculo;
 
 public class VisaoLocacao {
 
-	private boolean verificacaoMotorista () {
-		return false;
-	}
-
 	private static boolean checaCpf(String cpf)throws IOException {
 		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
 		System.out.println("Verificando se já está cadastrado:");

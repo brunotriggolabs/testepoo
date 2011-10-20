@@ -3,16 +3,13 @@ package persistencia;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
 
 import modelo.Console;
 import modelo.Data;
 import modelo.Locacao;
-import modelo.Veiculo;
 
 public class PersistenciaLocacao  {
 
@@ -29,7 +26,6 @@ public class PersistenciaLocacao  {
 		File numLocacoes = new File("arquivos/numLocacoes.txt");
 		FileWriter fw = new FileWriter(numLocacoes);
 		BufferedWriter escreve = new BufferedWriter(fw);
-		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
 		String x = String.valueOf(Locacao.numLocacoes);
 		escreve.write(x);
 		escreve.flush();
@@ -302,6 +298,32 @@ public class PersistenciaLocacao  {
 			}
 		}
 		return resultado;
+	}
+	
+	public double retornaPreco (String placa) throws IOException {
+		double preco = 0;
+		String conteudoLinha = null;
+		String s[];
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		Locacao loc = new Locacao(1, 1);
+		while(true){
+			try {
+				conteudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conteudoLinha == null) {
+				break;
+			}
+			s = conteudoLinha.split("\\;");
+			loc = converteOriginal(s);
+			if (placa == loc.getPlaca()) {
+				preco = preco + loc.getPreco();
+			}
+		}
+		return preco;
 	}
 
 	private boolean verificaDiasLocacaoAberta(Locacao loc, Data inicio, Data fim) {
