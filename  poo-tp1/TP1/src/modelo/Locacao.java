@@ -28,7 +28,7 @@ public class Locacao {
 		this.kmEntrada = kmSaida;
 		this.tipoLocacao = tipoLocacao;
 		this.valor = 5;
-		this.diaEntrada = new Date().getDate();
+		this.diaEntrada = new Date().getDate(); //ENTRADA = CHEGA NA LOJA  SAÍDA = SAI DA LOJA ,ACHO QUE TEM QUE TROCAR AQUI.
 		this.mesEntrada = new Date().getMonth();
 		this.anoEntrada = new Date().getYear();
 		this.previsaoDias = previsaoDias;

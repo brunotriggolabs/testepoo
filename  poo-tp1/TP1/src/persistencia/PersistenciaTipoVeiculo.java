@@ -11,6 +11,7 @@ import modelo.Locacao;
 import modelo.Motorista;
 import modelo.TipoLocacao;
 import modelo.TipoVeiculo;
+import modelo.Veiculo;
 
 public class PersistenciaTipoVeiculo {
 
@@ -65,12 +66,43 @@ public class PersistenciaTipoVeiculo {
 		double precoKm = Double.parseDouble(s[8]);
 		double taxa = Double.parseDouble(s[11]);
 		TipoLocacao tipoLoc = new TipoLocacao(s[0], taxa, precoKm);
-		
 		return tipoLoc;
 	}
 	
-	public boolean deletaTipoVeiculo(TipoVeiculo tipo) {
-		
-		return false;
+	public void deletaTipoVeiculo(int tipo) {
+		String conateudoLinha = null;
+		int linhaAtual = 0;
+	 	String s[];
+		TipoVeiculo tipoVec = new TipoVeiculo();
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		File novo = new File("arquivos/veiculoTemp.txt");
+		FileWriter fwTemp = new FileWriter(novo,true);
+		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
+		while(true) {
+			linhaAtual++;
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				break;
+			}
+			s = conateudoLinha.split("\\;");
+			vec = converteOriginal(s);
+			if (vec.getPlaca().equals(placa)){
+				System.out.println("Veículo deletado do registro");
+			} else {
+				bwTemp.append(vec.getPlaca() + ";" 	+ vec.getMarca() + ";" +  vec.getModelo() +
+						";" + vec.getCor() + ";" + vec.getTipo() + ";" + vec.getOpicionais() + ";" + vec.getDisponivel() +
+						";" + String.valueOf(vec.getLocacao()) + ";" + vec.getObservacoes() + "\n");		
+			}
+		}
+		bwTemp.flush();														//escrever o buff no arquivo
+		bwTemp.close();														//fecha o arquivo
+		arquivo.delete();
+		novo.renameTo(new File("arquivos/veiculo.txt"));  
 	}
 }
