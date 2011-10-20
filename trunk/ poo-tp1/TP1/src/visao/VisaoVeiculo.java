@@ -43,4 +43,10 @@ public class VisaoVeiculo {
 		pers.salvaVeiculo(veiculo);
 		return Locarrao.escolhaMenu();
 	}
+	
+	public static int pesquisaDispo() throws IOException{
+		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
+		arquivoVeiculo.pesquisarDisponivel().toString();
+		return Locarrao.escolhaMenu();
+	}
 }
