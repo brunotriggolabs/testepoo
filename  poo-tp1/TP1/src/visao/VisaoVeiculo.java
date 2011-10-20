@@ -1,13 +1,10 @@
 package visao;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
-import modelo.Cliente;
 import modelo.Console;
 import modelo.Veiculo;
-import persistencia.PersistenciaCliente;
+import modelo.Vetor;
 import persistencia.PersistenciaVeiculo;
 
 public class VisaoVeiculo {
@@ -70,15 +67,16 @@ public class VisaoVeiculo {
 		return Locarrao.escolhaMenu();
 	}
 	
-	public int maisProcurados() throws IOException {
-		ArrayList<Integer> = new ArrayList<Integer>;
+	public static int maisProcurados() throws IOException {
 		
 		Veiculo veiculo[];
 		PersistenciaVeiculo pers = new PersistenciaVeiculo();
 		int quantidade = pers.contaVeiculos();
 		veiculo = pers.montaVetorVeiculos(quantidade);
-		veiculo = veiculo.ordenaPorLocacoes(quantidade, veiculo);
-
+		System.out.println("Veículos mais procurados:" );
+		for (int i = 0; (i < veiculo.length) || (i < 5); i++) {
+			System.out.println(i + "- " + veiculo[i].getPlaca());
+		}
 		return Locarrao.escolhaMenu();
 	}
 	
@@ -93,5 +91,17 @@ public class VisaoVeiculo {
 			System.out.println("Veiculo da cetegoria não disponível.");
 			return Locarrao.escolhaMenu();
 		}
+	}
+
+	public static int maisRentaveis() throws IOException {
+		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
+		int quantidade = arquivoVeiculo.contaVeiculos();
+		Vetor vetor[] = new Vetor[quantidade];
+		vetor = arquivoVeiculo.somaPrecos(quantidade);
+		System.out.println("Veículos mais rentáveis:" );
+		for (int i = 0; i < vetor.length || i < 5; i++) {
+			System.out.println(i + "- " + vetor[i].getPlaca());
+		} 
+		return Locarrao.escolhaMenu();
 	}
 }

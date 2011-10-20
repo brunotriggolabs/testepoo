@@ -20,7 +20,7 @@ public class VisaoTipoVeiculo {
 		System.out.println("Qual o tipo de locação que deseja remover?");
 		tipo = Console.readString();
 		PersistenciaTipoVeiculo pers = new PersistenciaTipoVeiculo();
-		//TODO pers.deletaTipoVeiculo(tipo);
+		pers.deletaTipoVeiculo(tipo);
 		return Locarrao.escolhaMenu();
 	}
 }

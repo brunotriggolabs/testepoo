@@ -32,13 +32,11 @@ public class PersistenciaMotorista {
 	
 	public Motorista pesquisarMotorista(String cpf) throws IOException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
-	 	String s[];	 	
+		String s[];	 	
 	 	FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 	 	Motorista mot = new Motorista("x", "y", "z");
 		while(true) {
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {
@@ -77,8 +75,7 @@ public class PersistenciaMotorista {
 	
 	public void deletaMotorista(String cpf) throws IOException {
 		String conateudoLinha = null;
-		int linhaAtual = 0;
-	 	String s[];
+		String s[];
 		Motorista mot = new Motorista("a", "b", "c");
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
@@ -86,7 +83,6 @@ public class PersistenciaMotorista {
 		FileWriter fwTemp = new FileWriter(novo,true);
 		BufferedWriter bwTemp = new BufferedWriter(fwTemp);
 		while(true) {
-			linhaAtual++;
 			try {
 				conateudoLinha = br.readLine();
 			} catch (IOException e) {
