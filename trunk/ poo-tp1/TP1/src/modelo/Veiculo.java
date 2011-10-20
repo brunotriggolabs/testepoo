@@ -14,6 +14,7 @@ public class Veiculo {
 	private String observacoes;
 	private int disponivel;
 	private int locacao;
+	protected int getNumLocacoes;
 	
 	public Veiculo(String placa, String marca, String modelo) {
 		this.placa = placa;
@@ -92,6 +93,10 @@ public class Veiculo {
 			
 		}
 		return veiculos;
+	}
+	
+	public int getNumLocacoes() {
+		return 1;
 	}
 	
 }
