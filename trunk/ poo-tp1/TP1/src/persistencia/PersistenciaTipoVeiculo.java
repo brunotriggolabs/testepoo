@@ -64,7 +64,7 @@ public class PersistenciaTipoVeiculo {
 	
 	public TipoVeiculo converteOriginalTipoVeiculo(String s[]){
 		String tipo = s[0];
-		double precoKm = Double.parseDouble(s[11]);
+		double precoKm = Double.parseDouble(s[1]);
 		double taxaBase = Double.parseDouble(s[2]);
 		TipoVeiculo tipoVei = new TipoVeiculo(tipo, precoKm, taxaBase);
 		return tipoVei;
@@ -100,13 +100,13 @@ public class PersistenciaTipoVeiculo {
 	}
 	
 	private TipoLocacao converteOriginal (String s[]) {
-		double precoKm = Double.parseDouble(s[8]);
+		double precoKm = Double.parseDouble(s[8]); //ERRO AKI! ARRAYOUTOFBOUNDS EXCEPTION!
 		double taxa = Double.parseDouble(s[11]);
 		TipoLocacao tipoLoc = new TipoLocacao(s[0], taxa, precoKm);
 		return tipoLoc;
 	}
 	
-	public void deletaTipoVeiculo(int tipo) {
+	/*public void deletaTipoVeiculo(int tipo) {
 		String conateudoLinha = null;
 		int linhaAtual = 0;
 	 	String s[];
@@ -141,5 +141,5 @@ public class PersistenciaTipoVeiculo {
 		bwTemp.close();														//fecha o arquivo
 		arquivo.delete();
 		novo.renameTo(new File("arquivos/veiculo.txt"));  
-	}
+	}*/
 }

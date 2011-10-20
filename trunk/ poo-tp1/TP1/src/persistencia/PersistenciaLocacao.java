@@ -204,6 +204,7 @@ public class PersistenciaLocacao  {
 	public double pesquisaLocacoesEmAberto () throws FileNotFoundException {
 		String conteudoLinha = null;
 		String s[];
+		File arquivo = new File ("arquivos/Locacao.txt");
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
@@ -215,7 +216,7 @@ public class PersistenciaLocacao  {
 				System.out.println("Erro em IOException");
 				break;
 			}
-			s = conteudoLinha.split("\\;");
+			s = conteudoLinha.split("\\;"); //NULL POINTER EXCEPTION
 			if (s[13] == "true" && verificaDias(loc,s)){
 				resultado = resultado + loc.getPreco();
 			}

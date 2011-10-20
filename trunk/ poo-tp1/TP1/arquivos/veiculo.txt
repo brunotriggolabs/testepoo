@@ -6,3 +6,4 @@ gkr 2712;Gol;bolinha;null;null;null;1;0;null
 ABC-2345;FIAT;PALIO;null;null;null;1;0;null
 null;null;null;null;null;null;1;0;null
 HBWW;GGEGE;RERE;null;null;null;1;0;null
+HBS8552;EcoSport;Fiat;null;null;null;1;0;null
