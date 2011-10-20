@@ -52,6 +52,14 @@ public class Locacao {
 		this.previsaoDias = 2;
 	}
 	
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+	
+	public String getPlaca() {
+		return placa;
+	}
+	
 	public boolean isFinalizado() {
 		return finalizado;
 	}
