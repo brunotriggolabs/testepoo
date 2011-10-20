@@ -19,15 +19,12 @@ public class VisaoLocacao {
 	}
 	
 	private static boolean checaCpf(String cpf)throws IOException {
-		String lerCpf;
 		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
 		System.out.println("Verificando se já está cadastrado:");
-		System.out.println("Digite seu CPF:");
-		lerCpf = Console.readString();
-		if (arquivoCliente.pesquisarCliente(lerCpf) == null){
+		if (arquivoCliente.pesquisarCliente(cpf) == null){
 			System.out.println("Realizando Cadastro:");
 			System.out.println("Digite o seu nome:");
-			Cliente cliente = new Cliente(Console.readString(), lerCpf);
+			Cliente cliente = new Cliente(Console.readString(), cpf);
 			arquivoCliente.salvaCliente(cliente);
 			return false;
 		} else {
@@ -48,7 +45,7 @@ public class VisaoLocacao {
 			PersistenciaLocacao arquivoLocacao = new PersistenciaLocacao();
 			arquivoLocacao.salvar(locacao);
 			return menu = Locarrao.escolhaMenu();
-		}else return 0;		
+		}else return Locarrao.escolhaMenu();		
 	}
 	
 	public static int calculaDias (Locacao loc) {		//MÊS COM 30 DIAS

@@ -93,31 +93,33 @@ public class Locarrao {
 				System.out.println("*****************************************************************");
 				int opMenu2 = 0;
 				opMenu2 = Console.readInteger();
-				switch (opMenu2) {
-				case 1:
-					VisaoLocacao.locacoesEmAberto(VisaoLocacao.leDia());
-					break;
-				case 2:
-					VisaoLocacao.locacoesFinalizadas();
-					break;
-				case 3:
-					VisaoVeiculo.pesquisaDispo();
-					break;
-				case 4:
-					//TODO VEICULOS MAIS PROCURADOS
-					break;
-				case 5:
-					//TODO VEICULOS MAIS RENTAVEIS
-					break;
-				case 6:
-					VisaoCliente.pesquisaCliente();
-					break;
-				case 7:
-					//TODO PESQUISAR CATEGORIA DE VEÍCULO
-					break;
-				default:
-					System.out.println("Opção inválida");
-					break;
+				while(opMenu2 == 1){
+					switch (opMenu2) {
+					case 1:
+						System.out.println("Preço total das locações ainda em aberto: " + VisaoLocacao.locacoesEmAberto(VisaoLocacao.leDia()));
+						break;
+					case 2:
+						System.out.println("Preço total das locações já finalizadas: " + VisaoLocacao.locacoesFinalizadas());
+						break;
+					case 3:
+						opMenu2 = VisaoVeiculo.pesquisaDispo();
+						break;
+					case 4:
+						//TODO VEICULOS MAIS PROCURADOS
+						break;
+					case 5:
+						//TODO VEICULOS MAIS RENTAVEIS
+						break;
+					case 6:
+						opMenu2 = VisaoCliente.pesquisaCliente();
+						break;
+					case 7:
+						//TODO PESQUISAR CATEGORIA DE VEÍCULO
+						break;
+					default:
+						System.out.println("Opção inválida");
+						break;
+					}
 				}
 			case 8:
 				PersistenciaTipoVeiculo arquivoTipo = new PersistenciaTipoVeiculo();
