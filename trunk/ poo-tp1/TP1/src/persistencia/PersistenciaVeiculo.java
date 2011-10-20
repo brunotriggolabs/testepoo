@@ -215,4 +215,31 @@ public class PersistenciaVeiculo {
 			return false;
 		}
 	}
+	
+	public boolean pesquisaDisponivel (String categoria)throws IOException {
+		String conateudoLinha = null;
+		int linhaAtual = 0;
+		String s[];
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+		Veiculo vec = new Veiculo("x", "y", "z");
+		while(true){
+			linhaAtual++;
+			try {
+				conateudoLinha = br.readLine();
+			} catch (IOException e) {
+				System.out.println("Erro em IOException");
+				break;
+			}
+			if (conateudoLinha == null) {
+				return false;
+			}
+			s = conateudoLinha.split("\\;");
+			vec = converteOriginal(s);
+			if ((vec.getDisponivel()==1) && (vec.getTipo() == categoria)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -113,7 +113,7 @@ public class Locarrao {
 						opMenu2 = VisaoCliente.pesquisaCliente();
 						break;
 					case 7:
-						//TODO PESQUISAR CATEGORIA DE VEÍCULO
+						opMenu2 = VisaoVeiculo.pesquisaCategoriaVeiculo();
 						break;
 					default:
 						System.out.println("Opção inválida");
@@ -185,7 +185,8 @@ public class Locarrao {
 					System.out.println("Opção inválida.");
 					break;
 				}
-				break;
+				
+
 			default:
 				System.out.println("Deseja Sair?");
 				menu = escolhaMenu();
@@ -193,4 +194,6 @@ public class Locarrao {
 			}
 		}
 	}
+
+	
 }
