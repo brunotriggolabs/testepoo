@@ -1,6 +1,10 @@
 package modelo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
+
+import persistencia.PersistenciaVeiculo;
 
 public class Locacao {
 	
@@ -20,6 +24,7 @@ public class Locacao {
 	private boolean finalizado;
 	private double preco;
 	private int id;
+	private String placa;
 	public static int numLocacoes = 0;
 		
 	@SuppressWarnings("deprecation")
@@ -27,7 +32,6 @@ public class Locacao {
 		this.kmSaida = kmSaida;
 		this.kmEntrada = kmSaida;
 		this.tipoLocacao = tipoLocacao;
-		this.valor = 5;
 		this.diaEntrada = new Date().getDate(); //ENTRADA = CHEGA NA LOJA  SAÍDA = SAI DA LOJA ,ACHO QUE TEM QUE TROCAR AQUI.
 		this.mesEntrada = new Date().getMonth();
 		this.anoEntrada = new Date().getYear();
@@ -52,7 +56,7 @@ public class Locacao {
 		return finalizado;
 	}
 
-	public void setFinalizado(boolean finalizado) {
+	public void setFinalizado(boolean finalizado) {		
 		this.finalizado = finalizado;
 	}
 
@@ -113,7 +117,7 @@ public class Locacao {
 	}
 
 	public double getPreco() {
-		return preco;
+		return this.preco;
 	}
 
 	public void setPreco(double preco) {
@@ -124,8 +128,8 @@ public class Locacao {
 		return alugado;
 	}
 
-	public void setAlugado(boolean alugado) {
-		this.alugado = alugado;
+	public void setAlugado(boolean disponibilidade) throws IOException {
+		this.alugado = disponibilidade;
 	}	
 	
 	public void setKmSaida(int kmSaida) {
@@ -182,5 +186,13 @@ public class Locacao {
 	
 	public void setId(int id) {
 		this.id = id;
-	}	
+	}
+	
+//	public void a() {
+//		System.out.println("Qual a placa do veículo que deseja alugar?");
+//		String placa = Console.readString();
+//		PersistenciaVeiculo pers = new PersistenciaVeiculo();
+//		boolean alugado = pers.aluga(placa); // SE ALUGADO = 1  --> VEICULO ESTAVA DISPONIVEL
+//
+//	}
 }

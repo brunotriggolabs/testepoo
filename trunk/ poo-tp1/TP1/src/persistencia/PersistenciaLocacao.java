@@ -9,7 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
+import modelo.Console;
+import modelo.Data;
 import modelo.Locacao;
+import modelo.Veiculo;
 
 public class PersistenciaLocacao  {
 
@@ -30,7 +33,7 @@ public class PersistenciaLocacao  {
 		escreve.write(x);
 		escreve.flush();
 		escreve.close();
-		
+
 		out.write(x);
 		out.write(";");
 		out.write(String.valueOf(locacao.getValor()));
@@ -64,7 +67,7 @@ public class PersistenciaLocacao  {
 		out.flush();
 		out.close();
 	}
-	
+
 	public Locacao pesquisar(int id) throws IOException{
 		String conteudoLinha = null;
 		String s[];
@@ -153,8 +156,8 @@ public class PersistenciaLocacao  {
 		arquivo.delete();
 		novo.renameTo(new File("arquivos/Locacao.txt"));  
 	}
-	
-	private Locacao converteOriginal (String s[]) {
+
+	private Locacao converteOriginal (String s[]) throws IOException {
 		int dias = Integer.parseInt(s[10]);
 		int kmSaida = Integer.parseInt(s[8]);
 		int km = (int)kmSaida;
@@ -169,18 +172,45 @@ public class PersistenciaLocacao  {
 		loc.setDiaSaida(Integer.valueOf(s[5]));
 		loc.setMesSaida(Integer.valueOf(s[6]));
 		loc.setAnoSaida(Integer.valueOf(s[7]));
+		loc.setPreco(Double.parseDouble(s[12]));
 		loc.setAlugado(Boolean.parseBoolean(s[13]));
 		loc.setFinalizado(Boolean.parseBoolean(s[14]));
 		return loc;
 	}
 
-	public double pesquisaPrecoFinalizado () throws FileNotFoundException{
+	public double pesquisaPrecoFinalizado () throws IOException{
 		String conteudoLinha = null;
 		String s[];
+		File arquivo = new File ("arquivos/Locacao.txt");
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
-		double resultado = 0;
+		double resultado = 1;
+		System.out.println("Deseja informar o periodo? S/N");
+		char resposta = Console.readChar();
+		while (resposta != 's' || resposta != 'S' || resposta != 'n' || resposta != 'N') {
+			System.out.println("Digite S para sim ou N para não");
+			resposta = Console.readChar();
+		}
+		Data dataInicio = new Data();
+		Data dataFim = new Data();
+		if (resposta == 'S' || resposta == 's') {
+			System.out.println("Digite o período que deseja testar");
+			System.out.println("Início do período:");
+			System.out.println("Digite o dia: ");
+			dataInicio.setDia(Console.readInteger());
+			System.out.println("Digite o mês: ");
+			dataInicio.setMes(Console.readInteger());
+			System.out.println("Digite o ano: ");
+			dataInicio.setAno(Console.readInteger());
+			System.out.println("Fim do período:");
+			System.out.println("Digite o dia: ");
+			dataFim.setDia(Console.readInteger());
+			System.out.println("Digite o mês: ");
+			dataFim.setMes(Console.readInteger());
+			System.out.println("Digite o ano: ");
+			dataFim.setAno(Console.readInteger());
+		}
 		while(true){
 			try {
 				conteudoLinha = br.readLine();
@@ -189,26 +219,58 @@ public class PersistenciaLocacao  {
 				break;
 			}
 			if (conteudoLinha == null) {
-				System.out.println("Linha vazia!");
 				break;
 			}
 			s = conteudoLinha.split("\\;");
-			if (s[14] == "true"){
-				resultado = resultado + loc.getPreco();
+			loc = converteOriginal(s);
+			// Se o usuário informou o periodo, então pesquisa entre as locações daquele período
+			if (resposta == 'S' || resposta == 's') {
+				if (verificaDiasLocacaoFechada(loc, dataInicio, dataFim)){
+					resultado = resultado + loc.getPreco();
+				}
+			} else {
+				// Senão, pesquisa todas as locações em aberto
+				if (loc.isFinalizado()){
+					resultado = resultado + loc.getPreco();
+				}
 			}
-			return resultado;
 		}
-		return 0;
+		return resultado;
 	}
 
-	public double pesquisaLocacoesEmAberto () throws FileNotFoundException {
+	public double pesquisaLocacoesEmAberto () throws IOException {
 		String conteudoLinha = null;
 		String s[];
 		File arquivo = new File ("arquivos/Locacao.txt");
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
-		double resultado = 0;
+		double resultado = 1;
+		System.out.println("Deseja informar o periodo? S/N");
+		char resposta = Console.readChar();
+		while (resposta != 's' || resposta != 'S' || resposta != 'n' || resposta != 'N') {
+			System.out.println("Digite S para sim ou N para não");
+			resposta = Console.readChar();
+		}
+		Data dataInicio = new Data();
+		Data dataFim = new Data();
+		if (resposta == 'S' || resposta == 's') {
+			System.out.println("Digite o período que deseja testar");
+			System.out.println("Início do período:");
+			System.out.println("Digite o dia: ");
+			dataInicio.setDia(Console.readInteger());
+			System.out.println("Digite o mês: ");
+			dataInicio.setMes(Console.readInteger());
+			System.out.println("Digite o ano: ");
+			dataInicio.setAno(Console.readInteger());
+			System.out.println("Fim do período:");
+			System.out.println("Digite o dia: ");
+			dataFim.setDia(Console.readInteger());
+			System.out.println("Digite o mês: ");
+			dataFim.setMes(Console.readInteger());
+			System.out.println("Digite o ano: ");
+			dataFim.setAno(Console.readInteger());
+		}
 		while(true){
 			try {
 				conteudoLinha = br.readLine();
@@ -216,30 +278,66 @@ public class PersistenciaLocacao  {
 				System.out.println("Erro em IOException");
 				break;
 			}
-			s = conteudoLinha.split("\\;"); //NULL POINTER EXCEPTION
-			if (s[13] == "true" && verificaDias(loc,s)){
-				resultado = resultado + loc.getPreco();
+			if (conteudoLinha == null) {
+				break;
+			}
+			s = conteudoLinha.split("\\;");
+			loc = converteOriginal(s);
+			// Se o usuário informou o periodo, então pesquisa entre as locações daquele período
+			if (resposta == 'S' || resposta == 's') {
+				if (verificaDiasLocacaoAberta(loc, dataInicio, dataFim)){
+					resultado = resultado + loc.getPreco();
+				}
+			} else {
+				// Senão, pesquisa todas as locações em aberto
+				if (loc.isAlugado()){
+					resultado = resultado + loc.getPreco();
+				}
 			}
 		}
 		return resultado;
 	}
 
-	@SuppressWarnings("deprecation")
-	private boolean verificaDias(Locacao loc,String s[]) {
-		int diaAtual = new Date().getDate();
-		int mesAtual = new Date().getMonth();
-		int anoAtual = new Date().getYear();
-		loc.setDiaEntrada(Integer.valueOf(s[2]));
-		loc.setMesEntrada(Integer.valueOf(s[3]));
-		loc.setAnoEntrada(Integer.valueOf(s[4]));
-
-		if (anoAtual < loc.getAnoEntrada()) {
-			return false;
-		}else if (loc.getMesEntrada() < mesAtual) {
-			return false;
-		} else if (loc.getDiaEntrada() < diaAtual){
-			return false;
+	private boolean verificaDiasLocacaoAberta(Locacao loc, Data inicio, Data fim) {
+		// Verificando se a data de saida do veiculo é menor do que a data de início do período
+		if (loc.getAnoEntrada() < inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() < inicio.getMes()) ||
+				(loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() == inicio.getMes() && loc.getDiaEntrada() < inicio.getMes())) {
+			if (loc.getAnoSaida() > fim.getAno() || (loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() > fim.getMes()) ||
+					(loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() == fim.getMes() && loc.getDiaSaida() > fim.getDia())) {
+				return true;
+			}
 		}
-		return true;
+		
+		// Verifica se a data de saida do veículo está no meio do período informado
+		if (loc.getAnoSaida() > inicio.getAno() || (loc.getAnoSaida() == inicio.getAno() && loc.getMesSaida() > inicio.getMes()) ||
+				(loc.getAnoSaida() == inicio.getAno() && loc.getMesSaida() == inicio.getMes() && loc.getDiaSaida() > inicio.getDia())) {
+			if (loc.getAnoSaida() < fim.getAno() || (loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() < fim.getMes()) ||
+					(loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() == fim.getMes() && loc.getDiaSaida() < fim.getMes())) {
+				return true;
+			}
+		}
+		
+		// Verifica se a data de entrada do veículo está no meio do período informado
+		if (loc.getAnoEntrada() > inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() > inicio.getMes()) ||
+				(loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() == inicio.getMes() && loc.getDiaEntrada() > inicio.getDia())) {
+			if (loc.getAnoEntrada() < fim.getAno() || (loc.getAnoEntrada() == fim.getAno() && loc.getMesEntrada() < fim.getMes()) ||
+					(loc.getAnoEntrada() == fim.getAno() && loc.getMesEntrada() == fim.getMes() && loc.getDiaEntrada() < fim.getMes())) {
+				return true;
+			}
+		}
+		return false;
 	}
+	
+	private boolean verificaDiasLocacaoFechada(Locacao loc, Data inicio, Data fim) {
+		// Verifica se a data de entrada do veículo está no meio do período informado
+		if (loc.getAnoEntrada() > inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() > inicio.getMes()) ||
+				(loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() == inicio.getMes() && loc.getDiaEntrada() > inicio.getDia())) {
+			if (loc.getAnoEntrada() < fim.getAno() || (loc.getAnoEntrada() == fim.getAno() && loc.getMesEntrada() < fim.getMes()) ||
+					(loc.getAnoEntrada() == fim.getAno() && loc.getMesEntrada() == fim.getMes() && loc.getDiaEntrada() < fim.getMes())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

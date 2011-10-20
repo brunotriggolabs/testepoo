@@ -44,9 +44,45 @@ public class VisaoVeiculo {
 		return Locarrao.escolhaMenu();
 	}
 	
+	public int atualizaVeiculo(Veiculo vec) throws IOException {
+		String placa = vec.getPlaca();
+		System.out.println("Digite a placa do veículo que terá seus dados atualizados");
+		placa = Console.readString();
+		PersistenciaVeiculo pers = new PersistenciaVeiculo();
+		Veiculo veiculo = pers.pesquisarVeiculo(placa);
+		System.out.println("Digite os novos dados do veículo:");
+		System.out.print("Cor: ");
+		veiculo.setCor(Console.readString());
+		System.out.print("Itens opcionais: ");
+		veiculo.setOpicionais(Console.readString());
+		System.out.print("Observações: ");
+		veiculo.setObservacoes(Console.readString());
+		pers.deletaVeiculo(placa);
+		pers.salvaVeiculo(veiculo);
+		return Locarrao.escolhaMenu();
+	}
+	
 	public static int pesquisaDispo() throws IOException{
 		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
-		arquivoVeiculo.pesquisarDisponivel().toString();
+		arquivoVeiculo.pesquisarDisponivel();
+		return Locarrao.escolhaMenu();
+	}
+	
+	public int maisProcurados() throws IOException {
+		Veiculo veiculo[];
+		PersistenciaVeiculo pers = new PersistenciaVeiculo();
+		int quantidade = pers.contaVeiculos();
+		veiculo = pers.montaVetorVeiculos(quantidade);
+		veiculo = veiculo.ordenaPorLocacoes(quantidade, veiculo);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return Locarrao.escolhaMenu();
 	}
 }

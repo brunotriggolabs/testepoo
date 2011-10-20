@@ -7,17 +7,17 @@ import modelo.Data;
 import modelo.Locacao;
 import modelo.TipoLocacao;
 import modelo.TipoVeiculo;
+import modelo.Veiculo;
 import persistencia.PersistenciaCliente;
 import persistencia.PersistenciaLocacao;
+import persistencia.PersistenciaVeiculo;
 
 public class VisaoLocacao {
-	
+
 	private boolean verificacaoMotorista () {
-		
-		
 		return false;
 	}
-	
+
 	private static boolean checaCpf(String cpf)throws IOException {
 		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
 		System.out.println("Verificando se já está cadastrado:");
@@ -32,22 +32,41 @@ public class VisaoLocacao {
 			return true;
 		}
 	}
-	
+
 	public int cadastraLocacao() throws IOException{
+		PersistenciaVeiculo pers = new PersistenciaVeiculo();
+		VisaoVeiculo visaoVeiculo = new VisaoVeiculo();
 		String lerCpf;
-		int menu;
 		System.out.println("Digite seu CPF:");
 		lerCpf = Console.readString();
-		if(!checaCpf(lerCpf)){
+
+		// Se o cliente não estiver cadastrado, então realiza seu cadastro
+		checaCpf(lerCpf);
+
+		// Realiza a locação
+		System.out.println("Qual a placa do veículo que deseja alugar?");
+		String placa = Console.readString();
+		boolean disponivel = pers.veiculoDisponivel(placa);
+		// Se o veículo estiver disponível, então realiza a locação
+		if (disponivel) {
+			Veiculo veiculo = new Veiculo("a", "marca", "modelo");
+			veiculo = pers.pesquisarVeiculo(placa);
+			// Marca o veiculo como alugado
+			veiculo.setDisponivel(0);
+			// Atualiza o cadastro do veículo
+			visaoVeiculo.atualizaVeiculo(veiculo);
+			// Finalmente, realiza a locação e a registra no arquivo
 			System.out.println("Digite a Km de Saida,Tipo da Locacao[porKm - 1 / Kmlivre - 2] e a previsão de dias da locacao.");
 			Locacao locacao = new Locacao(Console.readInteger(), Console.readInteger(), Console.readInteger());
 			locacao.setAlugado(true);
 			PersistenciaLocacao arquivoLocacao = new PersistenciaLocacao();
 			arquivoLocacao.salvar(locacao);
-			return menu = Locarrao.escolhaMenu();
-		}else return Locarrao.escolhaMenu();		
+		} else {
+			System.out.println("Este veículo já está alugado. Realize outra locação.");
+		}
+		return Locarrao.escolhaMenu();		
 	}
-	
+
 	public static int calculaDias (Locacao loc) {		//MÊS COM 30 DIAS
 		int dias = 0;
 		if (loc.getAnoSaida() == loc.getAnoEntrada()) {
@@ -73,7 +92,7 @@ public class VisaoLocacao {
 			}	
 			else dias = ((loc.getDiaEntrada() - loc.getAnoSaida())*365) - ((loc.getMesEntrada() - loc.getMesSaida())*30) - (loc.getDiaEntrada() - loc.getDiaSaida());	
 		}
-		else System.out.println("Dados inválidos!");
+		else { System.out.println("Dados inválidos!"); }
 		return dias;
 	}
 
@@ -91,18 +110,16 @@ public class VisaoLocacao {
 			p = (loc.getKmSaida() - loc.getKmEntrada()) + ( tipov.getTaxaBase() * calculaDias(loc) ) ;
 			loc.setPreco(p);
 			return loc.getPreco();
-		}else{
+		} else {
 			loc.setPreco(tipov.getTaxaBase() * calculaDias(loc) );
 			return loc.getPreco();
 		}
 	}
 
 	public static double locacoesEmAberto(Data dia) throws IOException {
-		//TODO pegar período desejado
 		double precoTotal = 0.0;
 		PersistenciaLocacao arquivo = new PersistenciaLocacao();
 		precoTotal = precoTotal + arquivo.pesquisaLocacoesEmAberto();
-
 		return precoTotal;
 	}
 
@@ -112,8 +129,8 @@ public class VisaoLocacao {
 		resultado = resultado + arquivo.pesquisaPrecoFinalizado();
 		return resultado;
 	}
-	
-	public static  Data leDia(){
+
+	public static Data leDia(){
 		Data data = new Data();
 		System.out.println("Informe dia,mes e ano para pesquisar:");
 		data.setDia(Console.readInteger());
