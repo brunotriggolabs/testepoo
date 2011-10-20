@@ -101,18 +101,19 @@ public class Locarrao {
 					VisaoLocacao.locacoesFinalizadas();
 					break;
 				case 3:
-
+					VisaoVeiculo.pesquisaDispo();
 					break;
 				case 4:
-
+					//TODO VEICULOS MAIS PROCURADOS
 					break;
 				case 5:
-
+					//TODO VEICULOS MAIS RENTAVEIS
 					break;
 				case 6:
-
+					VisaoCliente.pesquisaCliente();
 					break;
 				case 7:
+					//TODO PESQUISAR CATEGORIA DE VEÍCULO
 					break;
 				default:
 					System.out.println("Opção inválida");
@@ -121,10 +122,12 @@ public class Locarrao {
 			case 8:
 				PersistenciaTipoVeiculo arquivoTipo = new PersistenciaTipoVeiculo();
 				int tipo;
+				String tipoVei;
 				System.out.println("Digite o tipo da locação: \n    1 - PorKm \n    2 - KmLivre");
 				tipo = Console.readInteger();
-				VisaoLocacao.finalizaLocacao(tipov,arquivoTipo.pesquisarTipoLocacao(tipo)); //FALTA CRIAR MÉTODO PRA 
-				//PESQUISAR O TIPO VEÍCULO
+				System.out.println("Digite o tipo do veículo que deseja pesquisar:");
+				tipoVei = Console.readString();
+				VisaoLocacao.finalizaLocacao(arquivoTipo.pesquisarTipoVeiculo(tipoVei),arquivoTipo.pesquisarTipoLocacao(tipo));
 				break;
 			case 9:
 				System.out.println("********--------------LOCARRÃO RENT-A-CAR---------------********");

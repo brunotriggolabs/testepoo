@@ -39,4 +39,20 @@ public class VisaoCliente {
 		pers.salvaCliente(cli);
 		return Locarrao.escolhaMenu();
 	}
+	
+	public static int pesquisaCliente() throws IOException {
+		String buscaCpf;
+		Cliente cliente = new Cliente("", "");
+		System.out.println("Digite o CPF do cliente à ser buscado:");
+		buscaCpf = Console.readString();
+		PersistenciaCliente arquivoCliente = new PersistenciaCliente();
+		cliente = arquivoCliente.pesquisarCliente(buscaCpf);
+		if (cliente != null){
+			System.out.println("Cliente localizado!");
+			return Locarrao.escolhaMenu();
+		}else {
+			System.out.println("Cliente não encontrado!");
+			return Locarrao.escolhaMenu();
+		}
+	}
 }
