@@ -1,6 +1,8 @@
 package visao;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import modelo.Cliente;
 import modelo.Console;
@@ -69,20 +71,14 @@ public class VisaoVeiculo {
 	}
 	
 	public int maisProcurados() throws IOException {
+		ArrayList<Integer> = new ArrayList<Integer>;
+		
 		Veiculo veiculo[];
 		PersistenciaVeiculo pers = new PersistenciaVeiculo();
 		int quantidade = pers.contaVeiculos();
 		veiculo = pers.montaVetorVeiculos(quantidade);
 		veiculo = veiculo.ordenaPorLocacoes(quantidade, veiculo);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		return Locarrao.escolhaMenu();
 	}
 	
