@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import modelo.Motorista;
 import modelo.TipoLocacao;
 import modelo.TipoVeiculo;
 
@@ -120,7 +119,7 @@ public class PersistenciaTipoVeiculo {
 				return null;
 			}
 			s = conateudoLinha.split("\\;");
-			tipoLoc = converteOriginal(s);
+			tipoLoc = converteOriginalLoc(s);
 			if (tipoLoc.getTipo().equals(tipo)){
 				System.out.println("Encontrado!");
 				br.close();
@@ -135,6 +134,14 @@ public class PersistenciaTipoVeiculo {
 		double s1 = Double.parseDouble(s[1]); // PRECOKM
 		double s2 = Double.parseDouble(s[2]); // TAXABASE
 		TipoVeiculo tipo = new TipoVeiculo(s0, s1, s2);
+		return tipo;
+	}
+	
+	private TipoLocacao converteOriginalLoc (String s[]) {		
+		String s0 = s[0]; // TIPO
+		double s1 = Double.parseDouble(s[1]); // PRECOKM
+		double s2 = Double.parseDouble(s[2]); // TAXABASE
+		TipoLocacao tipo = new TipoLocacao(s0, s1, s2);
 		return tipo;
 	}
 }

@@ -189,14 +189,15 @@ public class PersistenciaLocacao  {
 		Locacao loc = new Locacao(1, 1);
 		double resultado = 1;
 		System.out.println("Deseja informar o periodo? S/N");
-		char resposta = Console.readChar();
-		while (resposta != 's' || resposta != 'S' || resposta != 'n' || resposta != 'N') {
+		String resposta = Console.readString();
+		while (!resposta.contentEquals("s") || !resposta.contentEquals("S") || !resposta.contentEquals("n")
+				|| !resposta.contentEquals("N")) {
 			System.out.println("Digite S para sim ou N para não");
-			resposta = Console.readChar();
+			resposta = Console.readString();
 		}
 		Data dataInicio = new Data();
 		Data dataFim = new Data();
-		if (resposta == 'S' || resposta == 's') {
+		if (resposta.contentEquals("s") || resposta.contentEquals("S")) {
 			System.out.println("Digite o período que deseja testar");
 			System.out.println("Início do período:");
 			System.out.println("Digite o dia: ");
@@ -226,7 +227,7 @@ public class PersistenciaLocacao  {
 			s = conteudoLinha.split("\\;");
 			loc = converteOriginal(s);
 			// Se o usuário informou o periodo, então pesquisa entre as locações daquele período
-			if (resposta == 'S' || resposta == 's') {
+			if (resposta.contentEquals("s") || resposta.contentEquals("s")) {
 				if (verificaDiasLocacaoFechada(loc, dataInicio, dataFim)){
 					resultado = resultado + loc.getPreco();
 				}
@@ -249,14 +250,14 @@ public class PersistenciaLocacao  {
 		Locacao loc = new Locacao(1, 1);
 		double resultado = 1;
 		System.out.println("Deseja informar o periodo? S/N");
-		char resposta = Console.readChar();
-		while (resposta != 's' || resposta != 'S' || resposta != 'n' || resposta != 'N') {
-			System.out.println("Digite S para sim ou N para não");
-			resposta = Console.readChar();
-		}
+		String resposta = Console.readString();
+//		while (resposta != "s" || resposta != "S" || resposta != "n" || resposta != "N") {
+//			System.out.println("Digite S para sim ou N para não");
+//			resposta = Console.readString();
+//		}
 		Data dataInicio = new Data();
 		Data dataFim = new Data();
-		if (resposta == 'S' || resposta == 's') {
+		if (resposta.contentEquals("s") || resposta.contentEquals("s")) {
 			System.out.println("Digite o período que deseja testar");
 			System.out.println("Início do período:");
 			System.out.println("Digite o dia: ");
@@ -286,7 +287,7 @@ public class PersistenciaLocacao  {
 			s = conteudoLinha.split("\\;");
 			loc = converteOriginal(s);
 			// Se o usuário informou o periodo, então pesquisa entre as locações daquele período
-			if (resposta == 'S' || resposta == 's') {
+			if (resposta.contentEquals("s") || resposta.contentEquals("S")) {
 				if (verificaDiasLocacaoAberta(loc, dataInicio, dataFim)){
 					resultado = resultado + loc.getPreco();
 				}
@@ -319,7 +320,7 @@ public class PersistenciaLocacao  {
 			}
 			s = conteudoLinha.split("\\;");
 			loc = converteOriginal(s);
-			if (placa == loc.getPlaca()) {
+			if (placa.contentEquals(loc.getPlaca())) {
 				preco = preco + loc.getPreco();
 			}
 		}
