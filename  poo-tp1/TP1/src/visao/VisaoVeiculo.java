@@ -13,7 +13,13 @@ public class VisaoVeiculo {
 		Veiculo veiculo = new Veiculo(Console.readString(), Console.readString(), Console.readString());
 		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
 		arquivoVeiculo.salvaVeiculo(veiculo);
-		return Locarrao.escolhaMenu();
+		return 1;
+	}
+	
+	public int cadastraVeiculo(Veiculo veiculo) throws IOException{
+		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
+		arquivoVeiculo.salvaVeiculo(veiculo);
+		return 1;
 	}
 	
 	public int removeVeiculo() throws IOException {
@@ -22,7 +28,7 @@ public class VisaoVeiculo {
 		placa = Console.readString();
 		PersistenciaVeiculo pers = new PersistenciaVeiculo();
 		pers.deletaVeiculo(placa);
-		return Locarrao.escolhaMenu();
+		return 1;
 	}
 	
 	public int atualizaVeiculo() throws IOException {
@@ -34,6 +40,16 @@ public class VisaoVeiculo {
 		if (veiculo != null) {
 			pers.deletaVeiculo(placa);
 			cadastraVeiculo(veiculo.getPlaca(), veiculo.getMarca(), veiculo.getModelo());
+		}
+		return 1;
+	}
+	
+	public int atualizaDisponibilidade(Veiculo veiculo) throws IOException {
+		String placa = veiculo.getPlaca();
+		PersistenciaVeiculo pers = new PersistenciaVeiculo();
+		if (veiculo != null) {
+			pers.deletaVeiculo(placa);
+			cadastraVeiculo(veiculo);
 		}
 		return 1;
 	}
@@ -83,7 +99,7 @@ public class VisaoVeiculo {
 		int quantidade = pers.contaVeiculos();
 		veiculo = pers.montaVetorVeiculos(quantidade);
 		System.out.println("Veículos mais procurados:" );
-		for (int i = 0; (i < veiculo.length) || (i < 5); i++) {
+		for (int i = 0; i < quantidade && i < 5; i++) {
 			System.out.println(i + "- " + veiculo[i].getPlaca());
 		}
 		return 1;
@@ -92,6 +108,7 @@ public class VisaoVeiculo {
 	public static int pesquisaCategoriaVeiculo () throws IOException {
 		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
 		String categoria = "";
+		System.out.print("Digite a categoria do veículo que deseja buscar: ");
 		categoria = Console.readString();
 		if(arquivoVeiculo.pesquisaDisponivel(categoria)){
 			System.out.println("Veículo da categoria disponível.");
@@ -108,7 +125,7 @@ public class VisaoVeiculo {
 		Vetor vetor[] = new Vetor[quantidade];
 		vetor = arquivoVeiculo.somaPrecos(quantidade);
 		System.out.println("Veículos mais rentáveis:" );
-		for (int i = 0; i < vetor.length || i < 5; i++) {
+		for (int i = 0; i < quantidade && i < 5; i++) {
 			System.out.println(i + "- " + vetor[i].getPlaca());
 		} 
 		return 1;

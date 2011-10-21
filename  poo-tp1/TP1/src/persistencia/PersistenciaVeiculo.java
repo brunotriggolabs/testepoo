@@ -143,7 +143,7 @@ public class PersistenciaVeiculo {
 			s = conateudoLinha.split("\\;");
 			vec = converteOriginal(s);
 			if (vec.getDisponivel() == 1) {
-				System.out.print(" " + vec.getPlaca());
+				System.out.print(" - " + vec.getPlaca());
 			}
 		}
 		System.out.println();
@@ -220,15 +220,15 @@ public class PersistenciaVeiculo {
 		return false;
 	}
 	
-	public boolean veiculoDisponivel(String placa) throws FileNotFoundException {
+	public int veiculoDisponivel(String placa) throws FileNotFoundException {
+		int i;
 		Veiculo vec = new Veiculo("placa", "placa", "placa");
 		vec = pesquisarVeiculo(placa);
-		int i = vec.getDisponivel();
-		if (i == 1) {
-			return true;
-		} else {
-			return false;
+		if (vec == null) {
+			return 2;
 		}
+		i = vec.getDisponivel();
+		return i;
 	}
 	
 	public boolean pesquisaDisponivel (String categoria)throws IOException {
