@@ -251,10 +251,10 @@ public class PersistenciaLocacao  {
 		double resultado = 1;
 		System.out.println("Deseja informar o periodo? S/N");
 		String resposta = Console.readString();
-//		while (resposta != "s" || resposta != "S" || resposta != "n" || resposta != "N") {
-//			System.out.println("Digite S para sim ou N para não");
-//			resposta = Console.readString();
-//		}
+		while (resposta != "s" || resposta != "S" || resposta != "n" || resposta != "N") {
+			System.out.println("Digite S para sim ou N para não");
+			resposta = Console.readString();
+		}
 		Data dataInicio = new Data();
 		Data dataFim = new Data();
 		if (resposta.contentEquals("s") || resposta.contentEquals("s")) {

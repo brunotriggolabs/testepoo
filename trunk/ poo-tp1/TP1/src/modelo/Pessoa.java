@@ -1,10 +1,10 @@
 package modelo;
 
 public abstract class Pessoa {
-	private String nome;
-	private String cpf;
-	private String endereco;
-	private String telefone;
+	protected String nome;
+	protected String cpf;
+	protected String endereco;
+	protected String telefone;
 	
 	public Pessoa(String nome, String cpf) {
 		this.cpf = cpf;

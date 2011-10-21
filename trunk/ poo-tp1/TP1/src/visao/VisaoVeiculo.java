@@ -31,6 +31,16 @@ public class VisaoVeiculo {
 		placa = Console.readString();
 		PersistenciaVeiculo pers = new PersistenciaVeiculo();
 		Veiculo veiculo = pers.pesquisarVeiculo(placa);
+		if (veiculo != null) {
+			pers.deletaVeiculo(placa);
+			cadastraVeiculo(veiculo.getPlaca(), veiculo.getMarca(), veiculo.getModelo());
+		}
+		return 1;
+	}
+	
+	private void cadastraVeiculo(String placa, String marca, String modelo) throws IOException{
+		Veiculo veiculo = new Veiculo(placa, marca, modelo);
+		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
 		System.out.println("Digite os novos dados do veículo:");
 		System.out.print("Cor: ");
 		veiculo.setCor(Console.readString());
@@ -38,9 +48,9 @@ public class VisaoVeiculo {
 		veiculo.setOpicionais(Console.readString());
 		System.out.print("Observações: ");
 		veiculo.setObservacoes(Console.readString());
-		pers.deletaVeiculo(placa);
-		pers.salvaVeiculo(veiculo);
-		return Locarrao.escolhaMenu();
+		System.out.print("Tipo do veículo: ");
+		veiculo.setTipo(Console.readString());
+		arquivoVeiculo.salvaVeiculo(veiculo);
 	}
 	
 	public int atualizaVeiculo(Veiculo vec) throws IOException {
@@ -58,17 +68,16 @@ public class VisaoVeiculo {
 		veiculo.setObservacoes(Console.readString());
 		pers.deletaVeiculo(placa);
 		pers.salvaVeiculo(veiculo);
-		return Locarrao.escolhaMenu();
+		return 1;
 	}
 	
 	public static int pesquisaDispo() throws IOException{
 		PersistenciaVeiculo arquivoVeiculo = new PersistenciaVeiculo();
 		arquivoVeiculo.pesquisarDisponivel();
-		return Locarrao.escolhaMenu();
+		return 1;
 	}
 	
 	public static int maisProcurados() throws IOException {
-		
 		Veiculo veiculo[];
 		PersistenciaVeiculo pers = new PersistenciaVeiculo();
 		int quantidade = pers.contaVeiculos();
@@ -77,7 +86,7 @@ public class VisaoVeiculo {
 		for (int i = 0; (i < veiculo.length) || (i < 5); i++) {
 			System.out.println(i + "- " + veiculo[i].getPlaca());
 		}
-		return Locarrao.escolhaMenu();
+		return 1;
 	}
 	
 	public static int pesquisaCategoriaVeiculo () throws IOException {
@@ -86,10 +95,10 @@ public class VisaoVeiculo {
 		categoria = Console.readString();
 		if(arquivoVeiculo.pesquisaDisponivel(categoria)){
 			System.out.println("Veículo da categoria disponível.");
-			return Locarrao.escolhaMenu();
+			return 1;
 		} else {
 			System.out.println("Veiculo da cetegoria não disponível.");
-			return Locarrao.escolhaMenu();
+			return 1;
 		}
 	}
 
@@ -102,6 +111,6 @@ public class VisaoVeiculo {
 		for (int i = 0; i < vetor.length || i < 5; i++) {
 			System.out.println(i + "- " + vetor[i].getPlaca());
 		} 
-		return Locarrao.escolhaMenu();
+		return 1;
 	}
 }

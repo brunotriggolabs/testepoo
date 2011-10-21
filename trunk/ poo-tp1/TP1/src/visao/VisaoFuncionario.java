@@ -4,19 +4,15 @@ import java.io.IOException;
 
 import modelo.Console;
 import modelo.Funcionario;
-import modelo.Motorista;
 import persistencia.PersistenciaFuncionario;
-import persistencia.PersistenciaMotorista;
-import persistencia.PersistenciaVeiculo;
 
 public class VisaoFuncionario {
 	public int cadastraFuncionario() throws IOException{
-		int menu;
 		System.out.println("Digite: nome, cpf, cargo");
 		Funcionario funcionario = new Funcionario(Console.readString(), Console.readString(), Console.readString());
 		PersistenciaFuncionario arquivoFuncionario = new PersistenciaFuncionario();
 		arquivoFuncionario.salvaFuncionario(funcionario);
-		return menu = Locarrao.escolhaMenu();
+		return 1;
 	}
 	
 	public int removeFuncionario() throws IOException {
@@ -25,7 +21,7 @@ public class VisaoFuncionario {
 		cpf = Console.readString();
 		PersistenciaFuncionario pers = new PersistenciaFuncionario();
 		pers.deletaFuncionario(cpf);
-		return Locarrao.escolhaMenu();
+		return 1;
 	}
 	
 	public int atualizaFuncionario() throws IOException {
@@ -34,13 +30,21 @@ public class VisaoFuncionario {
 		cpf = Console.readString();
 		PersistenciaFuncionario pers = new PersistenciaFuncionario();
 		Funcionario funcionario = pers.pesquisarFuncionario(cpf);
-		System.out.println("Digite os novos dados do cliente:");
+		if (funcionario != null) {
+			pers.deletaFuncionario(cpf);
+			cadastraFuncionario(funcionario.getNome(), funcionario.getCpf(), funcionario.getCargo());
+		}
+		return 1;
+	}
+	
+	private void cadastraFuncionario(String nome, String cpf, String cargo) throws IOException{
+		Funcionario funcionario = new Funcionario(nome, cpf, cargo);
+		PersistenciaFuncionario arquivoFuncionario = new PersistenciaFuncionario();
+		System.out.println("Digite os novos dados do funcionário:");
 		System.out.print("Endereço: ");
 		funcionario.setEndereco(Console.readString());
 		System.out.print("Telefone: ");
 		funcionario.setTelefone(Console.readString());
-		pers.deletaFuncionario(cpf);
-		pers.salvaFuncionario(funcionario);
-		return Locarrao.escolhaMenu();
+		arquivoFuncionario.salvaFuncionario(funcionario);
 	}
 }
