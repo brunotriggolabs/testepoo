@@ -42,15 +42,15 @@ public class VisaoLocacao {
 		// Realiza a locação
 		System.out.println("Qual a placa do veículo que deseja alugar?");
 		String placa = Console.readString();
-		boolean disponivel = pers.veiculoDisponivel(placa);
+		int disponivel = pers.veiculoDisponivel(placa);
 		// Se o veículo estiver disponível, então realiza a locação
-		if (disponivel) {
+		if (disponivel == 1) {
 			Veiculo veiculo = new Veiculo("a", "marca", "modelo");
 			veiculo = pers.pesquisarVeiculo(placa);
 			// Marca o veiculo como alugado
 			veiculo.setDisponivel(0);
 			// Atualiza o cadastro do veículo
-			visaoVeiculo.atualizaVeiculo(veiculo);
+			visaoVeiculo.atualizaDisponibilidade(veiculo);
 			// Finalmente, realiza a locação e a registra no arquivo
 			System.out.println("Digite a Km de Saida,Tipo da Locacao[porKm - 1 / Kmlivre - 2] e a previsão de dias da locacao.");
 			Locacao locacao = new Locacao(Console.readInteger(), Console.readInteger(), Console.readInteger());
@@ -61,7 +61,7 @@ public class VisaoLocacao {
 		} else {
 			System.out.println("Este veículo já está alugado. Realize outra locação.");
 		}
-		return Locarrao.escolhaMenu();		
+		return 1;		
 	}
 
 	public static int calculaDias (Locacao loc) {		//MÊS COM 30 DIAS

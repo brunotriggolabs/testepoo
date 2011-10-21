@@ -188,32 +188,26 @@ public class PersistenciaLocacao  {
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
 		double resultado = 1;
-		System.out.println("Deseja informar o periodo? S/N");
-		String resposta = Console.readString();
-		while (!resposta.contentEquals("s") || !resposta.contentEquals("S") || !resposta.contentEquals("n")
-				|| !resposta.contentEquals("N")) {
-			System.out.println("Digite S para sim ou N para não");
-			resposta = Console.readString();
-		}
+
 		Data dataInicio = new Data();
 		Data dataFim = new Data();
-		if (resposta.contentEquals("s") || resposta.contentEquals("S")) {
-			System.out.println("Digite o período que deseja testar");
-			System.out.println("Início do período:");
-			System.out.println("Digite o dia: ");
-			dataInicio.setDia(Console.readInteger());
-			System.out.println("Digite o mês: ");
-			dataInicio.setMes(Console.readInteger());
-			System.out.println("Digite o ano: ");
-			dataInicio.setAno(Console.readInteger());
-			System.out.println("Fim do período:");
-			System.out.println("Digite o dia: ");
-			dataFim.setDia(Console.readInteger());
-			System.out.println("Digite o mês: ");
-			dataFim.setMes(Console.readInteger());
-			System.out.println("Digite o ano: ");
-			dataFim.setAno(Console.readInteger());
-		}
+
+		System.out.println("Digite o período que deseja testar");
+		System.out.println("Início do período:");
+		System.out.println("Digite o dia: ");
+		dataInicio.setDia(Console.readInteger());
+		System.out.println("Digite o mês: ");
+		dataInicio.setMes(Console.readInteger());
+		System.out.println("Digite o ano: ");
+		dataInicio.setAno(Console.readInteger());
+		System.out.println("Fim do período:");
+		System.out.println("Digite o dia: ");
+		dataFim.setDia(Console.readInteger());
+		System.out.println("Digite o mês: ");
+		dataFim.setMes(Console.readInteger());
+		System.out.println("Digite o ano: ");
+		dataFim.setAno(Console.readInteger());
+
 		while(true){
 			try {
 				conteudoLinha = br.readLine();
@@ -226,16 +220,9 @@ public class PersistenciaLocacao  {
 			}
 			s = conteudoLinha.split("\\;");
 			loc = converteOriginal(s);
-			// Se o usuário informou o periodo, então pesquisa entre as locações daquele período
-			if (resposta.contentEquals("s") || resposta.contentEquals("s")) {
-				if (verificaDiasLocacaoFechada(loc, dataInicio, dataFim)){
-					resultado = resultado + loc.getPreco();
-				}
-			} else {
-				// Senão, pesquisa todas as locações em aberto
-				if (loc.isFinalizado()){
-					resultado = resultado + loc.getPreco();
-				}
+
+			if (verificaDiasLocacaoFechada(loc, dataInicio, dataFim)){
+				resultado = resultado + loc.getPreco();
 			}
 		}
 		return resultado;
@@ -248,32 +235,26 @@ public class PersistenciaLocacao  {
 		FileReader fr = new FileReader(arquivo);
 		BufferedReader br = new BufferedReader(fr);
 		Locacao loc = new Locacao(1, 1);
-		double resultado = 1;
-		System.out.println("Deseja informar o periodo? S/N");
-		String resposta = Console.readString();
-		while (resposta != "s" || resposta != "S" || resposta != "n" || resposta != "N") {
-			System.out.println("Digite S para sim ou N para não");
-			resposta = Console.readString();
-		}
+		double resultado = 0;
 		Data dataInicio = new Data();
 		Data dataFim = new Data();
-		if (resposta.contentEquals("s") || resposta.contentEquals("s")) {
-			System.out.println("Digite o período que deseja testar");
-			System.out.println("Início do período:");
-			System.out.println("Digite o dia: ");
-			dataInicio.setDia(Console.readInteger());
-			System.out.println("Digite o mês: ");
-			dataInicio.setMes(Console.readInteger());
-			System.out.println("Digite o ano: ");
-			dataInicio.setAno(Console.readInteger());
-			System.out.println("Fim do período:");
-			System.out.println("Digite o dia: ");
-			dataFim.setDia(Console.readInteger());
-			System.out.println("Digite o mês: ");
-			dataFim.setMes(Console.readInteger());
-			System.out.println("Digite o ano: ");
-			dataFim.setAno(Console.readInteger());
-		}
+
+		System.out.println("Digite o período que deseja testar");
+		System.out.println("Início do período:");
+		System.out.println("Digite o dia: ");
+		dataInicio.setDia(Console.readInteger());
+		System.out.println("Digite o mês: ");
+		dataInicio.setMes(Console.readInteger());
+		System.out.println("Digite o ano: ");
+		dataInicio.setAno(Console.readInteger());
+		System.out.println("Fim do período:");
+		System.out.println("Digite o dia: ");
+		dataFim.setDia(Console.readInteger());
+		System.out.println("Digite o mês: ");
+		dataFim.setMes(Console.readInteger());
+		System.out.println("Digite o ano: ");
+		dataFim.setAno(Console.readInteger());
+
 		while(true){
 			try {
 				conteudoLinha = br.readLine();
@@ -286,21 +267,13 @@ public class PersistenciaLocacao  {
 			}
 			s = conteudoLinha.split("\\;");
 			loc = converteOriginal(s);
-			// Se o usuário informou o periodo, então pesquisa entre as locações daquele período
-			if (resposta.contentEquals("s") || resposta.contentEquals("S")) {
-				if (verificaDiasLocacaoAberta(loc, dataInicio, dataFim)){
-					resultado = resultado + loc.getPreco();
-				}
-			} else {
-				// Senão, pesquisa todas as locações em aberto
-				if (loc.isAlugado()){
-					resultado = resultado + loc.getPreco();
-				}
+			if (verificaDiasLocacaoAberta(loc, dataInicio, dataFim)){
+				resultado = resultado + loc.getPreco();
 			}
 		}
 		return resultado;
 	}
-	
+
 	public double retornaPreco (String placa) throws IOException {
 		double preco = 0;
 		String conteudoLinha = null;
@@ -336,7 +309,7 @@ public class PersistenciaLocacao  {
 				return true;
 			}
 		}
-		
+
 		// Verifica se a data de saida do veículo está no meio do período informado
 		if (loc.getAnoSaida() > inicio.getAno() || (loc.getAnoSaida() == inicio.getAno() && loc.getMesSaida() > inicio.getMes()) ||
 				(loc.getAnoSaida() == inicio.getAno() && loc.getMesSaida() == inicio.getMes() && loc.getDiaSaida() > inicio.getDia())) {
@@ -345,7 +318,7 @@ public class PersistenciaLocacao  {
 				return true;
 			}
 		}
-		
+
 		// Verifica se a data de entrada do veículo está no meio do período informado
 		if (loc.getAnoEntrada() > inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() > inicio.getMes()) ||
 				(loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() == inicio.getMes() && loc.getDiaEntrada() > inicio.getDia())) {
@@ -356,7 +329,7 @@ public class PersistenciaLocacao  {
 		}
 		return false;
 	}
-	
+
 	private boolean verificaDiasLocacaoFechada(Locacao loc, Data inicio, Data fim) {
 		// Verifica se a data de entrada do veículo está no meio do período informado
 		if (loc.getAnoEntrada() > inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() > inicio.getMes()) ||

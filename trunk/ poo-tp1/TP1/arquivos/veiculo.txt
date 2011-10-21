@@ -1,1 +1,2 @@
-gkr 2222;gol;bolinha;vermelho;null;nenhum;1;0;roubado;0
+gkr 2332;gol;bolinha;vermelho;null;nenhum;1;0;roubado;0
+gkr 2222;gol;bolinha;vermelho;null;nenhum;0;0;roubado;0
