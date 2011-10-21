@@ -249,7 +249,7 @@ public class PersistenciaVeiculo {
 			}
 			s = conateudoLinha.split("\\;");
 			vec = converteOriginal(s);
-			if ((vec.getDisponivel()==1) && (vec.getTipo() == categoria)) {
+			if ((vec.getDisponivel()==1) && (vec.getTipo().contains(categoria))) {
 				return true;
 			}
 		}
