@@ -33,8 +33,9 @@ public class Locarrao {
 		Locacao.numLocacoes = Integer.parseInt(br.readLine());
 		System.out.println("Numero de locacoes = " + Locacao.numLocacoes + "\n");
 		int menu = 1;
+		int opcaoMenu;
 		while (menu==1){
-			int opcaoMenu = 0;
+			opcaoMenu = 0;
 			System.out.println("********----------LOCARRÃO RENT-A-CAR----------********");
 			System.out.println("*******************************************************");
 			System.out.println("********----------Opções para cadastro---------*********");
@@ -51,8 +52,6 @@ public class Locarrao {
 			System.out.println("0-Sair");
 			System.out.println("********************************************************");
 			opcaoMenu = Console.readInteger();
-
-
 			switch (opcaoMenu) {
 			case 1:
 				//Cadastra cliente
@@ -92,34 +91,43 @@ public class Locarrao {
 				System.out.println("*****************************************************************");
 				int opMenu2 = 0;
 				opMenu2 = Console.readInteger();
-				while(opMenu2 == 1) {
-					switch (opMenu2) {
-					case 1:
-						System.out.println("Preço total das locações ainda em aberto: " + VisaoLocacao.locacoesEmAberto(VisaoLocacao.leDia())); // OK
-						break;
-					case 2:
-						System.out.println("Preço total das locações já finalizadas: " + VisaoLocacao.locacoesFinalizadas()); // OK
-						break;
-					case 3:
-						opMenu2 = VisaoVeiculo.pesquisaDispo(); // OK
-						break;
-					case 4:
-						VisaoVeiculo.maisProcurados();
-						break;
-					case 5:
-						VisaoVeiculo.maisRentaveis();
-						break;
-					case 6:
-						opMenu2 = VisaoCliente.pesquisaCliente();
-						break;
-					case 7:
-						opMenu2 = VisaoVeiculo.pesquisaCategoriaVeiculo();
-						break;
-					default:
-						System.out.println("Opção inválida");
-						break;
-					}
+				switch (opMenu2) {
+				case 1:
+					System.out.println("Preço total das locações ainda em aberto: " + VisaoLocacao.locacoesEmAberto()); // OK
+					opMenu2 = 0;
+					break;
+				case 2:
+					System.out.println("Preço total das locações já finalizadas: " + VisaoLocacao.locacoesFinalizadas()); // OK
+					opMenu2 = 0;
+					break;
+				case 3:
+					opcaoMenu = VisaoVeiculo.pesquisaDispo(); // OK
+					opMenu2 = 0;
+					break;
+				case 4:
+					VisaoVeiculo.maisProcurados();
+					opMenu2 = 0;
+					break;
+				case 5:
+					VisaoVeiculo.maisRentaveis();
+					opMenu2 = 0;
+					break;
+				case 6:
+					VisaoCliente.pesquisaCliente();
+					opMenu2 = 0;
+					break;
+				case 7:
+					VisaoVeiculo.pesquisaCategoriaVeiculo();
+					opMenu2 = 0;
+					break;
+				case 0:
+					break;
+				default:
+					System.out.println("Opção inválida");
+					opMenu2 = 0;
+					break;
 				}
+				break;
 			case 8:
 				PersistenciaTipoVeiculo arquivoTipo = new PersistenciaTipoVeiculo();
 				int tipo;
@@ -185,8 +193,10 @@ public class Locarrao {
 					System.out.println("Opção inválida.");
 					break;
 				}
-				
-
+				break;
+			case 0:
+				menu = 0;
+				break;
 			default:
 				System.out.println("Deseja Sair?");
 				menu = escolhaMenu();
@@ -194,6 +204,4 @@ public class Locarrao {
 			}
 		}
 	}
-
-	
 }

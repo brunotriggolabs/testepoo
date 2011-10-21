@@ -113,18 +113,16 @@ public class VisaoLocacao {
 		}
 	}
 
-	public static double locacoesEmAberto(Data dia) throws IOException {
-		double precoTotal = 0.0;
+	public static double locacoesEmAberto() throws IOException {
+		double precoTotal;
 		PersistenciaLocacao arquivo = new PersistenciaLocacao();
-		precoTotal = precoTotal + arquivo.pesquisaLocacoesEmAberto();
+		precoTotal = arquivo.pesquisaLocacoesEmAberto();
 		return precoTotal;
 	}
 
 	public static double locacoesFinalizadas() throws IOException{
-		double resultado = 0;
 		PersistenciaLocacao arquivo = new PersistenciaLocacao();
-		resultado = resultado + arquivo.pesquisaPrecoFinalizado();
-		return resultado;
+		return arquivo.pesquisaPrecoFinalizado();
 	}
 
 	public static Data leDia(){

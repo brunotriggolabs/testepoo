@@ -18,6 +18,27 @@ public class Cliente extends Pessoa {
 	public void addLocacao(int locacao) {
 		this.locacao.add(locacao);
 	}
-	//TODO adicionar métodos do cliente
+
+	public void imprime() {
+		System.out.println("Nome: " + this.nome);
+		System.out.println("CPF: " + this.cpf);
+		if (!this.telefone.contentEquals("null")) {
+			System.out.println("Telefone: " + this.telefone);
+		}
+		if (!this.endereco.contentEquals("null")) {
+			System.out.println("Endereço: " + this.endereco);
+		}
+		// Se a lista de clientes está vazia, nao imprime nada
+		if (this.locacao.isEmpty()) {
+			return;
+		} else {
+			// Caso contrário, imprime o ID de todas as locações realizadas
+			System.out.println("ID das locações realizadas: ");
+			for (int i = 0; i < this.locacao.size(); i++) {
+				System.out.println(this.locacao.get(i));
+			}
+		}
+		return;
+	}
 	
 }
