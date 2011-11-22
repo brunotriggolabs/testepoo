@@ -132,6 +132,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoLocacoesFinalizadas.setText("Locacões Finalizadas");
 
         botaoListagemVeiculosDisponiveis.setText("Veículos Disponíveis");
+        botaoListagemVeiculosDisponiveis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoListagemVeiculosDisponiveisActionPerformed(evt);
+            }
+        });
 
         botaoListagemVeiculoRentavel.setText("Veículos mais rentáveis");
 
@@ -219,7 +224,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,6 +260,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         // TODO add your handling code here:
         new JanelaVerificaLocacoesEmAberto().setVisible(true);
     }//GEN-LAST:event_botaoLocacoesEmAbertoActionPerformed
+
+    private void botaoListagemVeiculosDisponiveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListagemVeiculosDisponiveisActionPerformed
+        // TODO add your handling code here:
+        new JanelaExibeVeiculoDisponivel().setVisible(true);
+    }//GEN-LAST:event_botaoListagemVeiculosDisponiveisActionPerformed
 
     /**
      * @param args the command line arguments
