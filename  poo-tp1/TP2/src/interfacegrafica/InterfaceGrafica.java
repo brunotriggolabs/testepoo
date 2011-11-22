@@ -123,6 +123,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Listagens"));
 
         botaoLocacoesEmAberto.setText("Locacões em aberto");
+        botaoLocacoesEmAberto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoLocacoesEmAbertoActionPerformed(evt);
+            }
+        });
 
         botaoLocacoesFinalizadas.setText("Locacões Finalizadas");
 
@@ -214,7 +219,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,7 +248,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         new JanelaVerificacaoCpf().setVisible(true);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void botaoLocacoesEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLocacoesEmAbertoActionPerformed
+        // TODO add your handling code here:
+        new JanelaVerificaLocacaoEmAberto().setVisible(true);
+    }//GEN-LAST:event_botaoLocacoesEmAbertoActionPerformed
 
     /**
      * @param args the command line arguments
