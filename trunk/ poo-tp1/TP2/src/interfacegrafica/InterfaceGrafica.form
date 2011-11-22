@@ -45,7 +45,7 @@
               <Component id="jPanel2" min="-2" pref="146" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="86" max="32767" attributes="0"/>
+              <EmptySpace pref="82" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -194,6 +194,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Locac&#xf5;es em aberto"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLocacoesEmAbertoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botaoLocacoesFinalizadas">
           <Properties>
