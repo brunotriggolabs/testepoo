@@ -105,7 +105,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,6 +139,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
 
         botaoListagemVeiculoRentavel.setText("Veículos mais rentáveis");
+        botaoListagemVeiculoRentavel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoListagemVeiculoRentavelActionPerformed(evt);
+            }
+        });
 
         listagemVeiculoProcurado.setText("Veículos mais procurados");
 
@@ -199,7 +204,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoPesquisaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                 .addComponent(botaoPesquisaCategoriaVeiculo)
                 .addContainerGap())
         );
@@ -234,7 +239,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,6 +292,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         // TODO add your handling code here:
         new JanelaExibeVeiculoDisponivel().setVisible(true);
     }//GEN-LAST:event_botaoListagemVeiculosDisponiveisActionPerformed
+
+    private void botaoListagemVeiculoRentavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListagemVeiculoRentavelActionPerformed
+        // TODO add your handling code here:
+        new JanelaExibeVeiculosMaisRentaveis().setVisible(true);
+    }//GEN-LAST:event_botaoListagemVeiculoRentavelActionPerformed
 
 
     /**
