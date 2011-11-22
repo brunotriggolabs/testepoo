@@ -41,13 +41,6 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Cadastro Cliente"/>
-          </Border>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -57,45 +50,41 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rotuloNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="rotuloCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rotuloInicioPeriodo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rotuloFimPeriodo" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="campoCPF" min="-2" pref="126" max="-2" attributes="0"/>
-                              <Component id="campoNome" pref="315" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="campoFimPeriodo" max="32767" attributes="1"/>
+                              <Component id="campoInicioPeriodo" alignment="0" pref="105" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="botaoCancelarCliente" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="212" max="32767" attributes="0"/>
-                          <Component id="botaoEnviarCliente" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="botaoCancelar" min="-2" max="-2" attributes="1"/>
+                          <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
+                          <Component id="botaoEnviarPeriodo" pref="74" max="32767" attributes="1"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="rotuloNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rotuloInicioPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoInicioPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="rotuloCPF" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="campoCPF" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="rotuloFimPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoFimPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="136" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="botaoEnviarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="botaoCancelarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botaoCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botaoEnviarPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -103,34 +92,34 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="rotuloNome">
+        <Component class="javax.swing.JLabel" name="rotuloInicioPeriodo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nome:"/>
+            <Property name="text" type="java.lang.String" value="In&#xed;cio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="rotuloCPF">
+        <Component class="javax.swing.JTextField" name="campoInicioPeriodo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="rotuloFimPeriodo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF:"/>
+            <Property name="text" type="java.lang.String" value="Fim:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoNome">
+        <Component class="javax.swing.JTextField" name="campoFimPeriodo">
         </Component>
-        <Component class="javax.swing.JTextField" name="campoCPF">
-        </Component>
-        <Component class="javax.swing.JButton" name="botaoEnviarCliente">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Enviar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEnviarClienteActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="botaoCancelarCliente">
+        <Component class="javax.swing.JButton" name="botaoCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="botaoEnviarPeriodo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="OK"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEnviarPeriodoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

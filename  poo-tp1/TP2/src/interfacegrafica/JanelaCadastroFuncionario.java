@@ -189,3 +189,4 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel rotuloNomeFuncionario;
     // End of variables declaration//GEN-END:variables
 }
+
