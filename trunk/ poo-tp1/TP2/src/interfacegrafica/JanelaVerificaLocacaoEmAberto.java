@@ -4,9 +4,9 @@
  */
 
 /*
- * JanelaCadastroCliente.java
+ * JanelaVerificaLocacaoEmAberto.java
  *
- * Created on 03/11/2011, 12:48:16
+ * Created on 17/11/2011, 23:00:31
  */
 package interfacegrafica;
 
@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
  *
  * @author samuel
  */
-public class JanelaCadastroCliente extends javax.swing.JFrame {
+public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
 
-    /** Creates new form JanelaCadastroCliente */
-    public JanelaCadastroCliente() {
+    /** Creates new form JanelaVerificaLocacaoEmAberto */
+    public JanelaVerificaLocacaoEmAberto() {
         initComponents();
     }
 
@@ -33,32 +33,30 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        rotuloNome = new javax.swing.JLabel();
-        rotuloCPF = new javax.swing.JLabel();
-        campoNome = new javax.swing.JTextField();
-        campoCPF = new javax.swing.JTextField();
-        botaoEnviarCliente = new javax.swing.JButton();
-        botaoCancelarCliente = new javax.swing.JButton();
+        rotuloInicioPeriodo = new javax.swing.JLabel();
+        campoInicioPeriodo = new javax.swing.JTextField();
+        rotuloFimPeriodo = new javax.swing.JLabel();
+        campoFimPeriodo = new javax.swing.JTextField();
+        botaoCancelar = new javax.swing.JButton();
+        botaoEnviarPeriodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Cliente"));
+        rotuloInicioPeriodo.setText("Início:");
 
-        rotuloNome.setText("Nome:");
+        rotuloFimPeriodo.setText("Fim:");
 
-        rotuloCPF.setText("CPF:");
-
-        botaoEnviarCliente.setText("Enviar");
-        botaoEnviarCliente.addActionListener(new java.awt.event.ActionListener() {
+        botaoCancelar.setText("Cancelar");
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEnviarClienteActionPerformed(evt);
+                botaoCancelarActionPerformed(evt);
             }
         });
 
-        botaoCancelarCliente.setText("Cancelar");
-        botaoCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
+        botaoEnviarPeriodo.setText("OK");
+        botaoEnviarPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCancelarClienteActionPerformed(evt);
+                botaoEnviarPeriodoActionPerformed(evt);
             }
         });
 
@@ -71,35 +69,32 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rotuloNome)
-                            .addComponent(rotuloCPF))
+                            .addComponent(rotuloInicioPeriodo)
+                            .addComponent(rotuloFimPeriodo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(botaoCancelarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                        .addComponent(botaoEnviarCliente)))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoFimPeriodo)
+                            .addComponent(campoInicioPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(botaoCancelar)
+                        .addGap(216, 216, 216)
+                        .addComponent(botaoEnviarPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rotuloNome)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rotuloInicioPeriodo)
+                    .addComponent(campoInicioPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rotuloCPF)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rotuloFimPeriodo)
+                    .addComponent(campoFimPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoEnviarCliente)
-                    .addComponent(botaoCancelarCliente))
+                    .addComponent(botaoCancelar)
+                    .addComponent(botaoEnviarPeriodo))
                 .addContainerGap())
         );
 
@@ -123,20 +118,23 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarClienteActionPerformed
-        dispose();
-    }//GEN-LAST:event_botaoCancelarClienteActionPerformed
-
-    private void botaoEnviarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarClienteActionPerformed
+    private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
-        //JOptionPane.show
         this.dispose();
-    }//GEN-LAST:event_botaoEnviarClienteActionPerformed
+    }//GEN-LAST:event_botaoCancelarActionPerformed
+
+    private void botaoEnviarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarPeriodoActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Funfou, mano!");
+    }//GEN-LAST:event_botaoEnviarPeriodoActionPerformed
 
     /**
      * @param args the command line arguments
      */
+
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -151,13 +149,13 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JanelaCadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -165,17 +163,17 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new JanelaCadastroCliente().setVisible(true);
+                new JanelaVerificaLocacaoEmAberto().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoCancelarCliente;
-    private javax.swing.JButton botaoEnviarCliente;
-    private javax.swing.JTextField campoCPF;
-    private javax.swing.JTextField campoNome;
+    private javax.swing.JButton botaoCancelar;
+    private javax.swing.JButton botaoEnviarPeriodo;
+    private javax.swing.JTextField campoFimPeriodo;
+    private javax.swing.JTextField campoInicioPeriodo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel rotuloCPF;
-    private javax.swing.JLabel rotuloNome;
+    private javax.swing.JLabel rotuloFimPeriodo;
+    private javax.swing.JLabel rotuloInicioPeriodo;
     // End of variables declaration//GEN-END:variables
 }

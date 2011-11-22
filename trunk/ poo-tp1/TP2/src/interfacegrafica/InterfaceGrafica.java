@@ -158,7 +158,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(listagemVeiculoProcurado)
                             .addComponent(botaoListagemVeiculoRentavel))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,14 +173,24 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     .addComponent(listagemVeiculoProcurado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoListagemVeiculosDisponiveis)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
         botaoPesquisaCliente.setText("Cliente");
+        botaoPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoPesquisaClienteActionPerformed(evt);
+            }
+        });
 
         botaoPesquisaCategoriaVeiculo.setText("Categoria de veículo disponível");
+        botaoPesquisaCategoriaVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoPesquisaCategoriaVeiculoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -189,7 +199,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoPesquisaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                 .addComponent(botaoPesquisaCategoriaVeiculo)
                 .addContainerGap())
         );
@@ -221,7 +231,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(78, Short.MAX_VALUE))
@@ -261,10 +271,23 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         new JanelaVerificaLocacoesEmAberto().setVisible(true);
     }//GEN-LAST:event_botaoLocacoesEmAbertoActionPerformed
 
+
+    private void botaoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaClienteActionPerformed
+        // TODO add your handling code here:
+        new JanelaPesquisaCliente().setVisible(true);
+    }//GEN-LAST:event_botaoPesquisaClienteActionPerformed
+
+    private void botaoPesquisaCategoriaVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaCategoriaVeiculoActionPerformed
+        // TODO add your handling code here:
+        new JanelaPesquisaDisponibilidadeCategoria().setVisible(true);
+    }//GEN-LAST:event_botaoPesquisaCategoriaVeiculoActionPerformed
+
+
     private void botaoListagemVeiculosDisponiveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListagemVeiculosDisponiveisActionPerformed
         // TODO add your handling code here:
         new JanelaExibeVeiculoDisponivel().setVisible(true);
     }//GEN-LAST:event_botaoListagemVeiculosDisponiveisActionPerformed
+
 
     /**
      * @param args the command line arguments
