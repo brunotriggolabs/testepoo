@@ -4,22 +4,20 @@
  */
 
 /*
- * JanelaVerificaLocacaoEmAberto.java
+ * JanelaVerificacaoLocacoesFinalizadas.java
  *
- * Created on 17/11/2011, 23:00:31
+ * Created on 22/11/2011, 15:49:32
  */
 package interfacegrafica;
-
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author samuel
  */
-public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
+public class JanelaVerificacaoLocacoesFinalizadas extends javax.swing.JFrame {
 
-    /** Creates new form JanelaVerificaLocacaoEmAberto */
-    public JanelaVerificaLocacaoEmAberto() {
+    /** Creates new form JanelaVerificacaoLocacoesFinalizadas */
+    public JanelaVerificacaoLocacoesFinalizadas() {
         initComponents();
     }
 
@@ -33,20 +31,22 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        rotuloInicioPeriodo = new javax.swing.JLabel();
-        campoInicioPeriodo = new javax.swing.JTextField();
-        rotuloFimPeriodo = new javax.swing.JLabel();
-        campoFimPeriodo = new javax.swing.JTextField();
+        botaoVerificar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
-        botaoEnviarPeriodo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        campoInicioPeriodoFinalizado = new javax.swing.JTextField();
+        campoFimPeriodoFinalizado = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        rotuloInicioPeriodo.setText("Início:");
-
-        rotuloFimPeriodo.setText("Fim:");
+        botaoVerificar.setText("Verificar");
+        botaoVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVerificarActionPerformed(evt);
+            }
+        });
 
         botaoCancelar.setText("Cancelar");
         botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -55,16 +55,11 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
             }
         });
 
-        botaoEnviarPeriodo.setText("OK");
-        botaoEnviarPeriodo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEnviarPeriodoActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Início período");
 
-        jLabel1.setText("dd/mm/aaaa");
+        jLabel2.setText("Fim período");
 
-        jLabel2.setText("dd/mm/aaaa");
+        jLabel3.setText("dd/mm/aaaa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,41 +69,41 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(botaoCancelar)
-                        .addGap(216, 216, 216)
-                        .addComponent(botaoEnviarPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rotuloInicioPeriodo)
-                            .addComponent(rotuloFimPeriodo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoFimPeriodo)
-                            .addComponent(campoInicioPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addContainerGap(108, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(botaoCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                                .addComponent(botaoVerificar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(campoFimPeriodoFinalizado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(campoInicioPeriodoFinalizado, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(57, 57, 57))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rotuloInicioPeriodo)
-                    .addComponent(campoInicioPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(campoInicioPeriodoFinalizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rotuloFimPeriodo)
-                        .addComponent(campoFimPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2))
-                .addGap(163, 163, 163)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCancelar)
-                    .addComponent(botaoEnviarPeriodo))
+                    .addComponent(jLabel2)
+                    .addComponent(campoFimPeriodoFinalizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoVerificar)
+                    .addComponent(botaoCancelar))
                 .addContainerGap())
         );
 
@@ -124,7 +119,6 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -133,12 +127,14 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
+        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
-    private void botaoEnviarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarPeriodoActionPerformed
-        //TODO Exibir as locações em aberto.
-    }//GEN-LAST:event_botaoEnviarPeriodoActionPerformed
+    private void botaoVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerificarActionPerformed
+        // TODO add your handling code here:
+        new JanelaExibeLocacoesFinalizadas().setVisible(true);
+    }//GEN-LAST:event_botaoVerificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,13 +153,13 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificacaoLocacoesFinalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificacaoLocacoesFinalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificacaoLocacoesFinalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JanelaVerificaLocacaoEmAberto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVerificacaoLocacoesFinalizadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -171,19 +167,18 @@ public class JanelaVerificaLocacaoEmAberto extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new JanelaVerificaLocacaoEmAberto().setVisible(true);
+                new JanelaVerificacaoLocacoesFinalizadas().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
-    private javax.swing.JButton botaoEnviarPeriodo;
-    private javax.swing.JTextField campoFimPeriodo;
-    private javax.swing.JTextField campoInicioPeriodo;
+    private javax.swing.JButton botaoVerificar;
+    private javax.swing.JTextField campoFimPeriodoFinalizado;
+    private javax.swing.JTextField campoInicioPeriodoFinalizado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel rotuloFimPeriodo;
-    private javax.swing.JLabel rotuloInicioPeriodo;
     // End of variables declaration//GEN-END:variables
 }

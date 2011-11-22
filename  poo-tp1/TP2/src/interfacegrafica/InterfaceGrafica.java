@@ -253,7 +253,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoLocacoesEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLocacoesEmAbertoActionPerformed
         // TODO add your handling code here:
-        new JanelaVerificaLocacaoEmAberto().setVisible(true);
+        new JanelaVerificaLocacoesEmAberto().setVisible(true);
     }//GEN-LAST:event_botaoLocacoesEmAbertoActionPerformed
 
     /**
