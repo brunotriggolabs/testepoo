@@ -10,8 +10,12 @@
  */
 package interfacegrafica;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import modelo.Funcionario;
 
 /**
  *
@@ -138,7 +142,22 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
 
     private void botaoEnviarJanelaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarJanelaFuncionarioActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso");
+        Funcionario funcionario = new Funcionario(campoNomeFuncionario.getText(), campoCPFFuncionario.getText(), campoCargoFuncionario.getText());
+        funcionario.setEndereco("Casa da mãe Joana"); //TODO Colocar na interface Telefone e Endereço!
+        funcionario.setTelefone("0828373"); //TODO Tratar erro de CPF duplicado!
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(funcionario);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            JOptionPane.showMessageDialog(this, "Funcionário salvo com sucesso", "Sucesso", 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Falha ao salvar o funcionário", "Erro", 2);
+        }
         dispose();
     }//GEN-LAST:event_botaoEnviarJanelaFuncionarioActionPerformed
 
@@ -189,4 +208,3 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel rotuloNomeFuncionario;
     // End of variables declaration//GEN-END:variables
 }
-

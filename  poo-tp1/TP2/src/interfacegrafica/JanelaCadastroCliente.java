@@ -139,24 +139,27 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     private void botaoEnviarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarClienteActionPerformed
         Cliente cliente = new Cliente(campoNome.getText(), campoCPF.getText());
 
-        try {
+        
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
             EntityManager em = emf.createEntityManager();
+            System.out.println("Chegou aki 1");
             em.getTransaction().begin();
             em.persist(cliente);
+            System.out.println("Erro no persist");
             em.getTransaction().commit();
+            System.out.println("Erro no commit");
             em.close();
             emf.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error while trying to commit to database");
-        }
+            JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
+        
+          
+        
 
 
 
 
 
-        JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
+        
         this.dispose();
     }//GEN-LAST:event_botaoEnviarClienteActionPerformed
 
