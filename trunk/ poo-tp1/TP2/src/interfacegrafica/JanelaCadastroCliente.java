@@ -10,7 +10,10 @@
  */
 package interfacegrafica;
 
+import javax.net.ssl.ManagerFactoryParameters;
+import javax.persistence.*;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
 
 /**
  *
@@ -48,6 +51,12 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
 
         rotuloCPF.setText("CPF:");
 
+        campoNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeActionPerformed(evt);
+            }
+        });
+
         botaoEnviarCliente.setText("Enviar");
         botaoEnviarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,10 +85,10 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
+                            .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(botaoCancelarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                         .addComponent(botaoEnviarCliente)))
                 .addContainerGap())
         );
@@ -96,7 +105,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEnviarCliente)
                     .addComponent(botaoCancelarCliente))
@@ -128,13 +137,32 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCancelarClienteActionPerformed
 
     private void botaoEnviarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarClienteActionPerformed
+        Cliente cliente = new Cliente(campoNome.getText(), campoCPF.getText());
+
         try {
-            
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(cliente);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error while trying to commit to database");
         }
+
+
+
+
+
         JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
         this.dispose();
     }//GEN-LAST:event_botaoEnviarClienteActionPerformed
+
+    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeActionPerformed
 
     /**
      * @param args the command line arguments
