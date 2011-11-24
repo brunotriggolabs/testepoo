@@ -10,7 +10,11 @@
  */
 package interfacegrafica;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.persistence.Query;
+import modelo.*;
 
 /**
  *
@@ -75,10 +79,29 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Telefone", "Endereço", "CPF"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaNomeClientes);
+        tabelaNomeClientes.getColumnModel().getColumn(0).setResizable(false);
+        tabelaNomeClientes.getColumnModel().getColumn(1).setResizable(false);
+        tabelaNomeClientes.getColumnModel().getColumn(2).setResizable(false);
+        tabelaNomeClientes.getColumnModel().getColumn(3).setResizable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,18 +110,18 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(CampoNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(botaoCancelarPesquisaCliente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botaoPesquisarCliente)))
-                        .addContainerGap(80, Short.MAX_VALUE))))
+                        .addContainerGap(195, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +135,8 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
                     .addComponent(botaoCancelarPesquisaCliente)
                     .addComponent(botaoPesquisarCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,15 +145,15 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -146,9 +169,32 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCancelarPesquisaClienteActionPerformed
 
     private void botaoPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisarClienteActionPerformed
-        // TODO add your handling code here:
-        //TODO Busca no banco de dados!!!!!
         tabelaNomeClientes.setVisible(true);
+        
+        Cliente cli = new Cliente(CampoNomeCliente.getText(), "");
+        Cliente cli2;
+        List lista = new ArrayList<Cliente>();
+
+        InterfaceGrafica.em.getTransaction().begin();
+        Query query = InterfaceGrafica.em.createQuery("from Cliente c where c.nome = :nome");
+        query.setParameter("nome", cli.getNome());
+        lista = query.getResultList();
+
+        if (lista.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados com esse nome", "Erro", 0);
+            InterfaceGrafica.em.getTransaction().commit();
+        } else {
+
+            for (int i = 0; i < lista.size(); i++) {
+                cli2 = (Cliente) lista.get(i);
+                tabelaNomeClientes.setValueAt(cli2.getNome(), i, 0);
+                tabelaNomeClientes.setValueAt(cli2.getTelefone(), i, 1);
+                tabelaNomeClientes.setValueAt(cli2.getEndereco(), i, 2);
+                tabelaNomeClientes.setValueAt(cli2.getCpf(), i, 3);
+            }
+            InterfaceGrafica.em.getTransaction().commit();
+        }
+
     }//GEN-LAST:event_botaoPesquisarClienteActionPerformed
 
     /**
