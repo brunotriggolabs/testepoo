@@ -128,9 +128,11 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCancelarClienteActionPerformed
 
     private void botaoEnviarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarClienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            
+        } catch (Exception e) {
+        }
         JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
-        //JOptionPane.show
         this.dispose();
     }//GEN-LAST:event_botaoEnviarClienteActionPerformed
 
