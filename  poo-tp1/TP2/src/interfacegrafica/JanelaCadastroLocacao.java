@@ -10,7 +10,11 @@
  */
 package interfacegrafica;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import modelo.Locacao;
 
 /**
  *
@@ -57,6 +61,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         rotuloLocacaoKmLivre = new javax.swing.JRadioButton();
         botaoCancelarJanelaLocacao = new javax.swing.JButton();
         botaoEnviarJanelaLocacao = new javax.swing.JButton();
+        rotuloTeste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,14 +123,14 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(campoVerificacaoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(61, Short.MAX_VALUE)
+                        .addContainerGap(63, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(campoVerificacaoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)))
                 .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -139,6 +144,12 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         rotuloTipodaLocacao.setText("Tipo da locação:");
 
         rotuloPrevisaoDias.setText("Previsão de dias:");
+
+        campoPrevisaoDias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPrevisaoDiasActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rotuloLocacaoporKm);
         rotuloLocacaoporKm.setText("por Km");
@@ -178,21 +189,25 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(rotuloKmSaida)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoKmSaida, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                                .addComponent(campoKmSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(rotuloTipodaLocacao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rotuloLocacaoporKm)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rotuloLocacaoKmLivre)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoEnviarJanelaLocacao)
-                        .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                                .addComponent(botaoEnviarJanelaLocacao))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(rotuloTeste))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(rotuloPrevisaoDias)
-                        .addGap(12, 12, 12)
-                        .addComponent(campoPrevisaoDias, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                        .addGap(134, 134, 134))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoPrevisaoDias, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +220,8 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloTipodaLocacao)
                     .addComponent(rotuloLocacaoporKm)
-                    .addComponent(rotuloLocacaoKmLivre))
+                    .addComponent(rotuloLocacaoKmLivre)
+                    .addComponent(rotuloTeste))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloPrevisaoDias)
@@ -235,14 +251,39 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoEnviarJanelaLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarJanelaLocacaoActionPerformed
-        JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
+        rotuloTeste.setText("HAHAHA");
+        rotuloLocacaoporKm.getSelectedObjects();
+        int escolha = 0;
+        
+        if (rotuloLocacaoKmLivre.isSelected()) {
+            escolha = 1;
+        } else if (rotuloLocacaoporKm.isSelected()) {
+            escolha = 2;
+        }       
+     
+        Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText()), escolha, Integer.parseInt(campoPrevisaoDias.getText()));
+        
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(locacao);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro no cadastro da locação", "Erro", 2);
+        }
+        
         this.dispose();
     }//GEN-LAST:event_botaoEnviarJanelaLocacaoActionPerformed
 
@@ -265,7 +306,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         rotuloLocacaoKmLivre.setEnabled(false);
         rotuloLocacaoporKm.setEnabled(false);
         campoKmSaida.setText("");
-        campoPrevisaoDias.setText("");        
+        campoPrevisaoDias.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void rotuloLocacaoporKmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotuloLocacaoporKmActionPerformed
@@ -275,6 +316,10 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     private void campoVerificacaoPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoVerificacaoPlacaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoVerificacaoPlacaActionPerformed
+
+    private void campoPrevisaoDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPrevisaoDiasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoPrevisaoDiasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +377,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     private javax.swing.JRadioButton rotuloLocacaoKmLivre;
     private javax.swing.JRadioButton rotuloLocacaoporKm;
     private javax.swing.JLabel rotuloPrevisaoDias;
+    private javax.swing.JLabel rotuloTeste;
     private javax.swing.JLabel rotuloTipodaLocacao;
     // End of variables declaration//GEN-END:variables
 }
