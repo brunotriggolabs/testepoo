@@ -42,6 +42,10 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         campoCPF = new javax.swing.JTextField();
         botaoEnviarCliente = new javax.swing.JButton();
         botaoCancelarCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        campoEndereco = new javax.swing.JTextField();
+        campoTelefone = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +75,10 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Endereço:");
+
+        jLabel2.setText("Telefone:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,18 +86,22 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rotuloNome)
+                    .addComponent(rotuloCPF)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(botaoCancelarCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                        .addComponent(botaoEnviarCliente))
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rotuloNome)
-                            .addComponent(rotuloCPF))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(botaoCancelarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
-                        .addComponent(botaoEnviarCliente)))
+                            .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(campoTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(campoEndereco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,13 +111,19 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloNome)
                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rotuloCPF)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                    .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoEnviarCliente)
                     .addComponent(botaoCancelarCliente))
@@ -138,28 +156,14 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
 
     private void botaoEnviarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarClienteActionPerformed
         Cliente cliente = new Cliente(campoNome.getText(), campoCPF.getText());
-
+        cliente.setEndereco(campoEndereco.getText());
+        cliente.setTelefone(campoTelefone.getText());
         
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
-            EntityManager em = emf.createEntityManager();
-            System.out.println("Chegou aki 1");
-            em.getTransaction().begin();
-            em.persist(cliente);
-            System.out.println("Erro no persist");
-            em.getTransaction().commit();
-            System.out.println("Erro no commit");
-            em.close();
-            emf.close();
-            JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
-        
-          
-        
+        InterfaceGrafica.em.getTransaction().begin();
+        InterfaceGrafica.em.persist(cliente);
+        InterfaceGrafica.em.getTransaction().commit();
+        JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
 
-
-
-
-
-        
         this.dispose();
     }//GEN-LAST:event_botaoEnviarClienteActionPerformed
 
@@ -206,7 +210,11 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JButton botaoCancelarCliente;
     private javax.swing.JButton botaoEnviarCliente;
     private javax.swing.JTextField campoCPF;
+    private javax.swing.JTextField campoEndereco;
     private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoTelefone;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel rotuloCPF;
     private javax.swing.JLabel rotuloNome;
