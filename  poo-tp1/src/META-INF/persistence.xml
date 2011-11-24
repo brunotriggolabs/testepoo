@@ -1,54 +1,24 @@
-<?xmlversion="1.0"encoding="UTF-8"?>
-<persistenceversion="1.0"
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
 xmlns="http://java.sun.com/xml/ns/persistence"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema−instance"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
 http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-<persistence−unit name="ClienteJPA">
-<class >modelo.Cliente</class >
-<class >modelo.Funcionario</class >
-<class >modelo.Locacao</class >
-<class >modelo.Motorista</class >
-<class >modelo.TipoVeiculo</class >
-<class >modelo.Veiculo</class >
-
-<properties >
-
-<property name="hibernate.dialect"
-
-value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-
-<property name="hibernate.connection.driver_class"
-
-value="org.gjt.mm.mysql.Driver"/>
-
-<property name="hibernate.connection.url"
-
-value="jdbc:mysql://localhost/POOTp1"/>
-
-<property name="hibernate.connection.username"
-
-value="root"/>
-
-<property name="hibernate.connection.password"
-
-value="31052563RameLao"/>
-
-<property name="hibernate.hbm2ddl.auto"
-
-value="update"/>
-
-</properties>
-
-
-<!--
-Document:persistence.xml
-Createdon:23deNovembrode2011,15:49
-Author:samuel
-Description:
-Purposeofthedocumentfollows.
--->
-
-<root>
-
-</root>
+<persistence-unit name="ClienteJPA">
+    
+    <class>modelo.Cliente</class>
+    <class>modelo.Funcionario</class>
+    <class>modelo.Locacao</class>
+    <class>modelo.Motorista</class>
+    <class>modelo.TipoVeiculo</class>
+    <class>modelo.Veiculo</class>
+    <properties>
+    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+    <property name="hibernate.connection.driver_class" value="org.gjt.mm.mysql.Driver"/>
+    <property name="hibernate.connection.url" value="jdbc:mysql://localhost/POOTp1"/>
+    <property name="hibernate.connection.username" value="root"/>
+    <property name="hibernate.connection.password" value="31052563RameLao"/>
+    <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+</persistence>
