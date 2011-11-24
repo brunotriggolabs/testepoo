@@ -271,13 +271,9 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText()), escolha, Integer.parseInt(campoPrevisaoDias.getText()));
         
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
-            EntityManager em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(locacao);
-            em.getTransaction().commit();
-            em.close();
-            emf.close();
+            InterfaceGrafica.em.getTransaction().begin();
+            InterfaceGrafica.em.persist(locacao);
+            InterfaceGrafica.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,6 +13,7 @@ package interfacegrafica;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import modelo.Motorista;
 
 /**
  *
@@ -43,8 +44,14 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
         campoCnhMotorista = new javax.swing.JTextField();
         botaoCancelarMotorista = new javax.swing.JButton();
         botaoEnviarMotorista = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        campoEndereco = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        campoTelefone = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Motorista"));
 
         rotuloNomeMotorista.setText("Nome:");
 
@@ -71,6 +78,10 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Endereço:");
+
+        jLabel2.setText("Telefone:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,26 +91,35 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(botaoCancelarMotorista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
                         .addComponent(botaoEnviarMotorista))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rotuloNomeMotorista)
                             .addComponent(rotuloCpfMotorista)
                             .addComponent(rotuloCnhMotorista))
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoNomeMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(campoNomeMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(campoCpfMotorista, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campoCnhMotorista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)))
+                                .addComponent(campoCnhMotorista, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(campoCpfMotorista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloNomeMotorista)
                     .addComponent(campoNomeMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -111,11 +131,19 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloCnhMotorista)
                     .addComponent(campoCnhMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCancelarMotorista)
                     .addComponent(botaoEnviarMotorista))
-                .addGap(117, 117, 117))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,19 +160,23 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCancelarMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarMotoristaActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_botaoCancelarMotoristaActionPerformed
 
     private void botaoEnviarMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarMotoristaActionPerformed
-        // TODO add your handling code here:
+        Motorista motorista = new Motorista(campoNomeMotorista.getText(), campoCpfMotorista.getText(), campoCnhMotorista.getText());
+        motorista.setEndereco(campoEndereco.getText());
+        motorista.setTelefone(campoTelefone.getText());
+        InterfaceGrafica.em.getTransaction().begin();
+        InterfaceGrafica.em.persist(motorista);
+        InterfaceGrafica.em.getTransaction().commit();
         JOptionPane.showMessageDialog(this, "Motorista cadastrado com sucesso");
         this.dispose();
     }//GEN-LAST:event_botaoEnviarMotoristaActionPerformed
@@ -193,7 +225,11 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
     private javax.swing.JButton botaoEnviarMotorista;
     private javax.swing.JTextField campoCnhMotorista;
     private javax.swing.JTextField campoCpfMotorista;
+    private javax.swing.JTextField campoEndereco;
     private javax.swing.JTextField campoNomeMotorista;
+    private javax.swing.JTextField campoTelefone;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel rotuloCnhMotorista;
     private javax.swing.JLabel rotuloCpfMotorista;

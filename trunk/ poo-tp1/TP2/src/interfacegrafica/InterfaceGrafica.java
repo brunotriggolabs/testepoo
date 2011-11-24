@@ -10,6 +10,9 @@
  */
 package interfacegrafica;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -20,6 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class InterfaceGrafica extends javax.swing.JFrame {
 
+    static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
+    static final EntityManager em = emf.createEntityManager();
+    
     /** Creates new form InterfaceGrafica */
     public InterfaceGrafica() {
         initComponents();

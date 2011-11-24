@@ -146,13 +146,9 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
         funcionario.setEndereco("Casa da mãe Joana"); //TODO Colocar na interface Telefone e Endereço!
         funcionario.setTelefone("0828373"); //TODO Tratar erro de CPF duplicado!
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
-            EntityManager em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(funcionario);
-            em.getTransaction().commit();
-            em.close();
-            emf.close();
+            InterfaceGrafica.em.getTransaction().begin();
+            InterfaceGrafica.em.persist(funcionario);
+            InterfaceGrafica.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Funcionário salvo com sucesso", "Sucesso", 1);
         } catch (Exception e) {
             e.printStackTrace();
