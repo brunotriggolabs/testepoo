@@ -3,7 +3,7 @@ package modelo;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "motorista")
+@Table(name = "funcionario")
 @AttributeOverrides({
     @AttributeOverride(name = "NOME", column =
     @Column(name = "nome")),

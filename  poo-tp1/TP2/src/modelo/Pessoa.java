@@ -7,9 +7,9 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     @Column(unique = true, nullable = false)
+    @Id
     protected String cpf;
     @Column(name = "NOME", nullable = false)
     protected String nome;
