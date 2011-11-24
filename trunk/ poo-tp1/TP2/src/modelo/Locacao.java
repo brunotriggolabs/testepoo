@@ -6,41 +6,41 @@ import javax.persistence.*;
 
 public class Locacao {
 
-    @Column()
+    @Column
     private int kmSaida;
-    @Column()
+    @Column
     private int kmEntrada;
-    @Column()
+    @Column
     private int tipoLocacao;
-    @Column()
+    @Column
     private int tipoVeiculo;
-    @Column()
+    @Column
     private double valor;
-    @Column()
+    @Column
     private int diaEntrada;
-    @Column()
+    @Column
     private int diaSaida;
-    @Column()
+    @Column
     private int mesEntrada;
-    @Column()
+    @Column
     private int mesSaida;
-    @Column()
+    @Column
     private int anoEntrada;
-    @Column()
+    @Column
     private int anoSaida;
-    @Column()
+    @Column
     private int previsaoDias;
-    @Column()
+    @Column
     private boolean alugado;
-    @Column()
+    @Column
     private boolean finalizado;
-    @Column()
+    @Column
     private double preco;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private int id;
-    @Column
+    @Column(length=45)
     private String placa; //PLACA RELACIONADA COM VEÍCULO
 
     @SuppressWarnings("deprecation")
