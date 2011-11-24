@@ -133,7 +133,7 @@ public class JanelaVerificacaoLocacoesFinalizadas extends javax.swing.JFrame {
 
     private void botaoVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerificarActionPerformed
         // TODO add your handling code here:
-        new JanelaExibeLocacoesFinalizadas().setVisible(true);
+        
     }//GEN-LAST:event_botaoVerificarActionPerformed
 
     /**

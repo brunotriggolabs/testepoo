@@ -92,7 +92,7 @@
                           <Component id="campoCPF" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="134" max="32767" attributes="0"/>
+                  <EmptySpace pref="132" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="botaoEnviarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="botaoCancelarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -114,6 +114,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="campoNome">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoNomeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="campoCPF">
         </Component>
