@@ -10,6 +10,12 @@
  */
 package interfacegrafica;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
+import modelo.Locacao;
+
 /**
  *
  * @author samuel
@@ -19,8 +25,42 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
     /** Creates new form JanelaExibeLocacoesEmAberto */
     public JanelaExibeLocacoesEmAberto() {
         initComponents();
+        tabelaExibeLocacoesEmAberto();
     }
+    
+    private void tabelaExibeLocacoesEmAberto(){
+        Locacao loc1 = new Locacao(0, 0, 0);
+        Locacao loc2;
+        List lista = new ArrayList<Locacao>();
 
+        InterfaceGrafica.em.getTransaction().begin();
+        Query query = InterfaceGrafica.em.createQuery("from Locacao l where l.alugado = :qualquer");
+        query.setParameter("qualquer", true);
+        lista = query.getResultList();
+
+        if (lista.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados com esse nome", "Erro", 0);
+            InterfaceGrafica.em.getTransaction().commit();
+        } else {
+            
+            for (int i = 0; i < lista.size(); i++) {
+                loc2 = (Locacao) lista.get(i);
+                tabelaLocacoesEmAberto.setValueAt(loc2.getId(), i, 0);
+                tabelaLocacoesEmAberto.setValueAt(loc2.getValor(), i, 1);
+                tabelaLocacoesEmAberto.setValueAt(loc2.getKmSaida(), i, 2);
+                tabelaLocacoesEmAberto.setValueAt(loc2.getKmEntrada(), i, 3);
+                tabelaLocacoesEmAberto.setValueAt(concatenarData(loc2.getDiaEntrada(), loc2.getMesEntrada(), loc2.getAnoEntrada()), i, 4);
+            }
+            InterfaceGrafica.em.getTransaction().commit();
+        }
+    }
+    
+    private String concatenarData (int dia,int mes,int ano) {
+        String result = "";
+        result = String.valueOf(dia) + "/" + String.valueOf(mes) + "/" + String.valueOf(ano);
+        return result;
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -32,7 +72,7 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela = new javax.swing.JTable();
+        tabelaLocacoesEmAberto = new javax.swing.JTable();
         botaoOK = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
 
@@ -40,7 +80,7 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Locações em aberto"));
 
-        tabela.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaLocacoesEmAberto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -137,25 +177,25 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabela.setEnabled(false);
-        tabela.setOpaque(false);
-        jScrollPane1.setViewportView(tabela);
-        tabela.getColumnModel().getColumn(0).setResizable(false);
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(2);
-        tabela.getColumnModel().getColumn(1).setResizable(false);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(5);
-        tabela.getColumnModel().getColumn(2).setResizable(false);
-        tabela.getColumnModel().getColumn(3).setResizable(false);
-        tabela.getColumnModel().getColumn(4).setResizable(false);
-        tabela.getColumnModel().getColumn(5).setResizable(false);
-        tabela.getColumnModel().getColumn(6).setResizable(false);
-        tabela.getColumnModel().getColumn(6).setPreferredWidth(7);
-        tabela.getColumnModel().getColumn(7).setResizable(false);
-        tabela.getColumnModel().getColumn(7).setPreferredWidth(2);
-        tabela.getColumnModel().getColumn(8).setResizable(false);
-        tabela.getColumnModel().getColumn(8).setPreferredWidth(3);
-        tabela.getColumnModel().getColumn(9).setResizable(false);
-        tabela.getColumnModel().getColumn(9).setPreferredWidth(3);
+        tabelaLocacoesEmAberto.setEnabled(false);
+        tabelaLocacoesEmAberto.setOpaque(false);
+        jScrollPane1.setViewportView(tabelaLocacoesEmAberto);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(0).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(0).setPreferredWidth(2);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(1).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(1).setPreferredWidth(5);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(2).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(3).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(4).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(5).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(6).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(6).setPreferredWidth(7);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(7).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(7).setPreferredWidth(2);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(8).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(8).setPreferredWidth(3);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(9).setResizable(false);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(9).setPreferredWidth(3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,7 +247,7 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCancelar)
                     .addComponent(botaoOK))
@@ -265,6 +305,6 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
     private javax.swing.JButton botaoOK;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabela;
+    private javax.swing.JTable tabelaLocacoesEmAberto;
     // End of variables declaration//GEN-END:variables
 }
