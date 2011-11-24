@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "veiculo")
 public class Veiculo implements Serializable {
-
     
     @Id   
     @Column(unique = true, nullable = false)
@@ -19,15 +18,13 @@ public class Veiculo implements Serializable {
     @Column()
     private String tipo;
     @Column()
-    private String opicionais;
+    private String opcionais;
     @Column()
     private String observacoes;
     @Column()
-    private int disponivel;
+    private boolean disponivel;
     @Column()
     private int locacao;
-    @Column()
-    private int numLocacoes;
 
     public Veiculo() {
     }
@@ -36,13 +33,9 @@ public class Veiculo implements Serializable {
         this.placa = placa;
         this.modelo = modelo;
         this.marca = marca;
-        this.disponivel = 1;
+        this.disponivel = true;
         this.locacao = 0;
-        this.numLocacoes = 0;
-    }
-
-    public void setNumLocacoes(int numLocacoes) {
-        this.numLocacoes = numLocacoes;
+        
     }
 
     public void setCor(String cor) {
@@ -53,15 +46,15 @@ public class Veiculo implements Serializable {
         this.tipo = tipo;
     }
 
-    public void setOpicionais(String opicionais) {
-        this.opicionais = opicionais;
+    public void setOpicionais(String opcionais) {
+        this.opcionais = opcionais;
     }
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
 
-    public void setDisponivel(int disponivel) {
+    public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
 
@@ -77,7 +70,7 @@ public class Veiculo implements Serializable {
         return tipo;
     }
 
-    public int getDisponivel() {
+    public boolean getDisponivel() {
         return disponivel;
     }
 
@@ -98,14 +91,11 @@ public class Veiculo implements Serializable {
     }
 
     public String getOpicionais() {
-        return opicionais;
+        return opcionais;
     }
 
     public String getPlaca() {
         return placa;
     }
 
-    public int getNumLocacoes() {
-        return numLocacoes;
-    }
 }
