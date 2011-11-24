@@ -1,10 +1,12 @@
 package modelo;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
-
-public class Locacao {
+@Entity
+@Table(name="locacao")
+public class Locacao implements Serializable {
 
     @Column
     private int kmSaida;
@@ -42,6 +44,9 @@ public class Locacao {
     private int id;
     @Column(length=45)
     private String placa; //PLACA RELACIONADA COM VEÍCULO
+
+    public Locacao() {
+    }
 
     @SuppressWarnings("deprecation")
     public Locacao(int kmSaida, int tipoLocacao, int previsaoDias) {

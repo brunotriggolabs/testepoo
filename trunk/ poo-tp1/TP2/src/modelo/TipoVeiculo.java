@@ -1,8 +1,10 @@
 package modelo;
 
+import java.io.Serializable;
 import javax.persistence.*;
-
-public class TipoVeiculo {
+@Entity
+@Table(name = "tipoveiculo")
+public class TipoVeiculo implements Serializable {
 
     @Column()
     protected double precokm;
@@ -12,6 +14,9 @@ public class TipoVeiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     protected String tipo;
+
+    public TipoVeiculo() {
+    }
 
     public TipoVeiculo(String tipo, double precoKm, double taxaBase) {
         this.tipo = tipo;

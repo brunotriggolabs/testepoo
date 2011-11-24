@@ -1,8 +1,10 @@
 package modelo;
 
+import java.io.Serializable;
 import javax.persistence.*;
-
-public class Veiculo {
+@Entity
+@Table(name = "veiculo")
+public class Veiculo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,9 @@ public class Veiculo {
     private int locacao;
     @Column()
     private int numLocacoes;
+
+    public Veiculo() {
+    }
 
     public Veiculo(String placa, String marca, String modelo) {
         this.placa = placa;

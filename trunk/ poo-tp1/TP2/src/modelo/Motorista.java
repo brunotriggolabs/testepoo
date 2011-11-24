@@ -10,12 +10,14 @@ import javax.persistence.*;
     @AttributeOverride(name="TELEFONE", column=@Column(name="telefone"))
 })
 public class Motorista extends Pessoa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    
+    @Column(unique = true, nullable = false,length=45)
 	private String cnh;
-    @Column()
+    @Column
 	private int locacao;
+
+    public Motorista() {
+    }
 	
 	public Motorista(String nome, String cpf, String cnh) {
 		super(nome, cpf);
