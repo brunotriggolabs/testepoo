@@ -1,10 +1,21 @@
 package modelo;
 
 import java.util.ArrayList;
+import javax.persistence.*;
 
+@Entity
+@Table(name="cliente")
+@AttributeOverrides({
+    @AttributeOverride(name="NOME", column=@Column(name="nome")),
+    @AttributeOverride(name="ENDERECO", column=@Column(name="endereco")),
+    @AttributeOverride(name="TELEFONE", column=@Column(name="telefone"))
+})
 public class Cliente extends Pessoa {
 	
 	private ArrayList<Integer> locacao;
+
+    public Cliente() {
+    }
 	
 	public Cliente(String nome, String cpf) {
 		super(nome, cpf);
