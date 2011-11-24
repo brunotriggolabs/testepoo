@@ -53,11 +53,11 @@ public class Locacao implements Serializable {
         this.kmSaida = kmSaida;
         this.kmEntrada = kmSaida;
         this.tipoLocacao = tipoLocacao;
-        this.diaEntrada = new Date().getDate(); //ENTRADA = CHEGA NA LOJA  SAÍDA = SAI DA LOJA ,ACHO QUE TEM QUE TROCAR AQUI.
+        this.diaEntrada = new Date().getDate(); //ENTRADA = CHEGA NA LOJA  SAÍDA = SAI DA LOJA
         this.mesEntrada = new Date().getMonth();
         this.anoEntrada = new Date().getYear();
         this.previsaoDias = previsaoDias;
-        
+        this.alugado = true;
     }
 
     @SuppressWarnings("deprecation")

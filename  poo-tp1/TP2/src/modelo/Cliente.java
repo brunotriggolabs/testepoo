@@ -33,6 +33,12 @@ public class Cliente extends Pessoa {
         this.locacao.add(locacao);
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
+
     public void imprime() {
         System.out.println("Nome: " + this.nome);
         System.out.println("CPF: " + this.cpf);
