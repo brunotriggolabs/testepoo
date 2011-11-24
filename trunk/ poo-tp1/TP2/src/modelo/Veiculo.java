@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "veiculo")
 public class Veiculo implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    @Id   
     @Column(unique = true, nullable = false)
     private String placa;
     @Column()
