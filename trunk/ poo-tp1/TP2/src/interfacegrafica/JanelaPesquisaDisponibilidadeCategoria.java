@@ -10,6 +10,12 @@
  */
 package interfacegrafica;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
+import modelo.Veiculo;
+
 /**
  *
  * @author Lucas
@@ -61,15 +67,30 @@ public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
 
         tabelaCategoriaDisponivel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Modelo", "Marca", "Cor", "Placa", "Observações", "Opcionais", "Tipo"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaCategoriaDisponivel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -135,9 +156,37 @@ public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
     private void botaoPesquisarCategoriaDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisarCategoriaDisponivelActionPerformed
         // TODO add your handling code here:
         tabelaCategoriaDisponivel.setVisible(true);
-        
+        exibeTabela();
     }//GEN-LAST:event_botaoPesquisarCategoriaDisponivelActionPerformed
-
+    private void exibeTabela(){
+        InterfaceGrafica.em.getTransaction().begin();
+        Query query = InterfaceGrafica.em.createQuery("from Veiculo v where v.categoria = :qualquer");
+        query.setParameter("qualquer", campoBuscaCategoria.getText());
+        List lista = new ArrayList<Veiculo>();
+        lista = query.getResultList();
+        
+        Veiculo vec1 = new Veiculo(null, null, null);
+        Veiculo vec2;
+        
+        if (lista.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Não há veículos cadastrados nessa categoria", "Erro", 0);
+            InterfaceGrafica.em.getTransaction().commit();
+        } else {
+            
+            for (int i = 0; i < lista.size(); i++) {
+                vec2 = (Veiculo) lista.get(i);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getModelo(), i, 0);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getMarca(), i, 1);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getCor(), i, 2);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getPlaca(), i, 3);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getObservacoes(), i, 4);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getOpicionais(), i, 5);
+                tabelaCategoriaDisponivel.setValueAt(vec2.getTipo(), i, 6);
+            }
+            InterfaceGrafica.em.getTransaction().commit();
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
