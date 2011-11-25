@@ -28,14 +28,14 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
         tabelaExibeLocacoesEmAberto();
     }
     
-    private void tabelaExibeLocacoesEmAberto(){
+    private void tabelaExibeLocacoesEmAberto(){     //FALTAR CALCULAR O PERÍODO!
         Locacao loc1 = new Locacao(0, 0, 0);
         Locacao loc2;
         List lista = new ArrayList<Locacao>();
 
         InterfaceGrafica.em.getTransaction().begin();
         Query query = InterfaceGrafica.em.createQuery("from Locacao l where l.alugado = :qualquer");
-        query.setParameter("qualquer", true);
+        query.setParameter("qualquer", Boolean.parseBoolean("true"));
         lista = query.getResultList();
 
         if (lista.size() == 0) {
