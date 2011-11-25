@@ -11,13 +11,21 @@
 package interfacegrafica;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
 import modelo.Locacao;
+import modelo.TipoLocacao;
+import modelo.Veiculo;
 
 /**
  *
@@ -32,6 +40,10 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         campoPrevisaoDias.setEnabled(false);
         rotuloLocacaoKmLivre.setEnabled(false);
         rotuloLocacaoporKm.setEnabled(false);
+        campoTaxa.setEnabled(false);
+        campoPreco.setEnabled(false);
+        rotuloPreco.setEnabled(false);
+        rotuloTaxa.setEnabled(false);
     }
 
     /** This method is called from within the constructor to
@@ -65,6 +77,10 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         botaoCancelarJanelaLocacao = new javax.swing.JButton();
         botaoEnviarJanelaLocacao = new javax.swing.JButton();
         rotuloTeste = new javax.swing.JLabel();
+        rotuloTaxa = new javax.swing.JLabel();
+        rotuloPreco = new javax.swing.JLabel();
+        campoTaxa = new javax.swing.JTextField();
+        campoPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,14 +142,14 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(campoVerificacaoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(63, Short.MAX_VALUE)
+                        .addContainerGap(61, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(campoVerificacaoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)))
                 .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -179,6 +195,10 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
             }
         });
 
+        rotuloTaxa.setText("Taxa base:");
+
+        rotuloPreco.setText("Preço Km:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -187,35 +207,45 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botaoCancelarJanelaLocacao, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(rotuloKmSaida)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoKmSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(rotuloTipodaLocacao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rotuloLocacaoporKm)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rotuloLocacaoKmLivre)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                                .addComponent(botaoEnviarJanelaLocacao))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(rotuloKmSaida)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(campoKmSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(rotuloTipodaLocacao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rotuloLocacaoporKm)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rotuloLocacaoKmLivre)))
                                 .addGap(18, 18, 18)
-                                .addComponent(rotuloTeste))))
+                                .addComponent(rotuloTeste))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(rotuloPrevisaoDias)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoPrevisaoDias, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(rotuloPreco)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(campoPreco))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(rotuloTaxa)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(campoTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(223, 223, 223))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(rotuloPrevisaoDias)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoPrevisaoDias, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(botaoCancelarJanelaLocacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
+                        .addComponent(botaoEnviarJanelaLocacao)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloKmSaida)
                     .addComponent(campoKmSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -229,10 +259,18 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloPrevisaoDias)
                     .addComponent(campoPrevisaoDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCancelarJanelaLocacao)
-                    .addComponent(botaoEnviarJanelaLocacao))
+                    .addComponent(rotuloTaxa)
+                    .addComponent(campoTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rotuloPreco)
+                    .addComponent(campoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoEnviarJanelaLocacao)
+                    .addComponent(botaoCancelarJanelaLocacao))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -254,7 +292,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,9 +307,23 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
             escolha = 1;
         } else if (rotuloLocacaoporKm.isSelected()) {
             escolha = 2;
-        }       
+        }
      
-        Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText()), escolha, Integer.parseInt(campoPrevisaoDias.getText()));
+        Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText().trim()), escolha, Integer.parseInt(campoPrevisaoDias.getText().trim()));
+        TipoLocacao tipoLocacao = new TipoLocacao(escolha, Double.parseDouble(campoTaxa.getText()), Double.parseDouble(campoPreco.getText()));
+        try {
+            locacao.setAlugado(true);
+        } catch (IOException ex) {
+            Logger.getLogger(JanelaCadastroLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        locacao.setFinalizado(false);
+        GregorianCalendar cal = new GregorianCalendar();
+                
+        locacao.setDiaSaida(cal.get(cal.DAY_OF_MONTH));
+        locacao.setMesSaida(cal.get(cal.MONTH));
+        locacao.setAnoSaida(cal.get(cal.YEAR));
+        locacao.setPlaca(campoVerificacaoPlaca.getText());
+        
         try {
             locacao.setAlugado(true);
         } catch (IOException ex) {
@@ -279,9 +331,10 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         }
         
         try {
-            InterfaceGrafica.em.getTransaction().begin();
-            InterfaceGrafica.em.persist(locacao);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().begin();
+            TelaLogin.em.persist(tipoLocacao);
+            TelaLogin.em.persist(locacao);
+            TelaLogin.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,13 +349,21 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCancelarJanelaLocacaoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        campoKmSaida.setEnabled(true);
-        campoPrevisaoDias.setEnabled(true);
-        rotuloLocacaoKmLivre.setEnabled(true);
-        rotuloLocacaoporKm.setEnabled(true);
+        if (verificarCpfECliente()) {
+
+            campoKmSaida.setEnabled(true);
+            campoPrevisaoDias.setEnabled(true);
+            rotuloLocacaoKmLivre.setEnabled(true);
+            rotuloLocacaoporKm.setEnabled(true);
+            campoTaxa.setEnabled(true);
+            campoPreco.setEnabled(true);
+            rotuloPreco.setEnabled(true);
+            rotuloTaxa.setEnabled(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        TelaLogin.em.getTransaction().commit();
         campoVerificacaoCpf.setText("");
         campoVerificacaoPlaca.setText("");
         campoKmSaida.setEnabled(false);
@@ -311,6 +372,10 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         rotuloLocacaoporKm.setEnabled(false);
         campoKmSaida.setText("");
         campoPrevisaoDias.setText("");
+        campoTaxa.setText("");
+        campoPreco.setText("");
+        rotuloPreco.setEnabled(false);
+        rotuloTaxa.setEnabled(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void rotuloLocacaoporKmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotuloLocacaoporKmActionPerformed
@@ -368,7 +433,9 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JTextField campoKmSaida;
+    private javax.swing.JTextField campoPreco;
     private javax.swing.JTextField campoPrevisaoDias;
+    private javax.swing.JTextField campoTaxa;
     private javax.swing.JTextField campoVerificacaoCpf;
     private javax.swing.JTextField campoVerificacaoPlaca;
     private javax.swing.JButton jButton1;
@@ -380,8 +447,37 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     private javax.swing.JLabel rotuloKmSaida;
     private javax.swing.JRadioButton rotuloLocacaoKmLivre;
     private javax.swing.JRadioButton rotuloLocacaoporKm;
+    private javax.swing.JLabel rotuloPreco;
     private javax.swing.JLabel rotuloPrevisaoDias;
+    private javax.swing.JLabel rotuloTaxa;
     private javax.swing.JLabel rotuloTeste;
     private javax.swing.JLabel rotuloTipodaLocacao;
     // End of variables declaration//GEN-END:variables
+
+    private boolean verificarCpfECliente() {
+        
+        try {
+            TelaLogin.em.getTransaction().begin();
+            Query query = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
+            query.setParameter("placa", campoVerificacaoPlaca.getText());
+            Veiculo vec = (Veiculo) query.getSingleResult();
+        } catch (NoResultException e) {
+            JOptionPane.showMessageDialog(this, "Não há veículos cadastrados com essa placa", "Erro", 0);
+            TelaLogin.em.getTransaction().commit();
+            return false;
+        }
+
+        try {
+            Query querycli = TelaLogin.em.createQuery("from Cliente c where c.cpf = :cpf");
+            querycli.setParameter("cpf", campoVerificacaoCpf.getText());
+            Cliente cli = (Cliente) querycli.getSingleResult();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados com esse cpf", "Erro", 0);
+            TelaLogin.em.getTransaction().commit();
+            return false;
+        }
+        TelaLogin.em.getTransaction().commit();
+        return true;
+
+    }
 }

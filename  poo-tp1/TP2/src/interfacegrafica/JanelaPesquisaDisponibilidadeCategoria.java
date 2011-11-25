@@ -159,8 +159,8 @@ public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
         exibeTabela();
     }//GEN-LAST:event_botaoPesquisarCategoriaDisponivelActionPerformed
     private void exibeTabela(){
-        InterfaceGrafica.em.getTransaction().begin();
-        Query query = InterfaceGrafica.em.createQuery("from Veiculo v where v.categoria = :qualquer");
+        TelaLogin.em.getTransaction().begin();
+        Query query = TelaLogin.em.createQuery("from Veiculo v where v.categoria = :qualquer");
         query.setParameter("qualquer", campoBuscaCategoria.getText());
         List lista = new ArrayList<Veiculo>();
         lista = query.getResultList();
@@ -170,7 +170,7 @@ public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
         
         if (lista.size() == 0) {
             JOptionPane.showMessageDialog(this, "Não há veículos cadastrados nessa categoria", "Erro", 0);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         } else {
             
             for (int i = 0; i < lista.size(); i++) {
@@ -183,7 +183,7 @@ public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
                 tabelaCategoriaDisponivel.setValueAt(vec2.getOpicionais(), i, 5);
                 tabelaCategoriaDisponivel.setValueAt(vec2.getTipo(), i, 6);
             }
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         }
         
     }

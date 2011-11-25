@@ -175,14 +175,14 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
         Cliente cli2;
         List lista = new ArrayList<Cliente>();
 
-        InterfaceGrafica.em.getTransaction().begin();
-        Query query = InterfaceGrafica.em.createQuery("from Cliente c where c.nome = :nome");
+        TelaLogin.em.getTransaction().begin();
+        Query query = TelaLogin.em.createQuery("from Cliente c where c.nome = :nome");
         query.setParameter("nome", cli.getNome());
         lista = query.getResultList();
 
         if (lista.size() == 0) {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados com esse nome", "Erro", 0);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         } else {
 
             for (int i = 0; i < lista.size(); i++) {
@@ -192,7 +192,7 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
                 tabelaNomeClientes.setValueAt(cli2.getEndereco(), i, 2);
                 tabelaNomeClientes.setValueAt(cli2.getCpf(), i, 3);
             }
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         }
 
     }//GEN-LAST:event_botaoPesquisarClienteActionPerformed

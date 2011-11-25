@@ -33,14 +33,14 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
         Locacao loc2;
         List lista = new ArrayList<Locacao>();
 
-        InterfaceGrafica.em.getTransaction().begin();
-        Query query = InterfaceGrafica.em.createQuery("from Locacao l where l.alugado = :qualquer");
+        TelaLogin.em.getTransaction().begin();
+        Query query = TelaLogin.em.createQuery("from Locacao l where l.alugado = :qualquer");
         query.setParameter("qualquer", Boolean.parseBoolean("true"));
         lista = query.getResultList();
 
         if (lista.size() == 0) {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados com esse nome", "Erro", 0);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         } else {
             
             for (int i = 0; i < lista.size(); i++) {
@@ -51,7 +51,7 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
                 tabelaLocacoesEmAberto.setValueAt(loc2.getKmEntrada(), i, 3);
                 tabelaLocacoesEmAberto.setValueAt(concatenarData(loc2.getDiaEntrada(), loc2.getMesEntrada(), loc2.getAnoEntrada()), i, 4);
             }
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         }
     }
     

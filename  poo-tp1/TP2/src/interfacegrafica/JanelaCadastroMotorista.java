@@ -174,9 +174,9 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
         Motorista motorista = new Motorista(campoNomeMotorista.getText(), campoCpfMotorista.getText(), campoCnhMotorista.getText());
         motorista.setEndereco(campoEndereco.getText());
         motorista.setTelefone(campoTelefone.getText());
-        InterfaceGrafica.em.getTransaction().begin();
-        InterfaceGrafica.em.persist(motorista);
-        InterfaceGrafica.em.getTransaction().commit();
+        TelaLogin.em.getTransaction().begin();
+        TelaLogin.em.persist(motorista);
+        TelaLogin.em.getTransaction().commit();
         JOptionPane.showMessageDialog(this, "Motorista cadastrado com sucesso");
         this.dispose();
     }//GEN-LAST:event_botaoEnviarMotoristaActionPerformed

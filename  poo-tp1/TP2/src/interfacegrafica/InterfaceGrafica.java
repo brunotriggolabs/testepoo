@@ -12,10 +12,13 @@ package interfacegrafica;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import modelo.Funcionario;
 
 /**
  *
@@ -23,12 +26,19 @@ import javax.swing.JOptionPane;
  */
 public class InterfaceGrafica extends javax.swing.JFrame {
 
-    static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
-    static final EntityManager em = emf.createEntityManager();
-    
+    // Armazena o CPF do usuário que está logado no sistema
+    public static String login;
     /** Creates new form InterfaceGrafica */
     public InterfaceGrafica() {
         initComponents();
+        int tipoUsuario = verificarTipoUsuario();
+        if (tipoUsuario == 2) {
+            cadastroUsuario.setVisible(false);
+        } else if (tipoUsuario == 3) {
+            cadastroUsuario.setVisible(false);
+        } else if (tipoUsuario == 0) {
+            
+        }
     }
 
     /** This method is called from within the constructor to
@@ -283,7 +293,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCadastraClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastraClienteActionPerformed
-
         new JanelaCadastroCliente().setVisible(true);
     }//GEN-LAST:event_botaoCadastraClienteActionPerformed
 
@@ -337,11 +346,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoEncerrarLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEncerrarLocacaoActionPerformed
         // TODO add your handling code here:
-        int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja encerrar a locação?", "Confirmação", 0); //SIM == 0 NÃO == 1
-        
-        if (opcao == 0) {
-            encerraLocacao();
-        }
+        new EncerrarLocacao().setVisible(true);
     }//GEN-LAST:event_botaoEncerrarLocacaoActionPerformed
 
 
@@ -402,5 +407,33 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void encerraLocacao() {
         //TODO MÉTODO PARA ENCERRA A LOCAÇÃO!
+    }
+
+    private int verificarTipoUsuario() {
+        Funcionario fun;
+        Query query;
+        try {
+            TelaLogin.em.getTransaction().begin();
+            query = TelaLogin.em.createQuery("from Funcionario f where f.cpf = :cpf");
+            query.setParameter("cpf", this.login);
+            fun = (Funcionario) query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        
+        if (fun.getCargo().equals("Administrador")) {
+            TelaLogin.em.getTransaction().commit();
+            return 1;
+        } else if (fun.getCargo().equals("Vendedor")) {
+            TelaLogin.em.getTransaction().commit();
+            return 2;
+        } else if (fun.getCargo().equals("Auxiliar")) {
+            TelaLogin.em.getTransaction().commit();
+            return 3;
+        } else {
+            TelaLogin.em.getTransaction().commit();
+            return 0;
+        }
     }
 }

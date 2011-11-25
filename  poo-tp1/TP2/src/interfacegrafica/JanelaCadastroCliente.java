@@ -159,9 +159,9 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         cliente.setEndereco(campoEndereco.getText());
         cliente.setTelefone(campoTelefone.getText());
         
-        InterfaceGrafica.em.getTransaction().begin();
-        InterfaceGrafica.em.persist(cliente);
-        InterfaceGrafica.em.getTransaction().commit();
+        TelaLogin.em.getTransaction().begin();
+        TelaLogin.em.persist(cliente);
+        TelaLogin.em.getTransaction().commit();
         JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
 
         this.dispose();
