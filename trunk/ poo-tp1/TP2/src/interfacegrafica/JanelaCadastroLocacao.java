@@ -10,6 +10,9 @@
  */
 package interfacegrafica;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -258,7 +261,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoEnviarJanelaLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarJanelaLocacaoActionPerformed
-        rotuloTeste.setText("HAHAHA");
+        
         rotuloLocacaoporKm.getSelectedObjects();
         int escolha = 0;
         
@@ -269,6 +272,11 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         }       
      
         Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText()), escolha, Integer.parseInt(campoPrevisaoDias.getText()));
+        try {
+            locacao.setAlugado(true);
+        } catch (IOException ex) {
+            Logger.getLogger(JanelaCadastroLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try {
             InterfaceGrafica.em.getTransaction().begin();
