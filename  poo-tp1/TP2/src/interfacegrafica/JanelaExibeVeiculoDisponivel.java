@@ -10,7 +10,11 @@
  */
 package interfacegrafica;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import modelo.Veiculo;
 
 /**
  *
@@ -21,8 +25,37 @@ public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
     /** Creates new form JanelaExibeVeiculoDisponivel */
     public JanelaExibeVeiculoDisponivel() {
         initComponents();
+        exibeTabela();
     }
-
+    
+    private void exibeTabela(){
+        Veiculo vec1 = new Veiculo(null, null, null);
+        Veiculo vec2;
+        InterfaceGrafica.em.getTransaction().begin();
+        Query query = InterfaceGrafica.em.createQuery("from Veiculo v where v.disponivel = :qualquer");
+        query.setParameter("qualquer", Boolean.parseBoolean("true"));
+        List lista = new ArrayList<Veiculo>();
+        lista = query.getResultList();
+        
+        if (lista.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Não há veículos disponíveis", "Erro", 0);
+            InterfaceGrafica.em.getTransaction().commit();
+        } else {
+            
+            for (int i = 0; i < lista.size(); i++) {
+                vec2 = (Veiculo) lista.get(i);          //TODO CORRIGIR ERRO DE EXIBIÇÃO NA TABELA!
+                tabelaDisponiveis.setValueAt(vec2.getModelo(), i, 0);
+                tabelaDisponiveis.setValueAt(vec2.getMarca(), i, 1);
+                tabelaDisponiveis.setValueAt(vec2.getCor(), i, 2);
+//                tabelaDisponiveis.setValueAt(vec2.getPlaca(), i, 3);
+//                tabelaDisponiveis.setValueAt(vec2.getObservacoes(), i, 4);
+//                tabelaDisponiveis.setValueAt(vec2.getOpicionais(), i, 5);
+//                tabelaDisponiveis.setValueAt(vec2.getTipo(), i, 6);
+            }
+            InterfaceGrafica.em.getTransaction().commit();
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -34,25 +67,25 @@ public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaDisponiveis = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Veículos disponíveis"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaDisponiveis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Título 5", "Título 6", "Título 7"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaDisponiveis);
 
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +182,6 @@ public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaDisponiveis;
     // End of variables declaration//GEN-END:variables
 }
