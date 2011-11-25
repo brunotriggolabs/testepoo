@@ -46,6 +46,10 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
         rotuloCargoFuncionario = new javax.swing.JLabel();
         rotuloCPFFuncionario = new javax.swing.JLabel();
         rotuloNomeFuncionario = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        campoEndereco = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        campoTelefone = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(520, 515));
@@ -70,7 +74,7 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(botaoCancelarJanelaFuncionario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
                 .addComponent(botaoEnviarJanelaFuncionario)
                 .addContainerGap())
         );
@@ -90,6 +94,10 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
 
         rotuloNomeFuncionario.setText("Nome:");
 
+        jLabel2.setText("Endereço:");
+
+        jLabel3.setText("Telefone:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,20 +105,33 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rotuloNomeFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoNomeFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rotuloCargoFuncionario)
-                            .addComponent(rotuloCPFFuncionario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoCargoFuncionario)
-                            .addComponent(campoCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rotuloNomeFuncionario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rotuloCargoFuncionario)
+                                    .addComponent(rotuloCPFFuncionario))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoCargoFuncionario)
+                                    .addComponent(campoCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +148,15 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rotuloCargoFuncionario)
                     .addComponent(campoCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(132, 132, 132)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -142,13 +171,14 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
 
     private void botaoEnviarJanelaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarJanelaFuncionarioActionPerformed
         // TODO add your handling code here:
-        Funcionario funcionario = new Funcionario(campoNomeFuncionario.getText(), campoCPFFuncionario.getText(), campoCargoFuncionario.getText());
-        funcionario.setEndereco("Casa da mãe Joana"); //TODO Colocar na interface Telefone e Endereço!
-        funcionario.setTelefone("0828373"); //TODO Tratar erro de CPF duplicado!
+        Funcionario funcionario = new Funcionario(campoNomeFuncionario.getText(), campoCPFFuncionario.getText(), campoCargoFuncionario.getText(),null, 0);
+        
+        funcionario.setEndereco(campoEndereco.getText()); 
+        funcionario.setTelefone(campoTelefone.getText()); 
         try {
-            InterfaceGrafica.em.getTransaction().begin();
-            InterfaceGrafica.em.persist(funcionario);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().begin();
+            TelaLogin.em.persist(funcionario);
+            TelaLogin.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Funcionário salvo com sucesso", "Sucesso", 1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -197,7 +227,11 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton botaoEnviarJanelaFuncionario;
     private javax.swing.JTextField campoCPFFuncionario;
     private javax.swing.JTextField campoCargoFuncionario;
+    private javax.swing.JTextField campoEndereco;
     private javax.swing.JTextField campoNomeFuncionario;
+    private javax.swing.JTextField campoTelefone;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel rotuloCPFFuncionario;
     private javax.swing.JLabel rotuloCargoFuncionario;

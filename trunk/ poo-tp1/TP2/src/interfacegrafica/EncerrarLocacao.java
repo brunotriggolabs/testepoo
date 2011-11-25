@@ -71,21 +71,26 @@ public class EncerrarLocacao extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Encerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Preço:");
 
@@ -94,36 +99,36 @@ public class EncerrarLocacao extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton2))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rotuloPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rotuloPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(rotuloPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rotuloPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(47, 47, 47))
         );
 
         pack();
@@ -140,6 +145,10 @@ public class EncerrarLocacao extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,10 +198,10 @@ public class EncerrarLocacao extends javax.swing.JFrame {
 
     private void encerraLocacao() throws IOException {
         
-        InterfaceGrafica.em.getTransaction().begin();
-        Query query = InterfaceGrafica.em.createQuery("from Locacao l where l.placa = :placa and l.alugado = :true");
-        query.setParameter("qualquer", campoPlaca.getText());
-        query.setParameter("true", String.valueOf(true));
+        TelaLogin.em.getTransaction().begin();
+        Query query = TelaLogin.em.createQuery("from Locacao l where l.placa = :placa and l.alugado = :true");
+        query.setParameter("placa", campoPlaca.getText());
+        query.setParameter("true", Boolean.parseBoolean("true"));
         
         Locacao loc = (Locacao)query.getSingleResult();
                
@@ -200,18 +209,18 @@ public class EncerrarLocacao extends javax.swing.JFrame {
         
         if (loc.getPlaca() == null) {
             JOptionPane.showMessageDialog(this, "Não há veículos cadastrados com essa placa", "Erro", 0);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         } else {
             loc.setAlugado(false);
             loc.setFinalizado(true);
             loc.setPreco(calculoPreco(loc));
-            InterfaceGrafica.em.merge(loc);
-            Query query2 = InterfaceGrafica.em.createQuery("from Veiculo v where v.placa = :placa");
+            TelaLogin.em.merge(loc);
+            Query query2 = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
             query2.setParameter("placa", campoPlaca.getText());
             Veiculo vec = (Veiculo) query2.getSingleResult();
             vec.setDisponivel(true);
-            InterfaceGrafica.em.merge(vec);            
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.merge(vec);            
+            TelaLogin.em.getTransaction().commit();
             rotuloPreco.setText(String.valueOf(loc.getPreco()));
             rotuloPreco.setVisible(true);
         }
@@ -219,7 +228,7 @@ public class EncerrarLocacao extends javax.swing.JFrame {
     
     private double calculoPreco(Locacao loc) {
         
-        Query query = InterfaceGrafica.em.createQuery("from TipoLocacao t where t.tipo = :tipo");
+        Query query = TelaLogin.em.createQuery("from TipoLocacao t where t.tipo = :tipo");
         query.setParameter("tipo", loc.getTipoLocacao());
         
         TipoLocacao tipoLoc = (TipoLocacao)query.getSingleResult();
@@ -260,7 +269,7 @@ public class EncerrarLocacao extends javax.swing.JFrame {
                 dias = ((loc.getDiaEntrada() - loc.getAnoSaida()) * 365) - ((loc.getMesEntrada() - loc.getMesSaida()) * 30) - (loc.getDiaEntrada() - loc.getDiaSaida());
             }
         } else {
-            System.out.println("Dados inválidos!");
+            return 0;
         }
         return dias;
     }

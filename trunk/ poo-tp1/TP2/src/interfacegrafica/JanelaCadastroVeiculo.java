@@ -228,9 +228,9 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
         veiculo.setCategoria(campoCategoria.getText());
         
         try {
-            InterfaceGrafica.em.getTransaction().begin();
-            InterfaceGrafica.em.persist(veiculo);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().begin();
+            TelaLogin.em.persist(veiculo);
+            TelaLogin.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso", "Sucesso", 1);
         } catch (Exception e) {
             e.printStackTrace();

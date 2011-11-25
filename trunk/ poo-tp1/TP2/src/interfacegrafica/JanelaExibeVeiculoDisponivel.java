@@ -10,6 +10,7 @@
  */
 package interfacegrafica;
 
+import interfacegrafica.TelaLogin;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -31,28 +32,29 @@ public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
     private void exibeTabela(){
         Veiculo vec1 = new Veiculo(null, null, null);
         Veiculo vec2;
-        InterfaceGrafica.em.getTransaction().begin();
-        Query query = InterfaceGrafica.em.createQuery("from Veiculo v where v.disponivel = :qualquer");
-        query.setParameter("qualquer", Boolean.parseBoolean("true"));
+        TelaLogin.em.getTransaction().begin();
+        Query query = TelaLogin.em.createQuery("from Veiculo v where v.disponivel = :disp");
+        query.setParameter("disp", Boolean.parseBoolean("true"));
         List lista = new ArrayList<Veiculo>();
         lista = query.getResultList();
         
         if (lista.size() == 0) {
             JOptionPane.showMessageDialog(this, "Não há veículos disponíveis", "Erro", 0);
-            InterfaceGrafica.em.getTransaction().commit();
+            TelaLogin.em.getTransaction().commit();
         } else {
-            
             for (int i = 0; i < lista.size(); i++) {
                 vec2 = (Veiculo) lista.get(i);          //TODO CORRIGIR ERRO DE EXIBIÇÃO NA TABELA!
                 tabelaDisponiveis.setValueAt(vec2.getModelo(), i, 0);
                 tabelaDisponiveis.setValueAt(vec2.getMarca(), i, 1);
                 tabelaDisponiveis.setValueAt(vec2.getCor(), i, 2);
-//                tabelaDisponiveis.setValueAt(vec2.getPlaca(), i, 3);
-//                tabelaDisponiveis.setValueAt(vec2.getObservacoes(), i, 4);
-//                tabelaDisponiveis.setValueAt(vec2.getOpicionais(), i, 5);
-//                tabelaDisponiveis.setValueAt(vec2.getTipo(), i, 6);
+                tabelaDisponiveis.setValueAt(vec2.getPlaca(), i, 3);
+                tabelaDisponiveis.setValueAt(vec2.getObservacoes(), i, 4);
+                tabelaDisponiveis.setValueAt(vec2.getOpicionais(), i, 5);
+                tabelaDisponiveis.setValueAt(vec2.getTipo(), i, 6);
             }
-            InterfaceGrafica.em.getTransaction().commit();
+//            vec2 = (Veiculo) lista.get(0);
+//            tabelaDisponiveis.setValueAt(vec2.getModelo(), 1, 1);
+//            TelaLogin.em.getTransaction().commit();
         }
     }
     
@@ -79,12 +81,63 @@ public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Título 5", "Título 6", "Título 7"
+                "Modelo", "Marca", "Cor", "Placa", "Obs", "Opicionais", "Tipo"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaDisponiveis);
 
         jButton2.setText("OK");
@@ -101,19 +154,19 @@ public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(237, 237, 237)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
