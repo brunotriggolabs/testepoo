@@ -319,15 +319,27 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         locacao.setFinalizado(false);
         GregorianCalendar cal = new GregorianCalendar();
                 
-        locacao.setDiaSaida(cal.get(cal.DAY_OF_MONTH));
-        locacao.setMesSaida(cal.get(cal.MONTH));
-        locacao.setAnoSaida(cal.get(cal.YEAR));
+        locacao.setDiaSaida(cal.get(GregorianCalendar.DAY_OF_MONTH));
+        locacao.setMesSaida(cal.get(GregorianCalendar.MONTH));
+        locacao.setAnoSaida(cal.get(GregorianCalendar.YEAR));
         locacao.setPlaca(campoVerificacaoPlaca.getText());
         
         try {
             locacao.setAlugado(true);
         } catch (IOException ex) {
             Logger.getLogger(JanelaCadastroLocacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            TelaLogin.em.getTransaction().begin();
+            Query query = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
+            query.setParameter("placa", campoVerificacaoPlaca.getText());
+            Veiculo vec = (Veiculo) query.getSingleResult();
+            vec.setDisponivel(false);
+            TelaLogin.em.merge(vec);
+            TelaLogin.em.getTransaction().commit();
+        } catch (NoResultException e) {
+            e.printStackTrace();
         }
         
         try {
@@ -359,7 +371,11 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
             campoPreco.setEnabled(true);
             rotuloPreco.setEnabled(true);
             rotuloTaxa.setEnabled(true);
+            
+            
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
