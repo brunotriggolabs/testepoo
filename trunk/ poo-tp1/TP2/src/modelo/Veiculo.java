@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "veiculo")
 public class Veiculo implements Serializable {
     
-    @Id   
-    @Column(unique = true, nullable = false)
+    @Id
+    @Column(nullable = false)
     private String placa;
     @Column()
     private String marca;
@@ -25,6 +25,8 @@ public class Veiculo implements Serializable {
     private boolean disponivel;
     @Column()
     private int locacao;
+    @Column()
+    private String categoria;
 
     public Veiculo() {
     }
@@ -36,6 +38,14 @@ public class Veiculo implements Serializable {
         this.disponivel = true;
         this.locacao = 0;
         
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
 
     public void setCor(String cor) {

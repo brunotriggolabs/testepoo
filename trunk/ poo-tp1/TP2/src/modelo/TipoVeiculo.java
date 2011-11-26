@@ -11,7 +11,6 @@ public class TipoVeiculo implements Serializable {
     @Column()
     protected double taxaBase;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     protected String tipo;
 
