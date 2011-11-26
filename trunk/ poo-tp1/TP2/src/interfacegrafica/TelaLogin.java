@@ -10,12 +10,12 @@
  */
 package interfacegrafica;
 
-import java.awt.event.KeyListener;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 import modelo.Funcionario;
 
 /**
@@ -49,6 +49,8 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         botaoOK = new javax.swing.JButton();
         rotuloInvalido = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +79,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(176, 176, 176)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(rotuloInvalido)
@@ -91,12 +93,12 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                             .addComponent(campoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))))
-                .addGap(72, 72, 72))
+                .addGap(326, 326, 326))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(campoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -108,22 +110,41 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotuloInvalido)
                     .addComponent(botaoOK))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/carrinho.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setFont(new java.awt.Font("DialogInput", 0, 15)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 1, 1));
+        jLabel4.setText("Locarrão Rent-a-car");
+        jLabel4.setMinimumSize(new java.awt.Dimension(200, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(77, 77, 77))
         );
 
         pack();
@@ -135,9 +156,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void botaoOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOKActionPerformed
         if (verificaLogin()) {
+            InterfaceGrafica.login = campoLogin.getText();
             this.setVisible(false);
             new InterfaceGrafica().setVisible(true);
-            InterfaceGrafica.login = campoLogin.getText();
         } else rotuloInvalido.setVisible(true);
         
     }//GEN-LAST:event_botaoOKActionPerformed
@@ -183,25 +204,29 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel rotuloInvalido;
     // End of variables declaration//GEN-END:variables
 
     private boolean verificaLogin() {
-        
         Funcionario fun2;
+        Query query;
 
         try {
             TelaLogin.em.getTransaction().begin();
-            Query query = TelaLogin.em.createQuery("from Funcionario f where f.cpf = :cpf and f.senha = :senha and f.usuario = :usuario");
+            query = TelaLogin.em.createQuery("from Funcionario f where f.cpf = :cpf and f.senha = :senha and f.usuario = :usuario");
             query.setParameter("cpf", campoLogin.getText());
             query.setParameter("senha", String.valueOf(campoSenha.getPassword()));
             query.setParameter("usuario", 1);
             fun2 = (Funcionario) query.getSingleResult();
         } catch (NoResultException e) {
-            e.printStackTrace();
+            System.out.println("EROOOOOO");
+            TelaLogin.em.getTransaction().commit();
             return false;
         }
+
         TelaLogin.em.getTransaction().commit();
         return true;
     }

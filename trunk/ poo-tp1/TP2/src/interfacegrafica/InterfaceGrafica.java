@@ -32,12 +32,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     public InterfaceGrafica() {
         initComponents();
         int tipoUsuario = verificarTipoUsuario();
+        JOptionPane.showMessageDialog(this, tipoUsuario);
         if (tipoUsuario == 2) {
-            cadastroUsuario.setVisible(false);
+            botaoCadastraUsuario.setVisible(false);
         } else if (tipoUsuario == 3) {
-            cadastroUsuario.setVisible(false);
-        } else if (tipoUsuario == 0) {
-            
+            botaoCadastraUsuario.setVisible(false);
+        } else if (tipoUsuario == 10) {
+            botaoCadastraUsuario.setVisible(false);
         }
     }
 
@@ -56,6 +57,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        botaoCadastraUsuario = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         botaoLocacoesEmAberto = new javax.swing.JButton();
         botaoLocacoesFinalizadas = new javax.swing.JButton();
@@ -108,6 +110,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             }
         });
 
+        botaoCadastraUsuario.setText("Usuário");
+        botaoCadastraUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCadastraUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,7 +132,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botaoCadastraUsuario)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +145,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(botaoCadastraUsuario))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -181,7 +193,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(listagemVeiculoProcurado)
                             .addComponent(botaoListagemVeiculoRentavel))))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +208,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     .addComponent(listagemVeiculoProcurado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoListagemVeiculosDisponiveis)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
@@ -222,7 +234,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoPesquisaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addComponent(botaoPesquisaCategoriaVeiculo)
                 .addContainerGap())
         );
@@ -252,14 +264,14 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(179, 179, 179)
                 .addComponent(botaoEncerrarLocacao)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoEncerrarLocacao)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -283,10 +295,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -320,6 +332,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoLocacoesEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLocacoesEmAbertoActionPerformed
         // TODO add your handling code here:
         new JanelaVerificaLocacoesEmAberto().setVisible(true);
+        
     }//GEN-LAST:event_botaoLocacoesEmAbertoActionPerformed
 
 
@@ -348,6 +361,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         // TODO add your handling code here:
         new EncerrarLocacao().setVisible(true);
     }//GEN-LAST:event_botaoEncerrarLocacaoActionPerformed
+
+    private void botaoCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastraUsuarioActionPerformed
+        new JanelaCadastroUsuario().setVisible(true);
+    }//GEN-LAST:event_botaoCadastraUsuarioActionPerformed
 
 
     /**
@@ -387,6 +404,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastraCliente;
+    private javax.swing.JButton botaoCadastraUsuario;
     private javax.swing.JButton botaoEncerrarLocacao;
     private javax.swing.JButton botaoListagemVeiculoRentavel;
     private javax.swing.JButton botaoListagemVeiculosDisponiveis;
@@ -415,11 +433,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         try {
             TelaLogin.em.getTransaction().begin();
             query = TelaLogin.em.createQuery("from Funcionario f where f.cpf = :cpf");
-            query.setParameter("cpf", this.login);
+            query.setParameter("cpf", login);
             fun = (Funcionario) query.getSingleResult();
         } catch (NoResultException e) {
             e.printStackTrace();
-            return 0;
+            return 10;
         }
         
         if (fun.getCargo().equals("Administrador")) {
