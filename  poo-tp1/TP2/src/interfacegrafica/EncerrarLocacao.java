@@ -13,6 +13,7 @@ package interfacegrafica;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,7 +138,7 @@ public class EncerrarLocacao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja encerrar a locação?", "Confirmação", 0); //SIM == 0 NÃO == 1
-        
+
         if (opcao == 0) {
             try {
                 encerraLocacao();
@@ -198,46 +199,51 @@ public class EncerrarLocacao extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void encerraLocacao() throws IOException {
-        
+
         TelaLogin.em.getTransaction().begin();
         Query query = TelaLogin.em.createQuery("from Locacao l where l.placa = :placa and l.alugado = :true");
         query.setParameter("placa", campoPlaca.getText());
         query.setParameter("true", Boolean.parseBoolean("true"));
-        
-        Locacao loc = (Locacao)query.getSingleResult();
-               
-        
-        
+
+        Locacao loc;
+        List lista = new ArrayList<Locacao>();
+        lista = query.getResultList();
+
+
+        loc = (Locacao) lista.get(lista.size() - 1);
+
         if (loc.getPlaca() == null) {
             JOptionPane.showMessageDialog(this, "Não há veículos cadastrados com essa placa", "Erro", 0);
             TelaLogin.em.getTransaction().commit();
         } else {
+            GregorianCalendar cal = new GregorianCalendar();
             loc.setAlugado(false);
             loc.setFinalizado(true);
-            loc.setDiaEntrada(Calendar.DAY_OF_MONTH);
-            loc.setMesEntrada(Calendar.MONTH);
-            loc.setAnoEntrada(Calendar.YEAR + 1900);
+            loc.setDiaEntrada(cal.get(GregorianCalendar.DAY_OF_MONTH));
+            loc.setMesEntrada(cal.get(GregorianCalendar.MONTH + 1));
+            loc.setAnoEntrada(cal.get(GregorianCalendar.YEAR));
             loc.setPreco(calcularPreco(loc));
             TelaLogin.em.merge(loc);
             Query query2 = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
             query2.setParameter("placa", campoPlaca.getText());
             Veiculo vec = (Veiculo) query2.getSingleResult();
             vec.setDisponivel(true);
-            TelaLogin.em.merge(vec);            
+            TelaLogin.em.merge(vec);
             TelaLogin.em.getTransaction().commit();
             rotuloPreco.setText(String.valueOf(loc.getPreco()));
             rotuloPreco.setSize(7, 10);
             rotuloPreco.setVisible(true);
+
         }
     }
-    
+
     private double calcularPreco(Locacao loc) {
-        
-        Query query = TelaLogin.em.createQuery("from TipoLocacao t where t.tipo = :tipo");
-        query.setParameter("tipo", loc.getTipoLocacao());
-        
-        TipoLocacao tipoLoc = (TipoLocacao)query.getSingleResult();
-        
+
+        Query query = TelaLogin.em.createQuery("from TipoLocacao t where t.id = :id");
+        query.setParameter("id", loc.getTipoLocacao());
+
+        TipoLocacao tipoLoc = (TipoLocacao) query.getSingleResult();
+
 
         if (tipoLoc.getTipo() == 1) {
             double p = (loc.getKmEntrada() - loc.getKmSaida()) + (tipoLoc.getTaxaBase() * calculaDias(loc));
