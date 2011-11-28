@@ -14,13 +14,14 @@ import javax.net.ssl.ManagerFactoryParameters;
 import javax.persistence.*;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaCadastroCliente extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaCadastroCliente.class);
     /** Creates new form JanelaCadastroCliente */
     public JanelaCadastroCliente() {
         initComponents();
@@ -163,7 +164,7 @@ public class JanelaCadastroCliente extends javax.swing.JFrame {
         TelaLogin.em.persist(cliente);
         TelaLogin.em.getTransaction().commit();
         JOptionPane.showMessageDialog(this, "Cliente salvo com sucesso", "Sucesso", 1);
-
+        logger.info("O usuário " + InterfaceGrafica.login + " cadastrou um cliente.");
         this.dispose();
     }//GEN-LAST:event_botaoEnviarClienteActionPerformed
 

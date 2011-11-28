@@ -14,13 +14,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import modelo.Motorista;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaCadastroMotorista extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaCadastroLocacao.class);
     /** Creates new form JanelaCadastroMotorista */
     public JanelaCadastroMotorista() {
         initComponents();
@@ -179,6 +180,7 @@ public class JanelaCadastroMotorista extends javax.swing.JFrame {
         TelaLogin.em.getTransaction().commit();
         JOptionPane.showMessageDialog(this, "Motorista cadastrado com sucesso");
         this.dispose();
+        logger.info("O usuário " + InterfaceGrafica.login + " cadastrou um motorista.");
     }//GEN-LAST:event_botaoEnviarMotoristaActionPerformed
 
     private void botaoEnviarMotoristaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botaoEnviarMotoristaKeyPressed

@@ -16,13 +16,14 @@ import javax.persistence.Persistence;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.Funcionario;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaCadastroFuncionario extends javax.swing.JFrame {
-
+private static Logger logger = Logger.getLogger(JanelaCadastroFuncionario.class);
     /** Creates new form JanelaCadastroFuncionario */
     public JanelaCadastroFuncionario() {
         initComponents();
@@ -180,6 +181,7 @@ public class JanelaCadastroFuncionario extends javax.swing.JFrame {
             TelaLogin.em.persist(funcionario);
             TelaLogin.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Funcionário salvo com sucesso", "Sucesso", 1);
+            logger.info("O usuário " + InterfaceGrafica.login + " cadastrou um funcionário.");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Falha ao salvar o funcionário", "Erro", 2);

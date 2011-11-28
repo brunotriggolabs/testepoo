@@ -25,7 +25,6 @@ import modelo.Funcionario;
  * @author samuel
  */
 public class InterfaceGrafica extends javax.swing.JFrame {
-
     // Armazena o CPF do usuário que está logado no sistema
     public static String login;
     /** Creates new form InterfaceGrafica */
@@ -318,7 +317,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCadastraClienteActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         new JanelaCadastroFuncionario().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

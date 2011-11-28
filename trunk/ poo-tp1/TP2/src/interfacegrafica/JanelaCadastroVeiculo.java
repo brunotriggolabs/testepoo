@@ -17,13 +17,14 @@ import javax.swing.JOptionPane;
 import modelo.Data;
 import modelo.Locacao;
 import modelo.Veiculo;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaCadastroVeiculo extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaCadastroVeiculo.class);
     /** Creates new form JanelaCadastroVeiculo */
     public JanelaCadastroVeiculo() {
         initComponents();
@@ -222,6 +223,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botaoEnviarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarVeiculoActionPerformed
+        logger.info("O usuário " + InterfaceGrafica.login + " cadastrou um veículo.");
         Veiculo veiculo = new Veiculo(campoPlaca.getText(), campoMarca.getText(), campoModelo.getText());
         veiculo.setCor(campoCor.getText());
         veiculo.setObservacoes(areaTextoObservacoes.getText());

@@ -95,7 +95,7 @@
                   <Component id="campoFimMes" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoFimAno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="botaoConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botaoLimpar" alignment="3" min="-2" max="-2" attributes="0"/>

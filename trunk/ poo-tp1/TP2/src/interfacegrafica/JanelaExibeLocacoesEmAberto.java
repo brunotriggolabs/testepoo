@@ -16,13 +16,14 @@ import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import modelo.Data;
 import modelo.Locacao;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaExibeLocacoesEmAberto.class);
     /** Creates new form JanelaExibeLocacoesEmAberto */
     public JanelaExibeLocacoesEmAberto() {
         initComponents();
@@ -341,6 +342,7 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoOKActionPerformed
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
+        logger.info("O usuário " + InterfaceGrafica.login + " exibiu as locações em aberto.");
         tabelaExibeLocacoesEmAberto();
     }//GEN-LAST:event_botaoConfirmarActionPerformed
 

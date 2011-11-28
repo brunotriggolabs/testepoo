@@ -15,13 +15,14 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import modelo.Veiculo;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Lucas
  */
 public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaPesquisaDisponibilidadeCategoria.class);
     /** Creates new form JanelaPesquisaVeiculoDisponivel */
     public JanelaPesquisaDisponibilidadeCategoria() {
         initComponents();
@@ -149,12 +150,11 @@ public class JanelaPesquisaDisponibilidadeCategoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCancelarCategoriaDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarCategoriaDisponivelActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_botaoCancelarCategoriaDisponivelActionPerformed
 
     private void botaoPesquisarCategoriaDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisarCategoriaDisponivelActionPerformed
-        // TODO add your handling code here:
+        logger.info("O usuário " + InterfaceGrafica.login + " pesquisou uma categoria de veículos.");
         tabelaCategoriaDisponivel.setVisible(true);
         exibeTabela();
     }//GEN-LAST:event_botaoPesquisarCategoriaDisponivelActionPerformed

@@ -12,23 +12,21 @@ package interfacegrafica;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import modelo.Locacao;
 import modelo.TipoLocacao;
 import modelo.Veiculo;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class EncerrarLocacao extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(EncerrarLocacao.class);
     /** Creates new form EncerrarLocacao */
     public EncerrarLocacao() {
         initComponents();
@@ -137,13 +135,15 @@ public class EncerrarLocacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja encerrar a locação?", "Confirmação", 0); //SIM == 0 NÃO == 1
 
         if (opcao == 0) {
             try {
                 encerraLocacao();
+                logger.info("O usuário " + InterfaceGrafica.login + " encerrou uma locação.");
             } catch (IOException ex) {
-                Logger.getLogger(EncerrarLocacao.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

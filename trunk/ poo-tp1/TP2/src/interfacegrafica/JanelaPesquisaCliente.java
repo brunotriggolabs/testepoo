@@ -15,13 +15,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.persistence.Query;
 import modelo.*;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Lucas
  */
 public class JanelaPesquisaCliente extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(EncerrarLocacao.class);
     /** Creates new form JanelaPesquisaCliente */
     public JanelaPesquisaCliente() {
         initComponents();
@@ -169,6 +170,7 @@ public class JanelaPesquisaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCancelarPesquisaClienteActionPerformed
 
     private void botaoPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisarClienteActionPerformed
+        logger.info("O usuário " + InterfaceGrafica.login + " pesquisou um cliente.");
         tabelaNomeClientes.setVisible(true);
         
         Cliente cli = new Cliente(CampoNomeCliente.getText(), "");

@@ -10,6 +10,8 @@
  */
 package interfacegrafica;
 
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,6 +19,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import modelo.Funcionario;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -26,11 +30,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
     static public final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ClienteJPA");
     static public final EntityManager em = emf.createEntityManager();
+    private static Logger logger = Logger.getLogger(TelaLogin.class);
     
     /** Creates new form TelaLogin */
     public TelaLogin() {
         initComponents();
         rotuloInvalido.setVisible(false);
+        PropertyConfigurator.configure("log4j.properties");
     }
 
     /** This method is called from within the constructor to
@@ -152,7 +158,8 @@ public class TelaLogin extends javax.swing.JFrame {
             InterfaceGrafica.login = campoLogin.getText();
             this.setVisible(false);
             new InterfaceGrafica().setVisible(true);
-        } else rotuloInvalido.setVisible(true);
+            logger.info("O usuário " + InterfaceGrafica.login + " realizou login.");
+        } else rotuloInvalido.setVisible(true);        
         
     }//GEN-LAST:event_botaoOKActionPerformed
 
@@ -214,7 +221,7 @@ public class TelaLogin extends javax.swing.JFrame {
             query.setParameter("usuario", 1);
             fun2 = (Funcionario) query.getSingleResult();
         } catch (NoResultException e) {
-            System.out.println("EROOOOOO");
+            logger.info("O CPF: " + campoLogin.getText() + "tentou logar no sistema");
             TelaLogin.em.getTransaction().commit();
             return false;
         }
