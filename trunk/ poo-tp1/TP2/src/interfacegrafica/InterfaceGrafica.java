@@ -159,6 +159,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
 
         botaoLocacoesFinalizadas.setText("Locacões Finalizadas");
+        botaoLocacoesFinalizadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoLocacoesFinalizadasActionPerformed(evt);
+            }
+        });
 
         botaoListagemVeiculosDisponiveis.setText("Veículos Disponíveis");
         botaoListagemVeiculosDisponiveis.addActionListener(new java.awt.event.ActionListener() {
@@ -363,6 +368,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void listagemVeiculoProcuradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listagemVeiculoProcuradoActionPerformed
         new ExibeVeiculosMaisProcurados().setVisible(true);
     }//GEN-LAST:event_listagemVeiculoProcuradoActionPerformed
+
+    private void botaoLocacoesFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLocacoesFinalizadasActionPerformed
+        new ExibeLocacoesFinalizadas().setVisible(true);
+    }//GEN-LAST:event_botaoLocacoesFinalizadasActionPerformed
 
     /**
      * @param args the command line arguments

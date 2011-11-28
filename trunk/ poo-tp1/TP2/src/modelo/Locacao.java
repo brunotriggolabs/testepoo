@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="locacao")
 public class Locacao implements Serializable {
-
     @Column
     private int kmSaida;
     @Column

@@ -216,7 +216,7 @@ public class EncerrarLocacao extends javax.swing.JFrame {
             loc.setFinalizado(true);
             loc.setDiaEntrada(Calendar.DAY_OF_MONTH);
             loc.setMesEntrada(Calendar.MONTH);
-            loc.setAnoEntrada(Calendar.YEAR);
+            loc.setAnoEntrada(Calendar.YEAR + 1900);
             loc.setPreco(calcularPreco(loc));
             TelaLogin.em.merge(loc);
             Query query2 = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
