@@ -10,12 +10,14 @@
  */
 package interfacegrafica;
 
+import org.apache.log4j.Logger;
+
 /**
  *
  * @author samuel
  */
 public class JanelaVerificaLocacoesEmAberto extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaVerificaLocacoesEmAberto.class);
     /** Creates new form JanelaVerificaLocacoesEmAberto */
     public JanelaVerificaLocacoesEmAberto() {
         initComponents();
@@ -133,7 +135,7 @@ public class JanelaVerificaLocacoesEmAberto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        logger.info("O usuário " + InterfaceGrafica.login + " encerrou uma locação.");
         new JanelaExibeLocacoesEmAberto().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

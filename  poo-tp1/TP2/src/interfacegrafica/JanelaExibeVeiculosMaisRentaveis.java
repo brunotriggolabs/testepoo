@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import modelo.Locacao;
 import modelo.Veiculo;
 import modelo.Vetor;
+import org.apache.log4j.Logger;
 import org.hibernate.mapping.Array;
 
 /**
@@ -23,10 +24,11 @@ import org.hibernate.mapping.Array;
  * @author samuel
  */
 public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaExibeVeiculosMaisRentaveis.class);
     /** Creates new form JanelaExibeVeiculosMaisRentaveis */
     public JanelaExibeVeiculosMaisRentaveis() {
         initComponents();
+        logger.info("O usuário " + InterfaceGrafica.login + " exibiu os veículos mais rentáveis.");
         calculaVeiculosMaisRentaveis();
     }
 

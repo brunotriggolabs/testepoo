@@ -16,16 +16,18 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import modelo.Veiculo;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaExibeVeiculoDisponivel extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaExibeVeiculoDisponivel.class);
     /** Creates new form JanelaExibeVeiculoDisponivel */
     public JanelaExibeVeiculoDisponivel() {
         initComponents();
+        logger.info("O usuário " + InterfaceGrafica.login + " exibiu os veículos disponíveis.");
         exibeTabela();
     }
     

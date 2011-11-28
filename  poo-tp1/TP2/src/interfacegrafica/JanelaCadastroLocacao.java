@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -28,13 +27,15 @@ import modelo.Cliente;
 import modelo.Locacao;
 import modelo.TipoLocacao;
 import modelo.Veiculo;
+import org.apache.log4j.Logger;
+
 
 /**
  *
  * @author samuel
  */
 public class JanelaCadastroLocacao extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaCadastroLocacao.class);
     /** Creates new form JanelaCadastroLocacao */
     public JanelaCadastroLocacao() {
         initComponents();
@@ -301,68 +302,69 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoEnviarJanelaLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarJanelaLocacaoActionPerformed
-        
-        rotuloLocacaoporKm.getSelectedObjects();
-        int escolha = 0;
-        
-        if (rotuloLocacaoKmLivre.isSelected()) {
-            escolha = 1;
-        } else if (rotuloLocacaoporKm.isSelected()) {
-            escolha = 2;
-        }
-     
-        Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText().trim()), escolha, Integer.parseInt(campoPrevisaoDias.getText().trim()));
-        TipoLocacao tipoLocacao = new TipoLocacao(escolha, Double.parseDouble(campoTaxa.getText()), Double.parseDouble(campoPreco.getText()));
         try {
+            rotuloLocacaoporKm.getSelectedObjects();
+            int escolha = 0;
+            
+            if (rotuloLocacaoKmLivre.isSelected()) {
+                escolha = 1;
+            } else if (rotuloLocacaoporKm.isSelected()) {
+                escolha = 2;
+            }
+         
+            Locacao locacao = new Locacao(Integer.parseInt(campoKmSaida.getText().trim()), escolha, Integer.parseInt(campoPrevisaoDias.getText().trim()));
+            TipoLocacao tipoLocacao = new TipoLocacao(escolha, Double.parseDouble(campoTaxa.getText()), Double.parseDouble(campoPreco.getText()));
+
             locacao.setAlugado(true);
+            locacao.setFinalizado(false);
+            GregorianCalendar cal = new GregorianCalendar();
+            locacao.setDiaSaida(cal.get(GregorianCalendar.DAY_OF_MONTH));
+            locacao.setMesSaida(cal.get(GregorianCalendar.MONTH + 1));
+            locacao.setAnoSaida(cal.get(GregorianCalendar.YEAR));
+            locacao.setAnoEntrada(0);
+            locacao.setDiaEntrada(0);
+            locacao.setMesEntrada(0);
+            locacao.setPlaca(campoVerificacaoPlaca.getText());
+            
+            try {
+                locacao.setAlugado(true);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+            try {
+                TelaLogin.em.getTransaction().begin();
+                Query query = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
+                query.setParameter("placa", campoVerificacaoPlaca.getText());
+                Veiculo vec = (Veiculo) query.getSingleResult();
+                vec.setDisponivel(false);
+                vec.setNumLocacoes(vec.getNumLocacoes() + 1);
+                TelaLogin.em.merge(vec);
+                TelaLogin.em.getTransaction().commit();
+            } catch (NoResultException e) {
+                e.printStackTrace();
+            }
+            
+            try {
+                TelaLogin.em.getTransaction().begin();
+                TelaLogin.em.persist(tipoLocacao);
+                Query query = TelaLogin.em.createQuery("from TipoLocacao t");
+                List lista = new ArrayList<TipoLocacao>();
+                lista = query.getResultList();
+                TipoLocacao tipoLoc = (TipoLocacao) lista.get(lista.size() - 1);
+                locacao.setTipoLocacao(tipoLoc.getId());
+                TelaLogin.em.persist(locacao);
+                TelaLogin.em.getTransaction().commit();
+                JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Erro no cadastro da locação", "Erro", 2);
+            }
+            this.dispose();
+            logger.info("O usuário " + InterfaceGrafica.login + " cadastrou uma locação.");
         } catch (IOException ex) {
-            Logger.getLogger(JanelaCadastroLocacao.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaCadastroLocacao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        locacao.setFinalizado(false);
-        GregorianCalendar cal = new GregorianCalendar();
-        locacao.setDiaSaida(cal.get(GregorianCalendar.DAY_OF_MONTH));
-        locacao.setMesSaida(cal.get(GregorianCalendar.MONTH + 1));
-        locacao.setAnoSaida(cal.get(GregorianCalendar.YEAR));
-        locacao.setAnoEntrada(0);
-        locacao.setDiaEntrada(0);
-        locacao.setMesEntrada(0);
-        locacao.setPlaca(campoVerificacaoPlaca.getText());
-        
-        try {
-            locacao.setAlugado(true);
-        } catch (IOException ex) {
-            Logger.getLogger(JanelaCadastroLocacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            TelaLogin.em.getTransaction().begin();
-            Query query = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
-            query.setParameter("placa", campoVerificacaoPlaca.getText());
-            Veiculo vec = (Veiculo) query.getSingleResult();
-            vec.setDisponivel(false);
-            vec.setNumLocacoes(vec.getNumLocacoes() + 1);
-            TelaLogin.em.merge(vec);
-            TelaLogin.em.getTransaction().commit();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-        }
-        
-        try {
-            TelaLogin.em.getTransaction().begin();
-            TelaLogin.em.persist(tipoLocacao);
-            Query query = TelaLogin.em.createQuery("from TipoLocacao t");
-            List lista = new ArrayList<TipoLocacao>();
-            lista = query.getResultList();
-            TipoLocacao tipoLoc = (TipoLocacao) lista.get(lista.size() - 1);
-            locacao.setTipoLocacao(tipoLoc.getId());
-            TelaLogin.em.persist(locacao);
-            TelaLogin.em.getTransaction().commit();
-            JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro no cadastro da locação", "Erro", 2);
-        }
-        this.dispose();
     }//GEN-LAST:event_botaoEnviarJanelaLocacaoActionPerformed
 
     private void botaoCancelarJanelaLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarJanelaLocacaoActionPerformed

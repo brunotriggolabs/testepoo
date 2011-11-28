@@ -14,16 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import modelo.Veiculo;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class ExibeVeiculosMaisProcurados extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(ExibeVeiculosMaisProcurados.class);
     /** Creates new form ExibeVeiculosMaisProcurados */
     public ExibeVeiculosMaisProcurados() {
         initComponents();
+        logger.info("O usuário " + InterfaceGrafica.login + " exibiu os veiculos mais procurados.");
         atualizarTabela();
     }
 

@@ -16,13 +16,14 @@ import javax.persistence.Persistence;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.Funcionario;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author samuel
  */
 public class JanelaCadastroUsuario extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(JanelaCadastroUsuario.class);
     /** Creates new form JanelaCadastroUsuario */
     public JanelaCadastroUsuario() {
         initComponents();
@@ -192,8 +193,8 @@ public class JanelaCadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Funcionario funcionario = new Funcionario(campoNomeFuncionario.getText(), campoCPFFuncionario.getText(), campoCargoFuncionario.getText(),String.valueOf(campoSenha.getPassword()), 1);
-        
+        logger.info("O usuário " + InterfaceGrafica.login + " cadastrou um cliente.");        
+        Funcionario funcionario = new Funcionario(campoNomeFuncionario.getText(), campoCPFFuncionario.getText(), campoCargoFuncionario.getText(),String.valueOf(campoSenha.getPassword()), 1);       
         funcionario.setEndereco(campoEndereco.getText()); 
         funcionario.setTelefone(campoTelefone.getText()); 
         try {

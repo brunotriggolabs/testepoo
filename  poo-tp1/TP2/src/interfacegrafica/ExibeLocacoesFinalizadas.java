@@ -21,8 +21,9 @@ import modelo.Locacao;
  *
  * @author samuel
  */
+import org.apache.log4j.Logger;
 public class ExibeLocacoesFinalizadas extends javax.swing.JFrame {
-
+    private static Logger logger = Logger.getLogger(ExibeLocacoesFinalizadas.class);
     /** Creates new form ExibeLocacoesFinalizadas */
     public ExibeLocacoesFinalizadas() {
         initComponents();
@@ -254,6 +255,7 @@ public class ExibeLocacoesFinalizadas extends javax.swing.JFrame {
     }//GEN-LAST:event_campoDiaPeriodoActionPerformed
 
     private void botaoEnviarPeriodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEnviarPeriodosActionPerformed
+        logger.info("O usuário " + InterfaceGrafica.login + " exibiu as locações finalizadas.");
         exibeTabela();
     }//GEN-LAST:event_botaoEnviarPeriodosActionPerformed
 
