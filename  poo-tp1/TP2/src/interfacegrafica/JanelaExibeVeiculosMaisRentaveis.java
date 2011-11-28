@@ -10,6 +10,14 @@
  */
 package interfacegrafica;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import modelo.Locacao;
+import modelo.Veiculo;
+import modelo.Vetor;
+import org.hibernate.mapping.Array;
+
 /**
  *
  * @author samuel
@@ -19,6 +27,7 @@ public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
     /** Creates new form JanelaExibeVeiculosMaisRentaveis */
     public JanelaExibeVeiculosMaisRentaveis() {
         initComponents();
+        calculaVeiculosMaisRentaveis();
     }
 
     /** This method is called from within the constructor to
@@ -33,7 +42,7 @@ public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaVeiculosRentaveis = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,25 +51,104 @@ public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVeiculosRentaveis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Placa", "Preço"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelaVeiculosRentaveis);
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,21 +161,17 @@ public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(302, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(279, 279, 279))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -117,7 +201,6 @@ public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -161,6 +244,66 @@ public class JanelaExibeVeiculosMaisRentaveis extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaVeiculosRentaveis;
     // End of variables declaration//GEN-END:variables
+
+    private void calculaVeiculosMaisRentaveis() {
+        Veiculo veiculo;
+        String placa;
+        Locacao loc;
+        TelaLogin.em.getTransaction().begin();
+        Query query1 = TelaLogin.em.createQuery("from Veiculo v");
+        List lista = new ArrayList<Veiculo>();
+        lista = query1.getResultList();
+        double soma = 0;
+        Vetor vetor[] = new Vetor[lista.size()];
+        Vetor vet = new Vetor();
+        for (int i = 0; i < lista.size(); i++) {
+            soma = 0;
+            veiculo = (Veiculo) lista.get(i);
+            placa = veiculo.getPlaca();
+            Query queryLoc = TelaLogin.em.createQuery("from Locacao l where l.placa = :placa and l.finalizado = :finalizado");
+            queryLoc.setParameter("placa", placa);
+            queryLoc.setParameter("finalizado", true);
+            List listaLoc = new ArrayList<Locacao>();
+            listaLoc = queryLoc.getResultList();
+
+            for (int j = 0; j < listaLoc.size(); j++) {
+                loc = (Locacao) listaLoc.get(j);
+                soma += loc.getPreco();
+            }
+
+            vet.setPlaca(placa);
+            vet.setPreco(soma);
+            vetor[i] = vet;
+        }
+        vetor = ordena(vetor);
+        exibeTabela(vetor, lista);
+        TelaLogin.em.getTransaction().commit();
+    }
+
+    private Vetor[] ordena(Vetor[] vetor) {
+        boolean houveTroca = true;
+        while (houveTroca == true) {
+            houveTroca = false;
+            for (int i = 0; i < (vetor.length) - 1; i++) {
+                if (vetor[i].getPreco() > vetor[i + 1].getPreco()) {
+                    Vetor vec = vetor[i + 1];
+                    vetor[i + 1] = vetor[i];
+                    vetor[i] = vec;
+                    houveTroca = true;
+                }
+            }
+        }
+        return vetor;
+    }
+    
+    private void exibeTabela(Vetor[] vetor,List lista) {
+        Vetor vec;
+        for (int i = 0; i < 10 && i < lista.size(); i++) {
+        vec = vetor[i];
+        tabelaVeiculosRentaveis.setValueAt(vec.getPlaca(), i, 0);
+        tabelaVeiculosRentaveis.setValueAt(vec.getPreco(), i, 1);
+        }
+    }
 }

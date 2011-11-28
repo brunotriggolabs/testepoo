@@ -216,6 +216,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Locac&#xf5;es Finalizadas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLocacoesFinalizadasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botaoListagemVeiculosDisponiveis">
           <Properties>
