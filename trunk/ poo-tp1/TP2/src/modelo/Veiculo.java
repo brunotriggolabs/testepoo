@@ -27,6 +27,8 @@ public class Veiculo implements Serializable {
     private int locacao;
     @Column()
     private String categoria;
+    @Column()
+    private int numLocacoes = 0;
 
     public Veiculo() {
     }
@@ -39,6 +41,16 @@ public class Veiculo implements Serializable {
         this.locacao = 0;
         
     }
+
+    public int getNumLocacoes() {
+        return numLocacoes;
+    }
+
+    public void setNumLocacoes(int numLocacoes) {
+        this.numLocacoes = numLocacoes;
+    }
+    
+    
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;

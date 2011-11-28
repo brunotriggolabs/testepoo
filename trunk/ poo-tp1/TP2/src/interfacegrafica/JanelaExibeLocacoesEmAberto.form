@@ -38,21 +38,26 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="campoFim" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="campoInicio" alignment="0" pref="122" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="campoFimDia" alignment="0" max="32767" attributes="1"/>
+                                  <Component id="campoInicioDia" alignment="0" pref="30" max="32767" attributes="1"/>
                               </Group>
                           </Group>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="campoFimMes" min="0" pref="0" max="32767" attributes="1"/>
+                          <Component id="campoInicioMes" alignment="0" pref="29" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="campoFimAno" min="0" pref="0" max="32767" attributes="1"/>
+                          <Component id="campoInicioAno" alignment="0" pref="49" max="32767" attributes="1"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -64,24 +69,33 @@
               <Component id="botaoConfirmar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="372" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="641" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoInicioDia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoInicioMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoInicioAno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoFim" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoFimDia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoFimMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoFimAno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="botaoConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botaoLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -139,67 +153,43 @@
             <Component class="javax.swing.JTable" name="tabelaLocacoesEmAberto">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="10" rowCount="75">
+                  <Table columnCount="6" rowCount="75">
                     <Column editable="false" title="Id" type="java.lang.Integer"/>
                     <Column editable="false" title="Valor" type="java.lang.Double"/>
                     <Column editable="false" title="Km de Saida" type="java.lang.Double"/>
-                    <Column editable="false" title="Km de Entrada" type="java.lang.Double"/>
                     <Column editable="false" title="Tipo veiculo" type="java.lang.Integer"/>
-                    <Column editable="false" title="Data entrada" type="java.lang.Integer"/>
                     <Column editable="false" title="Data sa&#xed;da" type="java.lang.Integer"/>
                     <Column editable="false" title="Previsao de dias" type="java.lang.Integer"/>
-                    <Column editable="false" title="Alugado" type="java.lang.Boolean"/>
-                    <Column editable="false" title="Finalizado" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="2" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="2" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="5" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="5" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="7" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="7" resizable="false">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="2" resizable="false">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="3" resizable="false">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="3" resizable="false">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="2" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -238,14 +228,14 @@
         <Property name="text" type="java.lang.String" value="In&#xed;cio do per&#xed;odo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoInicio">
+    <Component class="javax.swing.JTextField" name="campoInicioDia">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fim do per&#xed;odo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoFim">
+    <Component class="javax.swing.JTextField" name="campoFimDia">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -264,6 +254,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoInicioMes">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoInicioMesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoInicioAno">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoFimMes">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoFimAno">
     </Component>
   </SubComponents>
 </Form>

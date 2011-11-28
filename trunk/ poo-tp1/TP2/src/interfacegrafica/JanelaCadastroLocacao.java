@@ -11,9 +11,11 @@
 package interfacegrafica;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -318,10 +320,12 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         }
         locacao.setFinalizado(false);
         GregorianCalendar cal = new GregorianCalendar();
-                
         locacao.setDiaSaida(cal.get(GregorianCalendar.DAY_OF_MONTH));
         locacao.setMesSaida(cal.get(GregorianCalendar.MONTH));
         locacao.setAnoSaida(cal.get(GregorianCalendar.YEAR));
+        locacao.setAnoEntrada(0);
+        locacao.setDiaEntrada(0);
+        locacao.setMesEntrada(0);
         locacao.setPlaca(campoVerificacaoPlaca.getText());
         
         try {
@@ -336,6 +340,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
             query.setParameter("placa", campoVerificacaoPlaca.getText());
             Veiculo vec = (Veiculo) query.getSingleResult();
             vec.setDisponivel(false);
+            vec.setNumLocacoes(vec.getNumLocacoes() + 1);
             TelaLogin.em.merge(vec);
             TelaLogin.em.getTransaction().commit();
         } catch (NoResultException e) {
@@ -345,6 +350,11 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         try {
             TelaLogin.em.getTransaction().begin();
             TelaLogin.em.persist(tipoLocacao);
+            Query query = TelaLogin.em.createQuery("from TipoLocacao t");
+            List lista = new ArrayList<TipoLocacao>();
+            lista = query.getResultList();
+            TipoLocacao tipoLoc = (TipoLocacao) lista.get(lista.size() - 1);
+            locacao.setTipoLocacao(tipoLoc.getId());
             TelaLogin.em.persist(locacao);
             TelaLogin.em.getTransaction().commit();
             JOptionPane.showMessageDialog(this, "Locação cadastrada com sucesso", "Sucesso", 1);
@@ -352,7 +362,6 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro no cadastro da locação", "Erro", 2);
         }
-        
         this.dispose();
     }//GEN-LAST:event_botaoEnviarJanelaLocacaoActionPerformed
 

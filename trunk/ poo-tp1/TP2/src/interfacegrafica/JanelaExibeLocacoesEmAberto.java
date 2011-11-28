@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import modelo.Data;
 import modelo.Locacao;
 
 /**
@@ -29,29 +30,41 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
     }
     
     private void tabelaExibeLocacoesEmAberto(){     //FALTAR CALCULAR O PERÍODO!
+        int x = 0;
+        Data inicio = new Data();
+        Data fim = new Data();
+        JOptionPane.showMessageDialog(this, campoFimDia.getText());
+        fim.setDia(Integer.parseInt(campoFimDia.getText()));
+        fim.setMes(Integer.parseInt(campoFimMes.getText()));
+        fim.setAno(Integer.parseInt(campoFimAno.getText()));
+        inicio.setDia(Integer.parseInt(campoInicioDia.getText()));
+        inicio.setMes(Integer.parseInt(campoInicioMes.getText()));
+        inicio.setAno(Integer.parseInt(campoInicioAno.getText()));
         Locacao loc1 = new Locacao(0, 0, 0);
         Locacao loc2;
         List lista = new ArrayList<Locacao>();
 
         TelaLogin.em.getTransaction().begin();
-        Query query = TelaLogin.em.createQuery("from Locacao l where l.alugado = :qualquer");
-        query.setParameter("qualquer", Boolean.parseBoolean("true"));
+        Query query = TelaLogin.em.createQuery("from Locacao l where l.alugado = :alugado");
+        query.setParameter("alugado", Boolean.parseBoolean("true"));
         lista = query.getResultList();
+        TelaLogin.em.getTransaction().commit();
 
         if (lista.size() == 0) {
-            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados com esse nome", "Erro", 0);
-            TelaLogin.em.getTransaction().commit();
+            JOptionPane.showMessageDialog(this, "Não há locações em aberto", "Erro", 0);
         } else {
-            
             for (int i = 0; i < lista.size(); i++) {
                 loc2 = (Locacao) lista.get(i);
-                tabelaLocacoesEmAberto.setValueAt(loc2.getId(), i, 0);
-                tabelaLocacoesEmAberto.setValueAt(loc2.getValor(), i, 1);
-                tabelaLocacoesEmAberto.setValueAt(loc2.getKmSaida(), i, 2);
-                tabelaLocacoesEmAberto.setValueAt(loc2.getKmEntrada(), i, 3);
-                tabelaLocacoesEmAberto.setValueAt(concatenarData(loc2.getDiaEntrada(), loc2.getMesEntrada(), loc2.getAnoEntrada()), i, 4);
+                if (verificaDiasLocacaoAberta(loc2, inicio, fim) == true) {
+                    tabelaLocacoesEmAberto.setValueAt(loc2.getId(), x, 0);
+                    tabelaLocacoesEmAberto.setValueAt(loc2.getValor(), x, 1);
+                    tabelaLocacoesEmAberto.setValueAt(loc2.getKmSaida(), x, 2);
+                    tabelaLocacoesEmAberto.setValueAt(loc2.getTipoVeiculo(), x, 3);
+                    tabelaLocacoesEmAberto.setValueAt(concatenarData(loc2.getDiaEntrada(), loc2.getMesEntrada(), loc2.getAnoEntrada()), x, 4);
+                    tabelaLocacoesEmAberto.setValueAt(loc2.getPrevisaoDias(), x, 5);
+                    x++;
+                }
             }
-            TelaLogin.em.getTransaction().commit();
         }
     }
     
@@ -72,12 +85,16 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
         botaoOK = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        campoInicio = new javax.swing.JTextField();
+        campoInicioDia = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        campoFim = new javax.swing.JTextField();
+        campoFimDia = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         botaoConfirmar = new javax.swing.JButton();
         botaoLimpar = new javax.swing.JButton();
+        campoInicioMes = new javax.swing.JTextField();
+        campoInicioAno = new javax.swing.JTextField();
+        campoFimMes = new javax.swing.JTextField();
+        campoFimAno = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,91 +102,91 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
 
         tabelaLocacoesEmAberto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Valor", "Km de Saida", "Km de Entrada", "Tipo veiculo", "Data entrada", "Data saída", "Previsao de dias", "Alugado", "Finalizado"
+                "Id", "Valor", "Km de Saida", "Tipo veiculo", "Data saída", "Previsao de dias"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -183,22 +200,10 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
         tabelaLocacoesEmAberto.setEnabled(false);
         tabelaLocacoesEmAberto.setOpaque(false);
         jScrollPane1.setViewportView(tabelaLocacoesEmAberto);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(0).setResizable(false);
         tabelaLocacoesEmAberto.getColumnModel().getColumn(0).setPreferredWidth(2);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(1).setResizable(false);
         tabelaLocacoesEmAberto.getColumnModel().getColumn(1).setPreferredWidth(5);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(2).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(3).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(4).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(5).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(6).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(6).setPreferredWidth(7);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(7).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(7).setPreferredWidth(2);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(8).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(8).setPreferredWidth(3);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(9).setResizable(false);
-        tabelaLocacoesEmAberto.getColumnModel().getColumn(9).setPreferredWidth(3);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(4).setPreferredWidth(7);
+        tabelaLocacoesEmAberto.getColumnModel().getColumn(5).setPreferredWidth(2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,6 +251,12 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
 
         botaoLimpar.setText("Limpar");
 
+        campoInicioMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoInicioMesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,17 +274,21 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(campoFim)
-                                    .addComponent(campoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
-                        .addGap(289, 289, 289))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(jLabel3)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(campoFimDia, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(campoInicioDia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoFimMes, 0, 0, Short.MAX_VALUE)
+                            .addComponent(campoInicioMes, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoFimAno, 0, 0, Short.MAX_VALUE)
+                            .addComponent(campoInicioAno, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(260, Short.MAX_VALUE)
@@ -281,21 +296,29 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
                 .addGap(149, 149, 149)
                 .addComponent(botaoConfirmar)
                 .addGap(372, 372, 372))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(jLabel3)
+                .addContainerGap(641, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(campoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addComponent(jLabel3)
-                .addGap(8, 8, 8)
+                    .addComponent(campoInicioDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoInicioMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoInicioAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campoFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                    .addComponent(campoFimDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoFimMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoFimAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoConfirmar)
                     .addComponent(botaoLimpar))
@@ -320,9 +343,12 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoOKActionPerformed
 
     private void botaoConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmarActionPerformed
-        
         tabelaExibeLocacoesEmAberto();
     }//GEN-LAST:event_botaoConfirmarActionPerformed
+
+    private void campoInicioMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoInicioMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoInicioMesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,13 +385,48 @@ public class JanelaExibeLocacoesEmAberto extends javax.swing.JFrame {
             }
         });
     }
+    
+    private boolean verificaDiasLocacaoAberta(Locacao loc, Data inicio, Data fim) {
+        // Verificando se a data de saida do veiculo é menor do que a data de início do período
+        if (loc.getAnoEntrada() < inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() < inicio.getMes())
+                || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() == inicio.getMes() && loc.getDiaEntrada() < inicio.getMes())) {
+            if (loc.getAnoSaida() > fim.getAno() || (loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() > fim.getMes())
+                    || (loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() == fim.getMes() && loc.getDiaSaida() > fim.getDia())) {
+                return true;
+            }
+        }
+
+        // Verifica se a data de saida do veículo está no meio do período informado
+        if (loc.getAnoSaida() > inicio.getAno() || (loc.getAnoSaida() == inicio.getAno() && loc.getMesSaida() > inicio.getMes())
+                || (loc.getAnoSaida() == inicio.getAno() && loc.getMesSaida() == inicio.getMes() && loc.getDiaSaida() > inicio.getDia())) {
+            if (loc.getAnoSaida() < fim.getAno() || (loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() < fim.getMes())
+                    || (loc.getAnoSaida() == fim.getAno() && loc.getMesSaida() == fim.getMes() && loc.getDiaSaida() < fim.getMes())) {
+                return true;
+            }
+        }
+
+        // Verifica se a data de entrada do veículo está no meio do período informado
+        if (loc.getAnoEntrada() > inicio.getAno() || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() > inicio.getMes())
+                || (loc.getAnoEntrada() == inicio.getAno() && loc.getMesEntrada() == inicio.getMes() && loc.getDiaEntrada() > inicio.getDia())) {
+            if (loc.getAnoEntrada() < fim.getAno() || (loc.getAnoEntrada() == fim.getAno() && loc.getMesEntrada() < fim.getMes())
+                    || (loc.getAnoEntrada() == fim.getAno() && loc.getMesEntrada() == fim.getMes() && loc.getDiaEntrada() < fim.getMes())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoConfirmar;
     private javax.swing.JButton botaoLimpar;
     private javax.swing.JButton botaoOK;
-    private javax.swing.JTextField campoFim;
-    private javax.swing.JTextField campoInicio;
+    private javax.swing.JTextField campoFimAno;
+    private javax.swing.JTextField campoFimDia;
+    private javax.swing.JTextField campoFimMes;
+    private javax.swing.JTextField campoInicioAno;
+    private javax.swing.JTextField campoInicioDia;
+    private javax.swing.JTextField campoInicioMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

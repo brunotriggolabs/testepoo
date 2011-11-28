@@ -12,6 +12,7 @@ package interfacegrafica;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -213,7 +214,10 @@ public class EncerrarLocacao extends javax.swing.JFrame {
         } else {
             loc.setAlugado(false);
             loc.setFinalizado(true);
-            loc.setPreco(calculoPreco(loc));
+            loc.setDiaEntrada(Calendar.DAY_OF_MONTH);
+            loc.setMesEntrada(Calendar.MONTH);
+            loc.setAnoEntrada(Calendar.YEAR);
+            loc.setPreco(calcularPreco(loc));
             TelaLogin.em.merge(loc);
             Query query2 = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
             query2.setParameter("placa", campoPlaca.getText());
@@ -222,11 +226,12 @@ public class EncerrarLocacao extends javax.swing.JFrame {
             TelaLogin.em.merge(vec);            
             TelaLogin.em.getTransaction().commit();
             rotuloPreco.setText(String.valueOf(loc.getPreco()));
+            rotuloPreco.setSize(7, 10);
             rotuloPreco.setVisible(true);
         }
     }
     
-    private double calculoPreco(Locacao loc) {
+    private double calcularPreco(Locacao loc) {
         
         Query query = TelaLogin.em.createQuery("from TipoLocacao t where t.tipo = :tipo");
         query.setParameter("tipo", loc.getTipoLocacao());
