@@ -321,7 +321,7 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
         locacao.setFinalizado(false);
         GregorianCalendar cal = new GregorianCalendar();
         locacao.setDiaSaida(cal.get(GregorianCalendar.DAY_OF_MONTH));
-        locacao.setMesSaida(cal.get(GregorianCalendar.MONTH));
+        locacao.setMesSaida(cal.get(GregorianCalendar.MONTH + 1));
         locacao.setAnoSaida(cal.get(GregorianCalendar.YEAR));
         locacao.setAnoEntrada(0);
         locacao.setDiaEntrada(0);
