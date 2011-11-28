@@ -17,11 +17,11 @@ public class TipoLocacao implements Serializable {
     @Column(unique=true, nullable=false)
     private int id;
     @Column
-    private int tipo; //porKm ou Km livre
-    @Column
     private double taxaBase;
     @Column
     private double precoKm;
+    @Column
+    private int tipo; //porKm ou Km livre
 
     public TipoLocacao() {
     }

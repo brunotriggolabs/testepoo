@@ -480,12 +480,15 @@ public class JanelaCadastroLocacao extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean verificarCpfECliente() {
-        
         try {
             TelaLogin.em.getTransaction().begin();
             Query query = TelaLogin.em.createQuery("from Veiculo v where v.placa = :placa");
             query.setParameter("placa", campoVerificacaoPlaca.getText());
             Veiculo vec = (Veiculo) query.getSingleResult();
+            if (vec.getDisponivel() == false) {
+                JOptionPane.showMessageDialog(this, "Veículo já alugado");
+                dispose();
+            }
         } catch (NoResultException e) {
             JOptionPane.showMessageDialog(this, "Não há veículos cadastrados com essa placa", "Erro", 0);
             TelaLogin.em.getTransaction().commit();
