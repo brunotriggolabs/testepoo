@@ -14,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import modelo.Data;
+import modelo.Locacao;
 import modelo.Veiculo;
 
 /**
@@ -226,6 +228,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
         veiculo.setOpicionais(campoOpcionais.getText());
         veiculo.setTipo(campoTipo.getText());
         veiculo.setCategoria(campoCategoria.getText());
+        veiculo.setNumLocacoes(0);
         
         try {
             TelaLogin.em.getTransaction().begin();
@@ -274,6 +277,7 @@ public class JanelaCadastroVeiculo extends javax.swing.JFrame {
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaTextoObservacoes;
     private javax.swing.JButton botaoEnviarVeiculo;

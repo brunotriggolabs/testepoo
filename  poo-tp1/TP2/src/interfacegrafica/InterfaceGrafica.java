@@ -319,53 +319,42 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         new JanelaCadastroVeiculo().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
         new JanelaCadastroLocacao().setVisible(true);
-        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void botaoLocacoesEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLocacoesEmAbertoActionPerformed
-        // TODO add your handling code here:
-        new JanelaVerificaLocacoesEmAberto().setVisible(true);
-        
+        new JanelaExibeLocacoesEmAberto().setVisible(true);
     }//GEN-LAST:event_botaoLocacoesEmAbertoActionPerformed
 
 
     private void botaoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaClienteActionPerformed
-        // TODO add your handling code here:
         new JanelaPesquisaCliente().setVisible(true);
     }//GEN-LAST:event_botaoPesquisaClienteActionPerformed
 
     private void botaoPesquisaCategoriaVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaCategoriaVeiculoActionPerformed
-        // TODO add your handling code here:
         new JanelaPesquisaDisponibilidadeCategoria().setVisible(true);
     }//GEN-LAST:event_botaoPesquisaCategoriaVeiculoActionPerformed
 
 
     private void botaoListagemVeiculosDisponiveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListagemVeiculosDisponiveisActionPerformed
-        // TODO add your handling code here:
         new JanelaExibeVeiculoDisponivel().setVisible(true);
     }//GEN-LAST:event_botaoListagemVeiculosDisponiveisActionPerformed
 
     private void botaoListagemVeiculoRentavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListagemVeiculoRentavelActionPerformed
-        // TODO add your handling code here:
         new JanelaExibeVeiculosMaisRentaveis().setVisible(true);
     }//GEN-LAST:event_botaoListagemVeiculoRentavelActionPerformed
 
     private void botaoEncerrarLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEncerrarLocacaoActionPerformed
-        // TODO add your handling code here:
         new EncerrarLocacao().setVisible(true);
     }//GEN-LAST:event_botaoEncerrarLocacaoActionPerformed
 
     private void botaoCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastraUsuarioActionPerformed
         new JanelaCadastroUsuario().setVisible(true);
     }//GEN-LAST:event_botaoCadastraUsuarioActionPerformed
-
 
     /**
      * @param args the command line arguments

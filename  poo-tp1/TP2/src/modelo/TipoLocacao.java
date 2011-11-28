@@ -3,6 +3,8 @@ package modelo;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,6 +13,9 @@ import javax.persistence.Table;
 public class TipoLocacao implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique=true, nullable=false)
+    private int id;
     @Column
     private int tipo; //porKm ou Km livre
     @Column
@@ -49,5 +54,9 @@ public class TipoLocacao implements Serializable {
 
     public double getPrecoKm() {
         return precoKm;
+    }
+
+    public int getId() {
+        return id;
     }
 }
