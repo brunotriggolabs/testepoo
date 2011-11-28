@@ -32,7 +32,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     public InterfaceGrafica() {
         initComponents();
         int tipoUsuario = verificarTipoUsuario();
-        JOptionPane.showMessageDialog(this, tipoUsuario);
         if (tipoUsuario == 2) {
             botaoCadastraUsuario.setVisible(false);
         } else if (tipoUsuario == 3) {
@@ -176,6 +175,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
 
         listagemVeiculoProcurado.setText("Veículos mais procurados");
+        listagemVeiculoProcurado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listagemVeiculoProcuradoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -298,7 +302,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -355,6 +359,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoCadastraUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastraUsuarioActionPerformed
         new JanelaCadastroUsuario().setVisible(true);
     }//GEN-LAST:event_botaoCadastraUsuarioActionPerformed
+
+    private void listagemVeiculoProcuradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listagemVeiculoProcuradoActionPerformed
+        new ExibeVeiculosMaisProcurados().setVisible(true);
+    }//GEN-LAST:event_listagemVeiculoProcuradoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,8 +435,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         } catch (NoResultException e) {
             e.printStackTrace();
             return 10;
-        }
-        
+        }   
         if (fun.getCargo().equals("Administrador")) {
             TelaLogin.em.getTransaction().commit();
             return 1;
